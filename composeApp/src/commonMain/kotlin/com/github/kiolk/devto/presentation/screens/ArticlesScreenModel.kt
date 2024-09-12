@@ -4,6 +4,8 @@ import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.github.kiolk.devto.domain.usecases.GetArticleUseCase
 import com.github.kiolk.devto.presentation.models.Article
+import com.github.kiolk.devto.presentation.models.GetArticlesParams
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -16,8 +18,11 @@ class ArticlesScreenModel(private val getArticlesUseCase: GetArticleUseCase) : S
 
     private fun loadArticles() {
         screenModelScope.launch {
-            getArticlesUseCase().collect {
-                _articlesState.value = it
+            for (i in 0..5) {
+                delay(1000)
+                getArticlesUseCase(GetArticlesParams(page = i)).collect {
+                    _articlesState.value += it
+                }
             }
         }
     }
