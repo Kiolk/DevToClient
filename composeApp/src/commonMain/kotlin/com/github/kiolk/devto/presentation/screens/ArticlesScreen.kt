@@ -17,8 +17,6 @@ class ArticlesScreen : Screen {
 
         val articlesState by screenModel.articlesState.collectAsState()
 
-        Text("Articles: ${articlesState.size}")
-
         LazyColumn {
             items(articlesState.size) { articleIndex ->
                 ArticleItem(articlesState[articleIndex])

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DevTo</string>
+    <string name="days">days</string>
 </resources>
