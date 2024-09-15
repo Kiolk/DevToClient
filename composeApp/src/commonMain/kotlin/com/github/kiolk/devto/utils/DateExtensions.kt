@@ -22,7 +22,12 @@ fun Instant.toPublicationDateAgo(stringProvider: StringProvider): String {
         return ""
     } else if (inDays >= 1) {
         //TODO localisation
-        return "($inDays ${stringProvider.getString("days")})"
+        return "($inDays ${
+            stringProvider.getQualityString(
+                "days_ago_since_publication",
+                inDays.toInt()
+            )
+        })"
     }
 
     val inHours = difference.inWholeHours
