@@ -6,7 +6,7 @@ import com.github.kiolk.devto.domain.usecases.GetArticleUseCase
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 import com.github.kiolk.devto.presentation.screens.mappers.mapToArticleUi
 import com.github.kiolk.devto.presentation.screens.models.ArticleUi
-import com.github.kiolk.devto.utils.StringProvider
+import com.github.kiolk.devto.utils.localisation.StringProvider
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

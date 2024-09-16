@@ -1,7 +1,10 @@
 package com.github.kiolk.devto.utils
 
+import com.github.kiolk.devto.utils.localisation.StringProvider
 import platform.Foundation.NSBundle
+import platform.Foundation.NSString
 import platform.Foundation.NSURL
+import platform.Foundation.localizedStringWithFormat
 
 class IosStringProvider : StringProvider {
     override fun getString(key: String): String {
@@ -26,6 +29,8 @@ class IosStringProvider : StringProvider {
     }
 
     override fun getQualityString(key: String, itemCount: Int): String {
-        TODO("Not yet implemented")
+        val format = getString(key)
+
+        return NSString.localizedStringWithFormat(format, itemCount)
     }
 }

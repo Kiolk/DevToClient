@@ -1,6 +1,6 @@
 package com.github.kiolk.devto.preview
 
-import com.github.kiolk.devto.utils.StringProvider
+import com.github.kiolk.devto.utils.localisation.StringProvider
 
 object MockStringProvider : StringProvider {
     override fun getString(key: String): String {

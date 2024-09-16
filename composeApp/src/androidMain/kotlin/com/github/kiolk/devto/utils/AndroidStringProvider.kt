@@ -1,11 +1,12 @@
 package com.github.kiolk.devto.utils
 
 import android.content.Context
+import com.github.kiolk.devto.utils.localisation.StringProvider
 
 open class AndroidStringProvider(private val context: Context) : StringProvider {
 
     override fun getString(key: String): String {
-        val resId = getId(key)
+        val resId = context.resources.getIdentifier(key, STRINGS_RESOURCE_TYPE, context.packageName)
 
         if (resId == 0) {
             return key
@@ -15,7 +16,7 @@ open class AndroidStringProvider(private val context: Context) : StringProvider 
     }
 
     override fun getQualityString(key: String, itemCount: Int): String {
-        val resId = getId(key)
+        val resId = context.resources.getIdentifier(key, PLURALS_RESOURCE_TYPE, context.packageName)
 
         if (resId == 0) {
             return key
@@ -23,7 +24,8 @@ open class AndroidStringProvider(private val context: Context) : StringProvider 
         return context.resources.getQuantityString(resId, itemCount, itemCount);
     }
 
-    private fun getId(key: String): Int {
-        return context.resources.getIdentifier(key, null, context.packageName)
+    private companion object {
+        const val STRINGS_RESOURCE_TYPE = "strings"
+        const val PLURALS_RESOURCE_TYPE = "plurals"
     }
 }

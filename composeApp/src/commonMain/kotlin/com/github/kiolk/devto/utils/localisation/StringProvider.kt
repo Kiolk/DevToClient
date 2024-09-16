@@ -1,4 +1,4 @@
-package com.github.kiolk.devto.utils
+package com.github.kiolk.devto.utils.localisation
 
 interface StringProvider {
 

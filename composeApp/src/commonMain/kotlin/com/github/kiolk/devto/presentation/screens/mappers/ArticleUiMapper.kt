@@ -2,7 +2,7 @@ package com.github.kiolk.devto.presentation.screens.mappers
 
 import com.github.kiolk.devto.presentation.models.Article
 import com.github.kiolk.devto.presentation.screens.models.ArticleUi
-import com.github.kiolk.devto.utils.StringProvider
+import com.github.kiolk.devto.utils.localisation.StringProvider
 import com.github.kiolk.devto.utils.toPublicationDate
 import com.github.kiolk.devto.utils.toPublicationDateAgo
 

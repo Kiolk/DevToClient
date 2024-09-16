@@ -1,5 +1,9 @@
 package com.github.kiolk.devto.utils
 
+import com.github.kiolk.devto.utils.localisation.StringProvider
+import com.github.kiolk.devto.utils.localisation.StringsKeys.DAYS_AGO_SINCE_PUBLICATION
+import com.github.kiolk.devto.utils.localisation.StringsKeys.HOURS_AGO_SINCE_PUBLICATION
+import com.github.kiolk.devto.utils.localisation.StringsKeys.MINUTES_AGO_SINCE_PUBLICATION
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
@@ -13,18 +17,19 @@ fun Instant.toPublicationDate(): String {
     return PUBLICATION_DATE_FORMAT.format(this.toLocalDateTime(TimeZone.currentSystemDefault()))
 }
 
+private const val DAYS_IN_MONTH = 31
+
 fun Instant.toPublicationDateAgo(stringProvider: StringProvider): String {
     val currentTime = Clock.System.now()
     val difference = currentTime - this
     val inDays = difference.inWholeDays
 
-    if (inDays >= 31) {
+    if (inDays >= DAYS_IN_MONTH) {
         return ""
     } else if (inDays >= 1) {
-        //TODO localisation
         return "($inDays ${
             stringProvider.getQualityString(
-                "days_ago_since_publication",
+                DAYS_AGO_SINCE_PUBLICATION,
                 inDays.toInt()
             )
         })"
@@ -32,15 +37,24 @@ fun Instant.toPublicationDateAgo(stringProvider: StringProvider): String {
 
     val inHours = difference.inWholeHours
 
-    if (inHours >= 24) {
-        //TODO localisation
-        return "($inHours hours)"
+    if (inHours >= 1) {
+        return "($inHours  ${
+            stringProvider.getQualityString(
+                HOURS_AGO_SINCE_PUBLICATION,
+                inDays.toInt()
+            )
+        })"
     }
 
     val inMinutes = difference.inWholeMinutes
 
     if (inMinutes >= 1) {
-        return "($inMinutes minutes)"
+        return "($inMinutes ${
+            stringProvider.getQualityString(
+                MINUTES_AGO_SINCE_PUBLICATION,
+                inDays.toInt()
+            )
+        })"
     }
 
     return ""

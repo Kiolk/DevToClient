@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+         <key>days_ago_since_publication</key>
+         <dict>
+             <key>NSStringLocalizedFormatKey</key>
+             <string>%#@days_ago_since_publication@</string>
+             <key>days_ago_since_publication</key>
+             <dict>
+                 <key>NSStringFormatSpecTypeKey</key>
+                 <string>NSStringPluralRuleType</string>
+                 <key>NSStringFormatValueTypeKey</key>
+                 <string>d</string>
+                 <key>one</key>
+                 <string>day ago</string>
+                 <key>other</key>
+                 <string>days ago</string>
+             </dict>
+         </dict>
+         <key>minutes_ago_since_publication</key>
+              <dict>
+                  <key>NSStringLocalizedFormatKey</key>
+                  <string>%#@minutes_ago_since_publication@</string>
+                  <key>minutes_ago_since_publication</key>
+                  <dict>
+                      <key>NSStringFormatSpecTypeKey</key>
+                      <string>NSStringPluralRuleType</string>
+                      <key>NSStringFormatValueTypeKey</key>
+                      <string>d</string>
+                      <key>one</key>
+                      <string>minute ago</string>
+                      <key>other</key>
+                      <string>minutes ago</string>
+                  </dict>
+              </dict>
+           <key>hours_ago_since_publication</key>
+                <dict>
+                    <key>NSStringLocalizedFormatKey</key>
+                    <string>%#@hours_ago_since_publication@</string>
+                    <key>hours_ago_since_publication</key>
+                    <dict>
+                        <key>NSStringFormatSpecTypeKey</key>
+                        <string>NSStringPluralRuleType</string>
+                        <key>NSStringFormatValueTypeKey</key>
+                        <string>d</string>
+                        <key>one</key>
+                        <string>hour ago</string>
+                        <key>other</key>
+                        <string>hours ago</string>
+                    </dict>
+                </dict>
+</dict>
+</plist>
