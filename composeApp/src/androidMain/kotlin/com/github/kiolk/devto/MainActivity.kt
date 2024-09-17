@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import cafe.adriel.voyager.navigator.Navigator
-import com.github.kiolk.devto.presentation.screens.ArticlesScreen
+import com.github.kiolk.devto.presentation.screens.main.MainScreen
 import com.github.kiolk.devto.utils.DevToTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             DevToTheme {
-                Navigator(ArticlesScreen())
+                Navigator(MainScreen())
             }
         }
     }
