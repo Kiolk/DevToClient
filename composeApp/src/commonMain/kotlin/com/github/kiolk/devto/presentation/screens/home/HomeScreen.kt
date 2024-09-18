@@ -1,4 +1,4 @@
-package com.github.kiolk.devto.presentation.screens
+package com.github.kiolk.devto.presentation.screens.home
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -9,13 +9,13 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
-import com.github.kiolk.devto.presentation.screens.views.ArticleItem
+import com.github.kiolk.devto.presentation.views.article.ArticleItem
 
-class ArticlesScreen : Screen {
+class HomeScreen : Screen {
 
     @Composable
     override fun Content() {
-        val screenModel = koinScreenModel<ArticlesScreenModel>()
+        val screenModel = koinScreenModel<HomeScreenModel>()
 
         val articlesState by screenModel.articlesState.collectAsState()
         val navigator = LocalNavigator.currentOrThrow

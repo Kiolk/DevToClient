@@ -1,4 +1,4 @@
-package com.github.kiolk.devto.presentation.screens.views
+package com.github.kiolk.devto.presentation.views.article
 
 import Organization
 import androidx.compose.foundation.BorderStroke
@@ -9,11 +9,15 @@ import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,7 +31,10 @@ import androidx.compose.ui.unit.dp
 import com.github.kiolk.devto.presentation.models.Article
 import com.github.kiolk.devto.presentation.models.FlareTag
 import com.github.kiolk.devto.presentation.models.User
-import com.github.kiolk.devto.presentation.screens.models.ArticleUi
+import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
+import com.github.kiolk.devto.presentation.screens.home.models.TagUi
+import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
+import com.github.kiolk.devto.presentation.views.tag.Tag
 
 @Composable
 fun ArticleItem(articleUi: ArticleUi, onArticleClick: (articleUi: ArticleUi) -> Unit = {}) {
@@ -54,7 +61,7 @@ fun ArticleItem(articleUi: ArticleUi, onArticleClick: (articleUi: ArticleUi) -> 
                     }
                 }
                 ArticleTitle(articleUi, onArticleClick)
-                ArticleTags(articleUi.article.tagList, articleUi.article.flareTag)
+                ArticleTags(articleUi.tags, articleUi.article.flareTag)
                 Row {
                     Reactions(articleUi.article)
                     CommentsButton(articleUi.article)
@@ -77,8 +84,21 @@ fun CommentsButton(article: Article) {
 fun Reactions(article: Article) {
 }
 
+@OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class)
 @Composable
-fun ArticleTags(tagList: List<String>, flareTag: FlareTag?) {
+fun ArticleTags(tagList: List<TagUi>, flareTag: FlareTag?) {
+    FlowRow(
+        modifier = Modifier
+            .wrapContentHeight()
+            .padding(0.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp, alignment = Alignment.Top)
+    ) {
+
+        for (tag in tagList) {
+            Tag(tag)
+        }
+    }
 }
 
 @Composable

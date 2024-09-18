@@ -1,8 +1,8 @@
 package com.github.kiolk.devto.di
 
-import com.github.kiolk.devto.presentation.screens.ArticlesScreenModel
+import com.github.kiolk.devto.presentation.screens.home.HomeScreenModel
 import org.koin.dsl.module
 
 val screenModelModule = module {
-    factory<ArticlesScreenModel> { ArticlesScreenModel(get(), get()) }
+    factory<HomeScreenModel> { HomeScreenModel(get(), get()) }
 }

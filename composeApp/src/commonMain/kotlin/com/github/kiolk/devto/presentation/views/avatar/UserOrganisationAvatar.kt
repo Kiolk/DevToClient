@@ -1,4 +1,4 @@
-package com.github.kiolk.devto.presentation.screens.views
+package com.github.kiolk.devto.presentation.views.avatar
 
 import Organization
 import androidx.compose.foundation.background

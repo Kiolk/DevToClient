@@ -6,8 +6,8 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.github.kiolk.devto.presentation.models.Article
 import com.github.kiolk.devto.presentation.models.User
-import com.github.kiolk.devto.presentation.screens.mappers.mapToArticleUi
-import com.github.kiolk.devto.presentation.screens.views.ArticleItem
+import com.github.kiolk.devto.presentation.screens.home.mappers.mapToArticleUi
+import com.github.kiolk.devto.presentation.views.article.ArticleItem
 import kotlinx.datetime.Clock
 
 @Preview(showBackground = true, device = Devices.DEFAULT, showSystemUi = true)
@@ -38,6 +38,6 @@ val fakeArticle = Article(
     positiveReactionCount = 0,
     coverImage = "",
     readingTimeMinutes = 3,
-    tagList = emptyList(),
+    tagList = listOf("Development", "VoiceRecognition", "Android", "Kotlin"),
     flareTag = null
 )
