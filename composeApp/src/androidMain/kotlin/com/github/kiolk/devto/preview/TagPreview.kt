@@ -7,12 +7,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.github.kiolk.devto.presentation.screens.home.models.TagUi
+import com.github.kiolk.devto.presentation.theme.DevToTheme
 import com.github.kiolk.devto.presentation.views.tag.Tag
 
 @Preview(showBackground = true, device = Devices.DEFAULT)
 @Composable
 fun TagPreview(@PreviewParameter(TagProvider::class) tag: TagUi) {
-    Tag(tag) {}
+    DevToTheme(isDarkTheme = true) {
+        Tag(tag) {}
+    }
 }
 
 class TagProvider : PreviewParameterProvider<TagUi> {

@@ -33,7 +33,7 @@ fun Tag(tag: TagUi, onTagClick: (TagUi) -> Unit = {}) {
 
     val backgroundColor = when {
         isPressed || isFocused -> if (tag.backgroundColor != null) tag.backgroundColor.copy(alpha = BACKGROUND_ALPHA) else DevToColors.lightGray
-        else -> if (tag.isFlare && tag.backgroundColor != null) tag.backgroundColor.copy(alpha = BACKGROUND_ALPHA) else DevToColors.white
+        else -> if (tag.isFlare && tag.backgroundColor != null) tag.backgroundColor.copy(alpha = BACKGROUND_ALPHA) else MaterialTheme.colors.surface
     }
 
     val borderColor = when {
@@ -41,7 +41,7 @@ fun Tag(tag: TagUi, onTagClick: (TagUi) -> Unit = {}) {
             alpha = BORDER_ALPHA
         ) else DevToColors.gray
 
-        else -> if (tag.isFlare) DevToColors.transparent else DevToColors.white
+        else -> if (tag.isFlare) DevToColors.transparent else MaterialTheme.colors.surface
     }
 
     val hashTagColor = when {

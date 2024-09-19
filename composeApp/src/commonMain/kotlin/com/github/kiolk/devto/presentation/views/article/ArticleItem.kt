@@ -37,11 +37,10 @@ import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
 import com.github.kiolk.devto.presentation.views.tag.Tag
 
 @Composable
-fun ArticleItem(articleUi: ArticleUi, onArticleClick: (articleUi: ArticleUi) -> Unit = {}) {
+fun ArticleItem(articleUi: ArticleUi, onArticleClick: (articleUi: ArticleUi) -> Unit = {}, onTagClick: (tagUi: TagUi) -> Unit = {}) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(4.dp),
-        backgroundColor = Color.White,
         elevation = 2.dp,
         border = BorderStroke(0.5.dp, Color.LightGray),
     ) {
@@ -61,7 +60,7 @@ fun ArticleItem(articleUi: ArticleUi, onArticleClick: (articleUi: ArticleUi) -> 
                     }
                 }
                 ArticleTitle(articleUi, onArticleClick)
-                ArticleTags(articleUi.tags, articleUi.article.flareTag)
+                ArticleTags(articleUi.tags, articleUi.article.flareTag, onTagClick)
                 Row {
                     Reactions(articleUi.article)
                     CommentsButton(articleUi.article)
@@ -86,7 +85,7 @@ fun Reactions(article: Article) {
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class)
 @Composable
-fun ArticleTags(tagList: List<TagUi>, flareTag: FlareTag?) {
+fun ArticleTags(tagList: List<TagUi>, flareTag: FlareTag?, onTagClick: (tagUi: TagUi) -> Unit) {
     FlowRow(
         modifier = Modifier
             .wrapContentHeight()
@@ -96,7 +95,7 @@ fun ArticleTags(tagList: List<TagUi>, flareTag: FlareTag?) {
     ) {
 
         for (tag in tagList) {
-            Tag(tag)
+            Tag(tag, onTagClick)
         }
     }
 }

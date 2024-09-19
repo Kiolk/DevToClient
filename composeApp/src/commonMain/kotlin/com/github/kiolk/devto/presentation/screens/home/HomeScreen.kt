@@ -9,6 +9,7 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
+import com.github.kiolk.devto.presentation.screens.tag.TagScreen
 import com.github.kiolk.devto.presentation.views.article.ArticleItem
 
 class HomeScreen : Screen {
@@ -22,9 +23,11 @@ class HomeScreen : Screen {
 
         LazyColumn {
             items(articlesState.size) { articleIndex ->
-                ArticleItem(articlesState[articleIndex]) {
-                    navigator.push(ArticleScreen())
-                }
+                ArticleItem(articlesState[articleIndex], onArticleClick = {
+                    navigator.push(ArticleScreen(it.article.user.username, it.article.slug))
+                }, onTagClick = {
+                    navigator.push(TagScreen(it.name))
+                })
             }
         }
     }

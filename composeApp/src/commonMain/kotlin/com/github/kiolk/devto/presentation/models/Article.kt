@@ -5,6 +5,7 @@ import kotlinx.datetime.Instant
 
 data class Article(
     val id: Int,
+    val slug: String,
     val title: String,
     val description: String,
     val publishedAt: Instant,

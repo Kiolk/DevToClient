@@ -14,6 +14,7 @@ import com.github.kiolk.devto.presentation.models.User
 fun ArticleApi.toArticle(): Article {
     return Article(
         id = id,
+        slug = slug,
         title = title,
         description = description,
         publishedAt = publishedAt,

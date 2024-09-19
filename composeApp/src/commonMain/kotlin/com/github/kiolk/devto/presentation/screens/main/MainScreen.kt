@@ -95,7 +95,7 @@ object SearchTab : Tab {
 
     @Composable
     override fun Content() {
-        Navigator(ArticleScreen())
+        Navigator(ArticleScreen("", ""))
     }
 }
 
@@ -118,6 +118,6 @@ object ProfileTab : Tab {
 
     @Composable
     override fun Content() {
-        Navigator(ArticleScreen())
+        Navigator(ArticleScreen("", ""))
     }
 }

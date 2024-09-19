@@ -8,6 +8,8 @@ import kotlinx.serialization.Serializable
 data class ArticleApi(
     @SerialName("id")
     val id: Int,
+    @SerialName("slug")
+    val slug: String,
     @SerialName("title")
     val title: String,
     @SerialName("description")

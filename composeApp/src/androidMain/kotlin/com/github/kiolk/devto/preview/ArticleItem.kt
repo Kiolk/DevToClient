@@ -7,17 +7,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.github.kiolk.devto.presentation.models.Article
 import com.github.kiolk.devto.presentation.models.User
 import com.github.kiolk.devto.presentation.screens.home.mappers.mapToArticleUi
+import com.github.kiolk.devto.presentation.theme.DevToTheme
 import com.github.kiolk.devto.presentation.views.article.ArticleItem
 import kotlinx.datetime.Clock
 
 @Preview(showBackground = true, device = Devices.DEFAULT, showSystemUi = true)
 @Composable
 fun ArticleItemPreview() {
-    ArticleItem(fakeArticle.mapToArticleUi(MockStringProvider))
+    DevToTheme(isDarkTheme = true) {
+        ArticleItem(fakeArticle.mapToArticleUi(MockStringProvider))
+    }
 }
 
 val fakeArticle = Article(
-    1, "Test", "Description", Clock.System.now(), user = User(
+    1, "", "Test", "Description", Clock.System.now(), user = User(
         name = "User",
         username = "User name",
         twitterUsername = null,
