@@ -34,10 +34,16 @@ import com.github.kiolk.devto.presentation.models.User
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.TagUi
 import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
+import com.github.kiolk.devto.presentation.views.buttons.bookMark.BookMarkButton
 import com.github.kiolk.devto.presentation.views.tag.Tag
 
 @Composable
-fun ArticleItem(articleUi: ArticleUi, onArticleClick: (articleUi: ArticleUi) -> Unit = {}, onTagClick: (tagUi: TagUi) -> Unit = {}) {
+fun ArticleItem(
+    articleUi: ArticleUi,
+    onArticleClick: (articleUi: ArticleUi) -> Unit = {},
+    onTagClick: (tagUi: TagUi) -> Unit = {},
+    onBookmarkClick: (articleUi: ArticleUi) -> Unit = {}
+) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(4.dp),
@@ -65,6 +71,7 @@ fun ArticleItem(articleUi: ArticleUi, onArticleClick: (articleUi: ArticleUi) -> 
                     Reactions(articleUi.article)
                     CommentsButton(articleUi.article)
                     ReadingTime(articleUi.article.readingTimeMinutes)
+                    BookMarkButton(articleUi, onBookmarkClick)
                 }
             }
         }

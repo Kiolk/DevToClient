@@ -13,7 +13,7 @@ import com.github.kiolk.devto.presentation.views.tag.Tag
 @Preview(showBackground = true, device = Devices.DEFAULT)
 @Composable
 fun TagPreview(@PreviewParameter(TagProvider::class) tag: TagUi) {
-    DevToTheme(isDarkTheme = true) {
+    DevToTheme() {
         Tag(tag) {}
     }
 }

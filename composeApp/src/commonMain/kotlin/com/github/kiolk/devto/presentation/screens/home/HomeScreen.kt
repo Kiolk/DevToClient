@@ -27,7 +27,10 @@ class HomeScreen : Screen {
                     navigator.push(ArticleScreen(it.article.user.username, it.article.slug))
                 }, onTagClick = {
                     navigator.push(TagScreen(it.name))
-                })
+                },
+                    onBookmarkClick = {
+                        screenModel.onBookmarkClick(it)
+                    })
             }
         }
     }

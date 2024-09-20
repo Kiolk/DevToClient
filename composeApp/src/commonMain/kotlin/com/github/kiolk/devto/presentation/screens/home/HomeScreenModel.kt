@@ -29,6 +29,22 @@ class HomeScreenModel(private val getArticlesUseCase: GetArticleUseCase, private
         }
     }
 
+    fun onBookmarkClick(article: ArticleUi) {
+        screenModelScope.launch {
+            //TODO add logic for storing bookmarks
+            val index = _articlesState.value.indexOfFirst { it.article.id == article.article.id }
+            val new = mutableListOf<ArticleUi>()
+            articlesState.value.forEach {
+                if (it.article.id == article.article.id) {
+                    new.add(it.copy(isBookmarked = !article.isBookmarked))
+                } else {
+                    new.add(it)
+                }
+            }
+            _articlesState.value = new
+        }
+    }
+
     private var _articlesState: MutableStateFlow<List<ArticleUi>> =
         MutableStateFlow(emptyList())
     val articlesState = _articlesState.asStateFlow()
