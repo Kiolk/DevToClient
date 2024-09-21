@@ -74,6 +74,10 @@ kotlin {
             implementation(libs.coil.network.ktor)
 
             implementation (libs.accompanist.flowlayout)
+
+            //compottie
+            implementation("io.github.alexzhirkevich:compottie:2.0.0-rc01")
+            implementation("io.github.alexzhirkevich:compottie-dot:2.0.0-rc01")
         }
 
         iosMain.dependencies {
