@@ -3,8 +3,6 @@ package com.github.kiolk.devto
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import cafe.adriel.voyager.navigator.Navigator
 import com.github.kiolk.devto.presentation.screens.main.MainScreen
 import com.github.kiolk.devto.presentation.theme.DevToTheme
@@ -14,15 +12,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            DevToTheme(isDarkTheme = true) {
+            DevToTheme(isDarkTheme = false) {
                 Navigator(MainScreen())
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
 }

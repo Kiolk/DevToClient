@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -70,6 +71,7 @@ fun ArticleItem(
                 Row {
                     Reactions(articleUi.article)
                     CommentsButton(articleUi.article)
+                    Spacer(Modifier.weight(1f))
                     ReadingTime(articleUi.article.readingTimeMinutes)
                     BookMarkButton(articleUi, onBookmarkClick)
                 }
