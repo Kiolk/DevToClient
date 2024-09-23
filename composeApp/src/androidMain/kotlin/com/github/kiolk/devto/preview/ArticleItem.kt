@@ -15,7 +15,7 @@ import kotlinx.datetime.Clock
 @Composable
 fun ArticleItemPreview() {
     DevToTheme(isDarkTheme = true) {
-        ArticleItem(fakeArticle.mapToArticleUi(MockStringProvider))
+        ArticleItem(fakeArticle.mapToArticleUi(MockStringProvider), MockStringProvider)
     }
 }
 

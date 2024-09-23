@@ -12,4 +12,5 @@ data class ArticleUi(
     val description: String,
     val tags: List<TagUi> = emptyList(),
     val isBookmarked: Boolean = false,
+    val numberOfComments: Int = 0,
 )

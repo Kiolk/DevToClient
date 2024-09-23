@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">DevTo</string>
     <string name="days">days</string>
+    <string name="add_comment">Add comment</string>
     <plurals name="days_ago_since_publication">
         <item quantity="one">day ago</item>
         <item quantity="other">days ago</item>
@@ -12,5 +13,9 @@
     <plurals name="hours_ago_since_publication">
         <item quantity="one">hour ago</item>
         <item quantity="other">hours ago</item>
+    </plurals>
+    <plurals name="comments">
+        <item quantity="one">%d comment</item>
+        <item quantity="other">%d comments</item>
     </plurals>
 </resources>

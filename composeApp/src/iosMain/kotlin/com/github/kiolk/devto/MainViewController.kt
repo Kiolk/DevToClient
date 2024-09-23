@@ -7,7 +7,7 @@ import com.github.kiolk.devto.presentation.theme.DevToTheme
 
 fun MainViewController() = ComposeUIViewController {
 
-    DevToTheme(isDarkTheme = true) {
+    DevToTheme(isDarkTheme = false) {
         Navigator(MainScreen())
     }
 }

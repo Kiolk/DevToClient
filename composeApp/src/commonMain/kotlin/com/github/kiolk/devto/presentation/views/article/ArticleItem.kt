@@ -36,11 +36,14 @@ import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.TagUi
 import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
 import com.github.kiolk.devto.presentation.views.buttons.bookMark.BookMarkButton
+import com.github.kiolk.devto.presentation.views.buttons.comment.CommentsButton
 import com.github.kiolk.devto.presentation.views.tag.Tag
+import com.github.kiolk.devto.utils.localisation.StringProvider
 
 @Composable
 fun ArticleItem(
     articleUi: ArticleUi,
+    stringProvider: StringProvider,
     onArticleClick: (articleUi: ArticleUi) -> Unit = {},
     onTagClick: (tagUi: TagUi) -> Unit = {},
     onBookmarkClick: (articleUi: ArticleUi) -> Unit = {}
@@ -70,7 +73,7 @@ fun ArticleItem(
                 ArticleTags(articleUi.tags, articleUi.article.flareTag, onTagClick)
                 Row {
                     Reactions(articleUi.article)
-                    CommentsButton(articleUi.article)
+                    CommentsButton(articleUi, stringProvider = stringProvider)
                     Spacer(Modifier.weight(1f))
                     ReadingTime(articleUi.article.readingTimeMinutes)
                     BookMarkButton(articleUi, onBookmarkClick)
@@ -82,10 +85,6 @@ fun ArticleItem(
 
 @Composable
 fun ReadingTime(readingTimeMinutes: Int) {
-}
-
-@Composable
-fun CommentsButton(article: Article) {
 }
 
 @Composable

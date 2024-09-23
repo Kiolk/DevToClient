@@ -25,7 +25,7 @@ open class AndroidStringProvider(private val context: Context) : StringProvider 
     }
 
     private companion object {
-        const val STRINGS_RESOURCE_TYPE = "strings"
+        const val STRINGS_RESOURCE_TYPE = "string"
         const val PLURALS_RESOURCE_TYPE = "plurals"
     }
 }
