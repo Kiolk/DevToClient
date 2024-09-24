@@ -18,7 +18,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import org.koin.dsl.module
 
-private const val BASE_URL = "https://dev.to/api/"
+private const val BASE_URL = "https://dev.to/"
 private const val ACCEPT_HEADER_VALUE = "application/vnd.forem.api-v1+json"
 private const val ACCEPT_HEADER = "accept"
 private const val CONTENT_TYPE_VALUE = "application/json"

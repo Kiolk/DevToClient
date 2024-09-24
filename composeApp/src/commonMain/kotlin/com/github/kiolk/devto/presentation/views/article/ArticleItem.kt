@@ -29,12 +29,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.github.kiolk.devto.presentation.models.Article
 import com.github.kiolk.devto.presentation.models.FlareTag
 import com.github.kiolk.devto.presentation.models.User
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.TagUi
 import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
+import com.github.kiolk.devto.presentation.views.buttons.reaction.ReactionsButton
 import com.github.kiolk.devto.presentation.views.buttons.bookMark.BookMarkButton
 import com.github.kiolk.devto.presentation.views.buttons.comment.CommentsButton
 import com.github.kiolk.devto.presentation.views.tag.Tag
@@ -71,8 +71,8 @@ fun ArticleItem(
                 }
                 ArticleTitle(articleUi, onArticleClick)
                 ArticleTags(articleUi.tags, articleUi.article.flareTag, onTagClick)
-                Row {
-                    Reactions(articleUi.article)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    ReactionsButton(articleUi, stringProvider, onArticleClick)
                     CommentsButton(articleUi, stringProvider = stringProvider)
                     Spacer(Modifier.weight(1f))
                     ReadingTime(articleUi.article.readingTimeMinutes)
@@ -85,10 +85,6 @@ fun ArticleItem(
 
 @Composable
 fun ReadingTime(readingTimeMinutes: Int) {
-}
-
-@Composable
-fun Reactions(article: Article) {
 }
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class)

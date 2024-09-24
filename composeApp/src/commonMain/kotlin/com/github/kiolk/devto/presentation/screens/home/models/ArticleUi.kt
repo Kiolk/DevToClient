@@ -13,4 +13,8 @@ data class ArticleUi(
     val tags: List<TagUi> = emptyList(),
     val isBookmarked: Boolean = false,
     val numberOfComments: Int = 0,
+    val reactionsUi: ReactionsUi = ReactionsUi(
+        listOf(ReactionType.Fire, ReactionType.Head, ReactionType.Hands, ReactionType.Unicorn, ReactionType.Heart),
+        5
+    )
 )

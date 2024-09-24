@@ -68,5 +68,21 @@
                             <string>Add comment</string>
                         </dict>
                     </dict>
+           <key>reactions</key>
+                   <dict>
+                       <key>NSStringLocalizedFormatKey</key>
+                       <string>%#@reactions@</string>
+                       <key>reactions</key>
+                       <dict>
+                           <key>NSStringFormatSpecTypeKey</key>
+                           <string>NSStringPluralRuleType</string>
+                           <key>NSStringFormatValueTypeKey</key>
+                           <string>d</string>
+                           <key>one</key>
+                           <string>%d reaction</string>
+                           <key>other</key>
+                           <string>%d reactions</string>
+                       </dict>
+                   </dict>
 </dict>
 </plist>

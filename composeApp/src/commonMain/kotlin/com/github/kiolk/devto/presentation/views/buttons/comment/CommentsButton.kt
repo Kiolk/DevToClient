@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.utils.localisation.StringProvider
@@ -30,7 +31,11 @@ fun CommentsButton(articleUi: ArticleUi, onCommentsClick: (ArticleUi) -> Unit = 
             }
             .padding(4.dp)) {
         Box(modifier = Modifier.size(20.dp).padding(4.dp)) {
-            Image(painter = painterResource(Res.drawable.ic_comment), contentDescription = null)
+            Image(
+                painter = painterResource(Res.drawable.ic_comment),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.onSurface)
+            )
         }
         Text(
             if (articleUi.numberOfComments != 0) stringProvider.getQualityString(
