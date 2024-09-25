@@ -25,7 +25,6 @@ val fakeArticle = Article(
         username = "User name",
         twitterUsername = null,
         githubUsername = null,
-        userId = 1,
         websiteUrl = "",
         profileImage = "https://picsum.photos/200/300",
         profileImage90 = "https://picsum.photos/200/300",

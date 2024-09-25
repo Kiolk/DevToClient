@@ -8,7 +8,7 @@ import com.github.kiolk.devto.presentation.models.GetArticlesParams
 
 class ArticleRepositoryImpl(private val articleService: ArticleService) : ArticleRepository {
     override suspend fun getArticles(params: GetArticlesParams): List<Article> {
-        return articleService.getArticles(params.toGetArticlesParamsApi()).map { it.toArticle() }
+        return articleService.getFeed(params.toGetArticlesParamsApi()).map { it.toArticle() }
     }
 }
 

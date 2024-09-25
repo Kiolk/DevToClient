@@ -18,4 +18,5 @@ data class Article(
     val user: User,
     val organization: Organization?,
     val flareTag: FlareTag?,
+    val reactions: List<PublicReactionCategory> = emptyList()
 )

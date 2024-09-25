@@ -2,13 +2,18 @@ package com.github.kiolk.devto.data.repositories.datasources.network.mappers
 
 import Organization
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedOrganizationApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedUserApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FlareTagApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.OrganizationApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.PublicReactionCategoryApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.UserApi
 import com.github.kiolk.devto.presentation.models.Article
 import com.github.kiolk.devto.presentation.models.FlareTag
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
+import com.github.kiolk.devto.presentation.models.PublicReactionCategory
 import com.github.kiolk.devto.presentation.models.User
 
 fun ArticleApi.toArticle(): Article {
@@ -30,15 +35,46 @@ fun ArticleApi.toArticle(): Article {
     )
 }
 
+fun FeedApi.toArticle(): Article {
+    return Article(
+        id = id,
+        slug = "",
+        title = title,
+        description = "",
+        publishedAt = publishedTimestamp,
+        commentsCount = commentsCount,
+        publicReactionCount = publicReactionCount,
+        positiveReactionCount = publicReactionCount,
+        coverImage = mainImage,
+        readingTimeMinutes = readingTimeMinutes,
+        tagList = tagList,
+        user = user.toUser(),
+        organization = organization?.toOrganization(),
+        flareTag = flareTag?.toFlareTag(),
+        reactions = publicReactionCategories.map { it.toPublicReactionCategory() }
+    )
+}
+
 fun UserApi.toUser(): User {
     return User(
         name = name,
         username = username,
         twitterUsername = twitterUsername,
         githubUsername = githubUsername,
-        userId = userId,
         websiteUrl = websiteUrl,
         profileImage = profileImage,
+        profileImage90 = profileImage90,
+    )
+}
+
+fun FeedUserApi.toUser(): User {
+    return User(
+        name = name,
+        username = username,
+        twitterUsername = null,
+        githubUsername = null,
+        websiteUrl = null,
+        profileImage = profileImageUrl,
         profileImage90 = profileImage90,
     )
 }
@@ -53,11 +89,30 @@ fun OrganizationApi.toOrganization(): Organization {
     )
 }
 
+fun FeedOrganizationApi.toOrganization(): Organization {
+    return Organization(
+        name = name,
+        username = username,
+        slug = slug,
+        profileImage = profileImageUrl,
+        profileImage90 = profileImage90,
+    )
+}
+
 fun FlareTagApi.toFlareTag(): FlareTag {
     return FlareTag(
         name = name,
         bgColorHex = bgColorHex,
         textColorHex = textColorHex,
+    )
+}
+
+fun PublicReactionCategoryApi.toPublicReactionCategory(): PublicReactionCategory {
+    return PublicReactionCategory(
+        name = name,
+        slug = slug,
+        icon = icon,
+        position = position,
     )
 }
 

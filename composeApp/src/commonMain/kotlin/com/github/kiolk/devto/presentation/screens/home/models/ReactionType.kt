@@ -8,11 +8,11 @@ import devto.composeapp.generated.resources.ic_raised_hands
 import devto.composeapp.generated.resources.ic_sparkle_heart
 import org.jetbrains.compose.resources.DrawableResource
 
-sealed class ReactionType(val resId: DrawableResource) {
+sealed class ReactionType(val resId: DrawableResource, val name: String = "") {
 
-    data object Fire : ReactionType(resId = Res.drawable.ic_fire)
-    data object Heart : ReactionType(resId = Res.drawable.ic_sparkle_heart)
-    data object Unicorn : ReactionType(resId = Res.drawable.ic_multi_unicorn)
-    data object Head : ReactionType(resId = Res.drawable.ic_exploding_head_daceb)
-    data object Hands : ReactionType(resId = Res.drawable.ic_raised_hands)
+    data object Fire : ReactionType(resId = Res.drawable.ic_fire, name = "fire")
+    data object Heart : ReactionType(resId = Res.drawable.ic_sparkle_heart, name = "like")
+    data object Unicorn : ReactionType(resId = Res.drawable.ic_multi_unicorn, name = "unicorn")
+    data object Head : ReactionType(resId = Res.drawable.ic_exploding_head_daceb, name = "exploding_head")
+    data object Hands : ReactionType(resId = Res.drawable.ic_raised_hands, name = "raised_hands")
 }

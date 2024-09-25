@@ -4,13 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class UserApi(
+data class FeedUserApi(
     @SerialName("name") val name: String,
     @SerialName("username") val username: String,
-    @SerialName("twitter_username") val twitterUsername: String? = null,
-    @SerialName("github_username") val githubUsername: String? = null,
-    @SerialName("user_id") val userId: Int,
-    @SerialName("website_url") val websiteUrl: String? = null,
-    @SerialName("profile_image") val profileImage: String,
+    @SerialName("profile_image_url") val profileImageUrl: String,
     @SerialName("profile_image_90") val profileImage90: String,
+    @SerialName("slug") val slug: String,
+    @SerialName("cached_base_subscriber") val cachedBaseSubscriber: Boolean
 )
