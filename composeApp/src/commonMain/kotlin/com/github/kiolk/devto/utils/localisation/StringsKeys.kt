@@ -6,5 +6,6 @@ object StringsKeys {
     const val MINUTES_AGO_SINCE_PUBLICATION = "minutes_ago_since_publication"
     const val COMMENTS = "comments"
     const val REACTIONS = "reactions"
+    const val READING_TIME = "reading_time"
     const val ADD_COMMENT = "add_comment"
 }

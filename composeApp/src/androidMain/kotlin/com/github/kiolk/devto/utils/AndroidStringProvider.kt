@@ -15,6 +15,16 @@ open class AndroidStringProvider(private val context: Context) : StringProvider 
         return context.getString(resId)
     }
 
+    override fun getFormattedString(key: String, vararg arguments: Any?): String {
+        val resId = context.resources.getIdentifier(key, STRINGS_RESOURCE_TYPE, context.packageName)
+
+        if (resId == 0) {
+            return key
+        }
+
+        return context.getString(resId, *arguments)
+    }
+
     override fun getQualityString(key: String, itemCount: Int): String {
         val resId = context.resources.getIdentifier(key, PLURALS_RESOURCE_TYPE, context.packageName)
 

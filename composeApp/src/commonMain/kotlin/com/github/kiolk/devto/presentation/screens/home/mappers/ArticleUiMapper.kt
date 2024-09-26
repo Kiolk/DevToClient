@@ -1,8 +1,10 @@
 package com.github.kiolk.devto.presentation.screens.home.mappers
 
 import com.github.kiolk.devto.presentation.models.Article
+import com.github.kiolk.devto.presentation.models.Comment
 import com.github.kiolk.devto.presentation.models.PublicReactionCategory
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
+import com.github.kiolk.devto.presentation.screens.home.models.CommentUi
 import com.github.kiolk.devto.presentation.screens.home.models.ReactionType
 import com.github.kiolk.devto.presentation.screens.home.models.ReactionsUi
 import com.github.kiolk.devto.utils.localisation.StringProvider
@@ -19,8 +21,10 @@ fun Article.mapToArticleUi(stringProvider: StringProvider): ArticleUi {
         numberOfComments = this.commentsCount,
         title = this.title,
         description = this.description,
+        readingTime = this.readingTimeMinutes,
         tags = this.tagList.map { it.toTagUi(this.flareTag) },
-        reactionsUi = ReactionsUi(types = this.reactions.sortedBy { it.position }.map { it.toReactionType() }, total = this.publicReactionCount)
+        reactionsUi = ReactionsUi(types = this.reactions.sortedBy { it.position }.map { it.toReactionType() }, total = this.publicReactionCount),
+        topComments = this.topComments.map { it.toCommentUi(stringProvider) }
     )
 }
 
@@ -33,4 +37,14 @@ private fun PublicReactionCategory.toReactionType(): ReactionType {
         ReactionType.Fire.name -> ReactionType.Fire
         else -> ReactionType.Heart
     }
+}
+
+private fun Comment.toCommentUi(stringProvider: StringProvider): CommentUi {
+    return CommentUi(
+        id = this.commentId,
+        text = this.text.replace(Regex("<[^>]*>"), "").trim(),
+        userName = this.username,
+        userProfileImage = this.profileImage90,
+        commentTime = this.publishedTimestamp.toPublicationDateAgo(stringProvider),
+    )
 }

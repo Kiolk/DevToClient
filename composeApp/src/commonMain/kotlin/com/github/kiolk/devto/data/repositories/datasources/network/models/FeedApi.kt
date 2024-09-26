@@ -32,4 +32,6 @@ data class FeedApi(
     val publishedTimestamp: Instant,
     @SerialName("public_reaction_categories")
     val publicReactionCategories: List<PublicReactionCategoryApi>,
+    @SerialName("top_comments")
+    val topComments: List<CommentApi> = emptyList()
 )
