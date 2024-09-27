@@ -10,6 +10,7 @@ import com.github.kiolk.devto.presentation.screens.home.models.ReactionsUi
 import com.github.kiolk.devto.utils.localisation.StringProvider
 import com.github.kiolk.devto.utils.toPublicationDate
 import com.github.kiolk.devto.utils.toPublicationDateAgo
+import io.ktor.http.decodeURLPart
 
 fun Article.mapToArticleUi(stringProvider: StringProvider): ArticleUi {
     return ArticleUi(
@@ -24,7 +25,7 @@ fun Article.mapToArticleUi(stringProvider: StringProvider): ArticleUi {
         readingTime = this.readingTimeMinutes,
         tags = this.tagList.map { it.toTagUi(this.flareTag) },
         reactionsUi = ReactionsUi(types = this.reactions.sortedBy { it.position }.map { it.toReactionType() }, total = this.publicReactionCount),
-        topComments = this.topComments.map { it.toCommentUi(stringProvider) }
+        topComments = this.topComments.filter { !it.text.contains("<img") && it.text.length < 100 }.map { it.toCommentUi(stringProvider) }
     )
 }
 
@@ -42,9 +43,13 @@ private fun PublicReactionCategory.toReactionType(): ReactionType {
 private fun Comment.toCommentUi(stringProvider: StringProvider): CommentUi {
     return CommentUi(
         id = this.commentId,
-        text = this.text.replace(Regex("<[^>]*>"), "").trim(),
+        text = this.text.trim(),
         userName = this.username,
-        userProfileImage = this.profileImage90,
+        //TODO find more efficient way to get image url
+        userProfileImage = this.profileImage90.replace(
+            "https://media.dev.to/cdn-cgi/image/width=90,height=90,fit=cover,gravity=auto,format=auto/",
+            ""
+        ).decodeURLPart(),
         commentTime = this.publishedTimestamp.toPublicationDateAgo(stringProvider),
     )
 }

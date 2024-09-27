@@ -4,3 +4,6 @@ import androidx.compose.runtime.Composable
 
 @Composable
 expect fun WebViewScreen(url: String)
+
+@Composable
+expect fun WebContent(html: String)

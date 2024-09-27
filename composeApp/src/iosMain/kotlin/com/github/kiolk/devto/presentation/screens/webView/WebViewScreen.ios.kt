@@ -8,3 +8,9 @@ actual fun WebViewScreen(url: String) {
     Text(url)
 }
 
+@Composable
+actual fun WebContent(html: String) {
+//TODO Need implement logic for this issue https://github.com/Kiolk/DevToClient/issues/2
+    Text(html)
+}
+

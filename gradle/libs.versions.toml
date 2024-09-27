@@ -24,6 +24,7 @@ coroutines = "1.9.0-RC.2"
 kotlinxDatetime = "0.6.0-RC.2"
 voyagerVersion = "1.1.0-beta02"
 pagingCommonJvm = "3.3.2"
+webkit = "1.12.0"
 
 [libraries]
 accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanistFlowlayout" }
@@ -61,6 +62,7 @@ voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", vers
 voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyagerVersion" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyagerVersion" }
 androidx-paging-common-jvm = { group = "androidx.paging", name = "paging-common-jvm", version.ref = "pagingCommonJvm" }
+androidx-webkit = { group = "androidx.webkit", name = "webkit", version.ref = "webkit" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

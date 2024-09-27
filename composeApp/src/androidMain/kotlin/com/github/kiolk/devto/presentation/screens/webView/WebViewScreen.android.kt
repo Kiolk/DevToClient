@@ -20,3 +20,22 @@ actual fun WebViewScreen(url: String) {
         }
     })
 }
+
+@Composable
+actual fun WebContent(html: String) {
+    //TODO Need modify to display correctly content for different themes https://github.com/Kiolk/DevToClient/issues/2
+    AndroidView(
+        factory = { context ->
+            WebView(context).apply {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                    settings.setAlgorithmicDarkeningAllowed(true)
+                } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                    settings.forceDark = WebSettings.FORCE_DARK_ON
+                }
+                webViewClient = WebViewClient()
+                loadUrl("about:blank")
+                loadDataWithBaseURL(null, html, "text/html", "UTF-8", null)
+            }
+        }
+    )
+}

@@ -35,7 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -44,11 +43,13 @@ import com.github.kiolk.devto.presentation.models.User
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.CommentUi
 import com.github.kiolk.devto.presentation.screens.home.models.TagUi
+import com.github.kiolk.devto.presentation.screens.webView.WebContent
 import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
 import com.github.kiolk.devto.presentation.views.buttons.bookMark.BookMarkButton
 import com.github.kiolk.devto.presentation.views.buttons.comment.CommentsButton
 import com.github.kiolk.devto.presentation.views.buttons.reaction.ReactionsButton
 import com.github.kiolk.devto.presentation.views.tag.Tag
+import com.github.kiolk.devto.utils.colors.DevToColors
 import com.github.kiolk.devto.utils.localisation.StringProvider
 import com.github.kiolk.devto.utils.localisation.StringsKeys
 
@@ -117,27 +118,34 @@ fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -> Unit
     Row(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp).fillMaxWidth()) {
         Box(modifier = Modifier.size(size)) {
             Box(
-                modifier = Modifier.size(size - 5.dp).background(Color.LightGray, CircleShape)
+                modifier = Modifier.size(size - 15.dp).background(Color.LightGray, CircleShape)
                     .border(1.dp, Color.LightGray, CircleShape).align(Alignment.Center)
             ) {
                 AsyncImage(
                     model = commentUi.userProfileImage, // replace with working URL
                     contentDescription = null,
                     modifier = Modifier
-                        .size(size - 6.dp)
+                        .size(size - 16.dp)
                         .align(Alignment.Center)
                         .clip(CircleShape)
                 )
             }
         }
-        Box(modifier = Modifier.background(shape = RoundedCornerShape(4.dp), color = Color.LightGray).fillMaxWidth()) {
-            Column {
-                Row(modifier = Modifier.padding(4.dp)) {
-                    Text(commentUi.userName)
+        Box(
+            modifier = Modifier.background(shape = RoundedCornerShape(4.dp), color = DevToColors.lightGray).fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                Row(modifier = Modifier) {
+                    Text(commentUi.userName, style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.Bold))
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text(commentUi.commentTime)
+                    Text(
+                        commentUi.commentTime,
+                        style = MaterialTheme.typography.overline.copy(
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
                 }
-                Text(commentUi.text, maxLines = 3, overflow = TextOverflow.Ellipsis)
+                WebContent(commentUi.text)
             }
         }
     }

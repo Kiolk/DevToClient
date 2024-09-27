@@ -12,7 +12,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            DevToTheme(isDarkTheme = true) {
+            DevToTheme(isDarkTheme = false) {
                 Navigator(MainScreen())
             }
         }
