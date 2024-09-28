@@ -9,7 +9,7 @@ actual fun WebViewScreen(url: String) {
 }
 
 @Composable
-actual fun WebContent(html: String) {
+actual fun WebContent(html: String, function: () -> Unit) {
 //TODO Need implement logic for this issue https://github.com/Kiolk/DevToClient/issues/2
     Text(html)
 }

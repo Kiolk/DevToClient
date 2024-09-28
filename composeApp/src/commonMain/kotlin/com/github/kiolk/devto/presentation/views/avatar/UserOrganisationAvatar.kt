@@ -3,6 +3,7 @@ package com.github.kiolk.devto.presentation.views.avatar
 import Organization
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -18,12 +19,15 @@ import coil3.compose.AsyncImage
 import com.github.kiolk.devto.presentation.models.User
 
 @Composable
-fun UserOrganisationAvatar(user: User, organization: Organization?, size: Dp = 35.dp) {
+fun UserOrganisationAvatar(user: User, organization: Organization?, size: Dp = 35.dp, onUserClick: (userName: String) -> Unit = {}) {
     if (organization == null) {
         Box(modifier = Modifier.size(size)) {
             Box(
                 modifier = Modifier.size(size - 5.dp).background(Color.LightGray, CircleShape)
                     .border(1.dp, Color.LightGray, CircleShape).align(Alignment.Center)
+                    .clickable {
+                        onUserClick(user.name)
+                    }
             ) {
                 AsyncImage(
                     model = user.profileImage, // replace with working URL

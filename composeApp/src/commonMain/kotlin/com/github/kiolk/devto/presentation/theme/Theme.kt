@@ -18,7 +18,7 @@ val lightColorPalette = lightColors(
     primary = DevToColors.lightGray,
     primaryVariant = DevToColors.black,
     secondary = DevToColors.white,
-    surface = DevToColors.white
+    surface = DevToColors.white,
 )
 
 

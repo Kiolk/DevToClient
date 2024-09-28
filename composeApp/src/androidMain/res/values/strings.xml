@@ -3,6 +3,7 @@
     <string name="days">days</string>
     <string name="add_comment">Add comment</string>
     <string name="reading_time">%d min read</string>
+    <string name="reading_all_comments">See all %d comments</string>
     <plurals name="days_ago_since_publication">
         <item quantity="one">day ago</item>
         <item quantity="other">days ago</item>

@@ -8,4 +8,5 @@ object StringsKeys {
     const val REACTIONS = "reactions"
     const val READING_TIME = "reading_time"
     const val ADD_COMMENT = "add_comment"
+    const val READING_ALL_COMMENTS = "reading_all_comments"
 }

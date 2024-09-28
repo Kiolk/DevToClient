@@ -57,9 +57,10 @@ import com.github.kiolk.devto.utils.localisation.StringsKeys
 fun ArticleItem(
     articleUi: ArticleUi,
     stringProvider: StringProvider,
-    onArticleClick: (articleUi: ArticleUi) -> Unit = {},
+    onArticleClick: (articleUi: ArticleUi, commentId: String?, showComments: Boolean) -> Unit = { _, _, _ -> },
     onTagClick: (tagUi: TagUi) -> Unit = {},
-    onBookmarkClick: (articleUi: ArticleUi) -> Unit = {}
+    onBookmarkClick: (articleUi: ArticleUi) -> Unit = {},
+    onUserClick: (userName: String) -> Unit = {},
 ) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(8.dp),
@@ -69,7 +70,7 @@ fun ArticleItem(
     ) {
         Column {
             Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.Top) {
-                UserOrganisationAvatar(articleUi.article.user, articleUi.article.organization)
+                UserOrganisationAvatar(articleUi.article.user, articleUi.article.organization, onUserClick = onUserClick)
                 Column(
                     modifier = Modifier.padding(start = 2.dp),
                     verticalArrangement = Arrangement.Top
@@ -78,7 +79,8 @@ fun ArticleItem(
                         Column(verticalArrangement = Arrangement.Top) {
                             UserNameWithOrganisation(
                                 articleUi.article.user,
-                                articleUi.article.organization
+                                articleUi.article.organization,
+                                onUserClick = onUserClick,
                             )
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 PublicationDate(articleUi)
@@ -87,19 +89,23 @@ fun ArticleItem(
                             }
                         }
                     }
-                    ArticleTitle(articleUi, onArticleClick)
+                    ArticleTitle(articleUi) { onArticleClick(it, null, false) }
                     ArticleTags(articleUi.tags, articleUi.article.flareTag, onTagClick)
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        ReactionsButton(articleUi, stringProvider, onArticleClick)
-                        CommentsButton(articleUi, stringProvider = stringProvider)
+                        ReactionsButton(articleUi, stringProvider) { onArticleClick(it, null, false) }
+                        CommentsButton(articleUi, stringProvider = stringProvider, onCommentsClick = { onArticleClick(articleUi, null, true) })
                         Spacer(Modifier.weight(1f))
                         BookMarkButton(articleUi, onBookmarkClick)
                     }
                 }
             }
-            articleUi.topComments.firstOrNull { it.text.length > 40 }?.let { comment ->
-                Comment(comment, onCommentClick = {})
-            }
+            CommentsBlock(
+                articleUi,
+                stringProvider = stringProvider,
+                onCommentClick = { comment -> onArticleClick(articleUi, comment.id.toString(), true) },
+                onSeeAllCommentsClick = { onArticleClick(articleUi, null, true) },
+                onUserClick = onUserClick
+            )
         }
     }
 }
@@ -114,7 +120,34 @@ fun ReadingTime(readingTimeMinutes: Int, stringProvider: StringProvider) {
 }
 
 @Composable
-fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -> Unit, size: Dp = 35.dp) {
+fun CommentsBlock(
+    articleUi: ArticleUi,
+    onCommentClick: (commentUi: CommentUi) -> Unit,
+    onSeeAllCommentsClick: () -> Unit,
+    stringProvider: StringProvider,
+    onUserClick: (userName: String) -> Unit
+) {
+    val selectedTopComments = articleUi.topComments.filter { it.text.length > 40 }.take(2)
+
+    if (selectedTopComments.isEmpty()) {
+        return
+    }
+
+    selectedTopComments.forEach {
+        Comment(it, onCommentClick = onCommentClick, onUserClick = onUserClick)
+    }
+
+    if (articleUi.numberOfComments > 2) {
+        Text(
+            stringProvider.getFormattedString(StringsKeys.READING_ALL_COMMENTS, articleUi.numberOfComments),
+            modifier = Modifier.padding(start = 48.dp, end = 8.dp, bottom = 8.dp).clickable { onSeeAllCommentsClick() },
+            style = MaterialTheme.typography.caption
+        )
+    }
+}
+
+@Composable
+fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -> Unit, size: Dp = 35.dp, onUserClick: (user: String) -> Unit) {
     Row(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp).fillMaxWidth()) {
         Box(modifier = Modifier.size(size)) {
             Box(
@@ -128,15 +161,20 @@ fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -> Unit
                         .size(size - 16.dp)
                         .align(Alignment.Center)
                         .clip(CircleShape)
+                        .clickable { onUserClick(commentUi.userName) }
                 )
             }
         }
         Box(
             modifier = Modifier.background(shape = RoundedCornerShape(4.dp), color = DevToColors.lightGray).fillMaxWidth()
+                .clickable { onCommentClick(commentUi) }
         ) {
             Column(modifier = Modifier.padding(8.dp)) {
                 Row(modifier = Modifier) {
-                    Text(commentUi.userName, style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.Bold))
+                    Text(
+                        commentUi.userName,
+                        style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.Bold),
+                        modifier = Modifier.clickable { onUserClick(commentUi.userName) })
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         commentUi.commentTime,
@@ -145,7 +183,7 @@ fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -> Unit
                         )
                     )
                 }
-                WebContent(commentUi.text)
+                WebContent(commentUi.text) { onCommentClick(commentUi) }
             }
         }
     }
@@ -198,9 +236,9 @@ fun PublicationDate(articleUi: ArticleUi) {
 }
 
 @Composable
-fun UserNameWithOrganisation(user: User, organization: Organization?) {
+fun UserNameWithOrganisation(user: User, organization: Organization?, onUserClick: (userName: String) -> Unit) {
     Row(verticalAlignment = Alignment.Top) {
-        Text(text = user.name, style = MaterialTheme.typography.caption)
+        Text(text = user.name, style = MaterialTheme.typography.caption, modifier = Modifier.clickable { onUserClick(user.name) })
         if (organization != null) {
             Text(" for ", color = Color.LightGray, style = MaterialTheme.typography.caption)
             Text(organization.name, style = MaterialTheme.typography.caption)
