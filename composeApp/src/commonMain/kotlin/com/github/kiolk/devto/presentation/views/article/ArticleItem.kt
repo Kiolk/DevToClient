@@ -113,7 +113,7 @@ fun ArticleItem(
 @Composable
 fun ReadingTime(readingTimeMinutes: Int, stringProvider: StringProvider) {
     Text(
-        text = stringProvider.getFormattedString(StringsKeys.READING_TIME, readingTimeMinutes),
+        text = stringProvider.getString(StringsKeys.READING_TIME, readingTimeMinutes),
         color = Color.LightGray,
         style = MaterialTheme.typography.overline,
     )
@@ -139,7 +139,7 @@ fun CommentsBlock(
 
     if (articleUi.numberOfComments > 2) {
         Text(
-            stringProvider.getFormattedString(StringsKeys.READING_ALL_COMMENTS, articleUi.numberOfComments),
+            stringProvider.getString(StringsKeys.READING_ALL_COMMENTS, articleUi.numberOfComments),
             modifier = Modifier.padding(start = 48.dp, end = 8.dp, bottom = 8.dp).clickable { onSeeAllCommentsClick() },
             style = MaterialTheme.typography.caption
         )

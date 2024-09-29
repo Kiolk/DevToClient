@@ -7,3 +7,4 @@
 */
 "add_comment" = "Add comment";
 "reading_time" = "%d min read";
+"reading_all_comments" = "See all %d comments";

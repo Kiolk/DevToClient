@@ -29,6 +29,11 @@ class IosStringProvider : StringProvider {
         return key
     }
 
+    override fun getString(key: String, value: Int): String {
+        val format = getString(key)
+        return NSString.stringWithFormat(format, value)
+    }
+
     override fun getFormattedString(key: String, vararg arguments: Any?): String {
         val format = getString(key)
         val a = arguments

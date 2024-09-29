@@ -7,6 +7,10 @@ object MockStringProvider : StringProvider {
         return "days"
     }
 
+    override fun getString(key: String, value: Int): String {
+        return "days"
+    }
+
     override fun getFormattedString(key: String, vararg arguments: Any?): String {
         return "5 min read"
     }

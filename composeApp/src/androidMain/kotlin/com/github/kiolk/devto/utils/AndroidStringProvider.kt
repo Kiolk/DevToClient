@@ -15,6 +15,10 @@ open class AndroidStringProvider(private val context: Context) : StringProvider 
         return context.getString(resId)
     }
 
+    override fun getString(key: String, value: Int): String {
+        return getFormattedString(key, value)
+    }
+
     override fun getFormattedString(key: String, vararg arguments: Any?): String {
         val resId = context.resources.getIdentifier(key, STRINGS_RESOURCE_TYPE, context.packageName)
 
