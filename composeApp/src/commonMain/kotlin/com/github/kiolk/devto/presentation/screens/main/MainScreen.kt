@@ -1,6 +1,9 @@
 package com.github.kiolk.devto.presentation.screens.main
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -11,6 +14,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
@@ -27,8 +31,14 @@ class MainScreen : Screen {
     override fun Content() {
         TabNavigator(HomeTab) {
             Scaffold(
-                content = {
-                    CurrentTab()
+                content = { innerPadding ->
+                    Box(
+                        modifier = Modifier
+                            .padding(innerPadding)
+                            .navigationBarsPadding()
+                    ) {
+                        CurrentTab()
+                    }
                 },
                 bottomBar = {
                     BottomNavigation {
