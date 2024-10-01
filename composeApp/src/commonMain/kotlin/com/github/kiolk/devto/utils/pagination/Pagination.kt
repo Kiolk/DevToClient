@@ -3,6 +3,8 @@ package com.github.kiolk.devto.utils.pagination
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class Pagination<T>(
@@ -13,19 +15,26 @@ class Pagination<T>(
 ) {
 
     private var startPage: Int = startPosition
+    private var job: Job? = null
 
     fun startLoading() {
         loadNewPortion()
     }
 
     fun loadNewPortion() {
-        scope.launch(Dispatchers.IO) {
+        if (job != null) {
+            return
+        }
+
+        job = scope.launch(Dispatchers.IO) {
             startPage += 1
+            delay(10000)
 
             val newPortion = source(startPage)
 
             launch(Dispatchers.Main) {
                 onNewPortionLoaded(newPortion)
+                job = null
             }
         }
     }

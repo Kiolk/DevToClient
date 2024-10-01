@@ -1,12 +1,16 @@
 package com.github.kiolk.devto.presentation.screens.home
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -14,6 +18,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
 import com.github.kiolk.devto.presentation.screens.tag.TagScreen
 import com.github.kiolk.devto.presentation.screens.user.UserScreen
+import com.github.kiolk.devto.presentation.views.InfinityProgress
+import com.github.kiolk.devto.presentation.views.ProgressSize
 import com.github.kiolk.devto.presentation.views.article.ArticleItem
 import com.github.kiolk.devto.utils.localisation.StringProvider
 import org.koin.mp.KoinPlatform.getKoin
@@ -31,35 +37,47 @@ class HomeScreen : Screen {
 
         val listState = rememberLazyListState()
 
-        LaunchedEffect(key1 = listState.layoutInfo.visibleItemsInfo.lastOrNull()) {
-            if (listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index == listState.layoutInfo.totalItemsCount - 1) {
-                screenModel.loadMoreArticles()
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+            if (articlesState.isEmpty()) {
+                InfinityProgress(size = ProgressSize.Large)
+                return
             }
-        }
 
-        LazyColumn(state = listState) {
-            items(articlesState.size) { articleIndex ->
-                if (articleIndex < articlesState.size - 1) {
-                    ArticleItem(articlesState[articleIndex], stringProvider = stringProvider,
-                        onArticleClick = { article, commentId, showComments ->
-                            navigator.push(
-                                ArticleScreen(
-                                    article.article.user.username,
-                                    article.article.slug,
-                                    article.article.id.toString(),
-                                    commentId,
-                                    showComments
+            LaunchedEffect(key1 = listState.layoutInfo.visibleItemsInfo.lastOrNull()) {
+                if (listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index == listState.layoutInfo.totalItemsCount - 1) {
+                    screenModel.loadMoreArticles()
+                }
+            }
+
+            LazyColumn(
+                state = listState,
+                modifier = Modifier,
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                items(articlesState.size) { articleIndex ->
+                    if (articleIndex < articlesState.size - 1) {
+                        ArticleItem(articlesState[articleIndex], stringProvider = stringProvider,
+                            onArticleClick = { article, commentId, showComments ->
+                                navigator.push(
+                                    ArticleScreen(
+                                        article.article.user.username,
+                                        article.article.slug,
+                                        article.article.id.toString(),
+                                        commentId,
+                                        showComments
+                                    )
                                 )
-                            )
-                        }, onTagClick = {
-                            navigator.push(TagScreen(it.name))
-                        }, onBookmarkClick = {
-                            screenModel.onBookmarkClick(it)
-                        }, onUserClick = {
-                            navigator.push(UserScreen(it))
-                        })
-                } else if (isLoading) {
-                    CircularProgressIndicator()
+                            }, onTagClick = {
+                                navigator.push(TagScreen(it.name))
+                            }, onBookmarkClick = {
+                                screenModel.onBookmarkClick(it)
+                            }, onUserClick = {
+                                navigator.push(UserScreen(it))
+                            })
+                    } else if (isLoading) {
+                        InfinityProgress()
+                    }
                 }
             }
         }
