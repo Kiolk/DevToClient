@@ -10,5 +10,4 @@ data class FeedUserApi(
     @SerialName("profile_image_url") val profileImageUrl: String,
     @SerialName("profile_image_90") val profileImage90: String,
     @SerialName("slug") val slug: String,
-    @SerialName("cached_base_subscriber") val cachedBaseSubscriber: Boolean
 )

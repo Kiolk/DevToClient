@@ -1,5 +1,7 @@
 package com.github.kiolk.devto.presentation.models
 
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SortingType
+
 data class GetArticlesParams(
     val page: Int? = null,
     val perPage: Int? = null,
@@ -10,4 +12,5 @@ data class GetArticlesParams(
     val state: String? = null,
     val top: Int? = null,
     val collectionId: Int? = null,
+    val sortingType: SortingType = SortingType.Infinity,
 )

@@ -9,4 +9,10 @@ object StringsKeys {
     const val READING_TIME = "reading_time"
     const val ADD_COMMENT = "add_comment"
     const val READING_ALL_COMMENTS = "reading_all_comments"
+    const val RELATED = "related_sorting"
+    const val LATEST = "latest_sorting"
+    const val TOP_WEEK = "top_week_sorting"
+    const val TOP_MONTH = "top_month_sorting"
+    const val TOP_YEAR = "top_year_sorting"
+    const val TOP_INFINITY = "top_week_sorting"
 }

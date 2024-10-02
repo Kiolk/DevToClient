@@ -32,7 +32,7 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
     }
 
     override suspend fun getFeed(params: GetArticlesParamsApi): List<FeedApi> {
-        return httpClient.get(GET_FEED_ENDPOINT) {
+        return httpClient.get(GET_FEED_ENDPOINT + params.sortingType.value) {
             params.page?.let { parameter("page", it) }
             params.perPage?.let { parameter("per_page", it) }
             params.tag?.let { parameter("tag", it) }

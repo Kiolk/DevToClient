@@ -10,4 +10,14 @@ data class GetArticlesParamsApi(
     val state: String? = null,
     val top: Int? = null,
     val collectionId: Int? = null,
+    val sortingType: SortingType = SortingType.Relevant,
 )
+
+sealed class SortingType(val value: String) {
+    object Relevant : SortingType("")
+    object Latest : SortingType("latest")
+    object Week : SortingType("week")
+    object Month : SortingType("month")
+    object Year : SortingType("year")
+    object Infinity : SortingType("infinity")
+}

@@ -130,6 +130,7 @@ fun GetArticlesParams.toGetArticlesParamsApi(): GetArticlesParamsApi {
         state = state,
         top = top,
         collectionId = collectionId,
+        sortingType = sortingType,
     )
 }
 
