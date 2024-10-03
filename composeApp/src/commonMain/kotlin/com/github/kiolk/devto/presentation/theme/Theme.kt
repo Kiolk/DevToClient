@@ -8,16 +8,16 @@ import androidx.compose.runtime.Composable
 import com.github.kiolk.devto.utils.colors.DevToColors
 
 val darkColorPalette = darkColors(
-    primary = DevToColors.blue,
+    primary = DevToColors.yellow,
     primaryVariant = DevToColors.paleWhite,
-    secondary = DevToColors.cyan,
-    surface = DevToColors.raisinBlack
+    secondary = DevToColors.light_blue,
+    surface = DevToColors.raisinBlack,
 )
 
 val lightColorPalette = lightColors(
-    primary = DevToColors.lightGray,
+    primary = DevToColors.yellow,
     primaryVariant = DevToColors.black,
-    secondary = DevToColors.white,
+    secondary = DevToColors.light_blue,
     surface = DevToColors.white,
 )
 

@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">DevTo</string>
     <string name="days">days</string>
+    <string name="related_sorting">Related</string>
+    <string name="latest_sorting">Latest</string>
+    <string name="top_sorting">Top</string>
+    <string name="top_week_sorting">Week</string>
+    <string name="top_month_sorting">Month</string>
+    <string name="top_year_sorting">Year</string>
+    <string name="top_infinity_sorting">Infinity</string>
     <string name="add_comment">Add comment</string>
     <string name="reading_time">%d min read</string>
     <string name="reading_all_comments">See all %d comments</string>

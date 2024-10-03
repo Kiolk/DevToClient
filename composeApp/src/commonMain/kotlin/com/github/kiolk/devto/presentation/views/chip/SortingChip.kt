@@ -2,6 +2,7 @@ package com.github.kiolk.devto.presentation.views.chip
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FilterChip
 import androidx.compose.material.MaterialTheme
@@ -19,20 +20,29 @@ import com.github.kiolk.devto.utils.localisation.StringProvider
 fun SortingChip(
     currentType: SortingTypeUi,
     passedType: SortingTypeUi,
+    isSelected: Boolean? = null,
     onClick: (type: SortingTypeUi) -> Unit,
-    stringProvider: StringProvider
+    stringProvider: StringProvider,
+    text: String? = null,
 ) {
     FilterChip(
-        selected = passedType == currentType,
+        selected = isSelected ?: (passedType == currentType),
         shape = RoundedCornerShape(size = 4.dp),
+        colors = ChipDefaults.filterChipColors(
+            backgroundColor = MaterialTheme.colors.secondary.copy(
+                alpha = 0.5f
+            ), selectedBackgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.5f)
+        ),
         onClick = {
             onClick(currentType)
         },
         content = {
             Text(
-                stringProvider.getString(currentType.key),
+                text ?: stringProvider.getString(currentType.key),
                 modifier = Modifier.padding(8.dp),
-                style = MaterialTheme.typography.caption.copy(fontWeight = if (passedType == currentType) W700 else W400)
+                style = MaterialTheme.typography.caption.copy(
+                    fontWeight = if (isSelected ?: (passedType == currentType)) W700 else W400
+                )
             )
         })
 }

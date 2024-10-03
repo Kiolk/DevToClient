@@ -13,4 +13,7 @@ object DevToColors {
     val paleWhite = Color(0xFF4F4FB)
     val cyan = Color(0xF39AFEA)
     val raisinBlack = Color(0xFF140E1B)
+    val light_blue = Color(0xFF1976d2)
+    val yellow = Color(0xFFFFEB3B)
+
 }

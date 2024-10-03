@@ -8,3 +8,10 @@
 "add_comment" = "Add comment";
 "reading_time" = "%d min read";
 "reading_all_comments" = "See all %d comments";
+"related_sorting" = "Related";
+"latest_sorting" = "Latest";
+"top_sorting" = "Top";
+"top_week_sorting" = "Week";
+"top_month_sorting" = "Month";
+"top_year_sorting" = "Year";
+"top_infinity_sorting" = "Infinity";

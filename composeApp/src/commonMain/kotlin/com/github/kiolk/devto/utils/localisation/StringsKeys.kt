@@ -11,8 +11,9 @@ object StringsKeys {
     const val READING_ALL_COMMENTS = "reading_all_comments"
     const val RELATED = "related_sorting"
     const val LATEST = "latest_sorting"
+    const val TOP = "top_sorting"
     const val TOP_WEEK = "top_week_sorting"
     const val TOP_MONTH = "top_month_sorting"
     const val TOP_YEAR = "top_year_sorting"
-    const val TOP_INFINITY = "top_week_sorting"
+    const val TOP_INFINITY = "top_infinity_sorting"
 }
