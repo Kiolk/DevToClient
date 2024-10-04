@@ -7,7 +7,7 @@ import com.github.kiolk.devto.presentation.screens.user.UserScreenModel
 import org.koin.dsl.module
 
 val screenModelModule = module {
-    factory<HomeScreenModel> { HomeScreenModel(get(), get()) }
+    factory<HomeScreenModel> { HomeScreenModel(get(), get(), get()) }
     factory<TagScreenModel> { (tagName: String) -> TagScreenModel(tagName) }
     factory<UserScreenModel> { (userName: String) -> UserScreenModel(userName) }
     factory<ArticleScreenModel> { (articleId: String) -> ArticleScreenModel(articleId) }

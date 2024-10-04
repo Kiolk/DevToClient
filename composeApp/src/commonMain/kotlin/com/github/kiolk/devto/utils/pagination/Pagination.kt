@@ -27,7 +27,7 @@ class Pagination<T>(
         }
 
         job = scope.launch(Dispatchers.IO) {
-            startPage += START_LOADING_POSITION
+            startPage += 1
             delay(10000)
 
             val newPortion = source(startPage)
