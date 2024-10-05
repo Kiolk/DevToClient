@@ -15,6 +15,7 @@ androidx-test-junit = "1.2.1"
 coilCompose = "3.0.0-alpha06"
 coilNetworkKtor = "3.0.0-alpha06"
 compose-plugin = "1.6.11"
+compottieDot = "2.0.0-rc01"
 junit = "4.13.2"
 koinCore = "3.5.6"
 kotlin = "2.0.20"
@@ -22,6 +23,7 @@ kotlinxSerializationJson = "1.5.1"
 ktor = "2.3.12"
 coroutines = "1.9.0-RC.2"
 kotlinxDatetime = "0.6.0-RC.2"
+multiplatformSettings = "1.2.0"
 voyagerVersion = "1.1.0-beta02"
 pagingCommonJvm = "3.3.2"
 webkit = "1.12.0"
@@ -30,6 +32,8 @@ webkit = "1.12.0"
 accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanistFlowlayout" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coilNetworkKtor" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottieDot" }
+compottie-dot = { module = "io.github.alexzhirkevich:compottie-dot", version.ref = "compottieDot" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -55,6 +59,7 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
 voyager-bottom-sheet-navigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyagerVersion" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyagerVersion" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyagerVersion" }

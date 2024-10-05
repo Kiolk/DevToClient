@@ -77,8 +77,10 @@ kotlin {
             implementation (libs.accompanist.flowlayout)
 
             //compottie
-            implementation("io.github.alexzhirkevich:compottie:2.0.0-rc01")
-            implementation("io.github.alexzhirkevich:compottie-dot:2.0.0-rc01")
+            implementation(libs.compottie)
+            implementation(libs.compottie.dot)
+
+            implementation(libs.multiplatform.settings)
         }
 
         iosMain.dependencies {
