@@ -20,7 +20,7 @@ class ArticleRepositoryImpl(private val articleService: ArticleService) : Articl
 
 private fun ReactionApi.toReaction(): Reaction {
     return Reaction(
-        result, category, id, reactableId, reactableType
+        result, category, id, reactableId, reactableType,
     )
 }
 
