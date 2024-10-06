@@ -2,9 +2,9 @@ package com.github.kiolk.devto.data.repositories.settings
 
 import com.russhwolf.settings.Settings
 
-class SettingsRepositoryImpl(private val settings: Settings) : SettingsRepository {
+class SettingsRepositoryImpl(private val settings: Settings, private val defaultToken: String) : SettingsRepository {
     override fun getToken(): String {
-        return settings.getString(SETTINGS_TOKEN, "")
+        return settings.getString(SETTINGS_TOKEN, defaultToken)
     }
 
     override fun setToken(token: String) {

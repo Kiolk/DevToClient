@@ -4,6 +4,8 @@ import com.github.kiolk.devto.Secrets
 import com.github.kiolk.devto.data.repositories.datasources.network.ArticleService
 import com.github.kiolk.devto.data.repositories.datasources.network.ArticleServiceImpl
 import com.github.kiolk.devto.data.repositories.datasources.network.converters.InstantSerializer
+import com.github.kiolk.devto.data.repositories.datasources.network.plugins.AuthenticationPlugin
+import com.github.kiolk.devto.data.repositories.datasources.network.plugins.AuthenticationPluginImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -32,6 +34,7 @@ val networkModule = module {
      */
     single<String>(named(API_TOKEN)) { Secrets.API_KEY }
     single<ArticleService> { ArticleServiceImpl(get()) }
+    single<AuthenticationPlugin> { AuthenticationPluginImpl(get()) }
     single {
         HttpClient {
             install(ContentNegotiation) {
@@ -58,6 +61,8 @@ val networkModule = module {
                 socketTimeoutMillis = 60_000
                 requestTimeoutMillis = 60_000
             }
+
+            install(get<AuthenticationPlugin>().createPlugin())
         }
     }
 }

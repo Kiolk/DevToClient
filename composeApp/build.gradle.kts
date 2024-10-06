@@ -55,6 +55,7 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.ktor.client.logging.jvm)
+            implementation(libs.ktor.client.auth)
             //serialization
             implementation(libs.kotlinx.serialization.json)
 

@@ -99,13 +99,16 @@ fun ArticleItem(
                     }
                 }
             }
-            CommentsBlock(
-                articleUi,
-                stringProvider = stringProvider,
-                onCommentClick = { comment -> onArticleClick(articleUi, comment.id.toString(), true) },
-                onSeeAllCommentsClick = { onArticleClick(articleUi, null, true) },
-                onUserClick = onUserClick
-            )
+            /**
+             * TODO Need find more efficient way to display comments with web formatted text. More information here https://github.com/Kiolk/DevToClient/issues/2
+             */
+//            CommentsBlock(
+//                articleUi,
+//                stringProvider = stringProvider,
+//                onCommentClick = { comment -> onArticleClick(articleUi, comment.id.toString(), true) },
+//                onSeeAllCommentsClick = { onArticleClick(articleUi, null, true) },
+//                onUserClick = onUserClick
+//            )
         }
     }
 }
