@@ -2,7 +2,7 @@ package com.github.kiolk.devto.data.repositories.datasources.network.mappers
 
 import Organization
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleApi
-import com.github.kiolk.devto.data.repositories.datasources.network.models.CommentApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.TopCommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedOrganizationApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedUserApi
@@ -134,7 +134,7 @@ fun GetArticlesParams.toGetArticlesParamsApi(): GetArticlesParamsApi {
     )
 }
 
-private fun CommentApi.toComment(): Comment {
+private fun TopCommentApi.toComment(): Comment {
     return Comment(
         commentId = this.commentId,
         userId = this.userId,

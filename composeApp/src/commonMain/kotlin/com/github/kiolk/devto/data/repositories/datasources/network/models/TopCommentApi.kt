@@ -6,14 +6,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TopCommentApi(
-    @SerialName("comment_id")
-    val commentId: Int,
-    @SerialName("user_id")
-    val userId: Int,
-    @SerialName("published_timestamp")
-    val publishedTimestamp: Instant,
-    @SerialName("published_at_int")
-    val publishedAtInt: Long,
-    @SerialName("safe_processed_html")
-    val safeProcessedHtml: String
+    @SerialName("comment_id") val commentId: Int,
+    @SerialName("user_id") val userId: Int,
+    @SerialName("published_timestamp") val publishedTimestamp: Instant,
+    @SerialName("path") val path: String,
+    @SerialName("username") val username: String,
+    @SerialName("name") val name: String,
+    @SerialName("profile_image_90") val profileImage90: String,
+    @SerialName("safe_processed_html") val safeProcessedHtml: String,
 )

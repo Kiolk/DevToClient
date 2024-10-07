@@ -1,9 +1,11 @@
 package com.github.kiolk.devto.data.repositories.datasources.network
 
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.CommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -17,6 +19,10 @@ interface ArticleService {
     suspend fun getFeed(params: GetArticlesParamsApi): List<FeedApi>
 
     suspend fun toggleReaction(reactionCategory: String, articleId: Int, reactionOn: String): ReactionApi
+
+    suspend fun getArticleById(id: Int): SingleArticleApi
+
+    suspend fun getCommentsForArticle(articleId: Int): List<CommentApi>
 }
 
 class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
@@ -50,19 +56,32 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
     }
 
     override suspend fun toggleReaction(reactionCategory: String, articleId: Int, reactionOn: String): ReactionApi {
-        val resource = httpClient.post(POST_TOGGLE_REACtION_ENDPOINT) {
+        val resource = httpClient.post(POST_TOGGLE_REACTION_ENDPOINT) {
             parameter("category", reactionCategory)
             parameter("reactable_id", articleId)
             parameter("reactable_type", reactionOn)
         }
 
-
         return resource.body()
+    }
+
+    override suspend fun getArticleById(id: Int): SingleArticleApi {
+        val article: SingleArticleApi = httpClient.get(GET_ARTICLE_BY_ID_ENDPOINT + id.toString()).body()
+        return article
+    }
+
+    override suspend fun getCommentsForArticle(articleId: Int): List<CommentApi> {
+        val comments: List<CommentApi> = httpClient.get(GET_COMMENTS_FOR_ARTICLE_ENDPOINT) {
+            parameter("a_id", articleId)
+        }.body()
+        return comments
     }
 
     companion object {
         private const val GET_ARTICLES_ENDPOINT = "api/articles"
         private const val GET_FEED_ENDPOINT = "stories/feed/"
-        private const val POST_TOGGLE_REACtION_ENDPOINT = "api/reactions/toggle"
+        private const val POST_TOGGLE_REACTION_ENDPOINT = "api/reactions/toggle"
+        private const val GET_ARTICLE_BY_ID_ENDPOINT = "api/articles/"
+        private const val GET_COMMENTS_FOR_ARTICLE_ENDPOINT = "api/comments"
     }
 }
