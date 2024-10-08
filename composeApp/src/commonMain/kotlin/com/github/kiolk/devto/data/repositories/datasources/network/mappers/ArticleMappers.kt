@@ -2,7 +2,6 @@ package com.github.kiolk.devto.data.repositories.datasources.network.mappers
 
 import Organization
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleApi
-import com.github.kiolk.devto.data.repositories.datasources.network.models.TopCommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedOrganizationApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedUserApi
@@ -10,6 +9,7 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.Flare
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.OrganizationApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.PublicReactionCategoryApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.TopCommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.UserApi
 import com.github.kiolk.devto.presentation.models.Article
 import com.github.kiolk.devto.presentation.models.Comment
@@ -136,7 +136,7 @@ fun GetArticlesParams.toGetArticlesParamsApi(): GetArticlesParamsApi {
 
 private fun TopCommentApi.toComment(): Comment {
     return Comment(
-        commentId = this.commentId,
+        commentId = this.commentId.toString(),
         userId = this.userId,
         publishedTimestamp = this.publishedTimestamp, // Format Instant as needed
         path = this.path,

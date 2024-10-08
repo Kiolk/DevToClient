@@ -61,5 +61,7 @@ data class SingleArticleApi(
     @SerialName("user")
     val user: UserApi,
     @SerialName("flare_tag")
-    val flareTag: FlareTagApi? = null
+    val flareTag: FlareTagApi? = null,
+    @SerialName("organization")
+    val organization: OrganizationApi? = null,
 )

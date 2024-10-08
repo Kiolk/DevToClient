@@ -2,8 +2,13 @@ package com.github.kiolk.devto.data.repositories.articles
 
 import com.github.kiolk.devto.data.repositories.datasources.network.ArticleService
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toArticle
+import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toFlareTag
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toGetArticlesParamsApi
+import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toOrganization
+import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toUser
+import com.github.kiolk.devto.data.repositories.datasources.network.models.CommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
 import com.github.kiolk.devto.domain.models.Reaction
 import com.github.kiolk.devto.presentation.models.Article
 import com.github.kiolk.devto.presentation.models.Comment
@@ -19,12 +24,44 @@ class ArticleRepositoryImpl(private val articleService: ArticleService) : Articl
     }
 
     override suspend fun getArticleById(id: Int): Article {
-        TODO("Not yet implemented")
+        return articleService.getArticleById(id).mapToArticle()
     }
 
     override suspend fun getCommentsForArticle(id: Int): List<Comment> {
-        TODO("Not yet implemented")
+        return articleService.getCommentsForArticle(id).map { it.mapToComment() }
     }
+}
+
+private fun CommentApi.mapToComment(): Comment {
+    return Comment(
+        commentId = idCode,
+        userId = user.userId,
+        text = bodyHtml,
+        publishedTimestamp = createdAt,
+        path = "",
+        username = user.username,
+        name = user.name,
+        profileImage90 = user.profileImage,
+    )
+}
+
+private fun SingleArticleApi.mapToArticle(): Article {
+    return Article(
+        id = id,
+        slug = slug,
+        title = title,
+        description = description,
+        publishedAt = publishedAt,
+        commentsCount = commentsCount,
+        publicReactionCount = publicReactionsCount,
+        positiveReactionCount = positiveReactionsCount,
+        coverImage = coverImage,
+        readingTimeMinutes = readingTimeMinutes,
+        tagList = tagList.split(","),
+        user = user.toUser(),
+        organization = organization?.toOrganization(),
+        flareTag = flareTag?.toFlareTag(),
+    )
 }
 
 private fun ReactionApi.toReaction(): Reaction {

@@ -16,8 +16,9 @@ data class Article(
     val readingTimeMinutes: Int = 0,
     val tagList: List<String> = emptyList(),
     val user: User,
-    val organization: Organization?,
-    val flareTag: FlareTag?,
+    val organization: Organization? = null,
+    val flareTag: FlareTag? = null,
     val reactions: List<PublicReactionCategory> = emptyList(),
-    val topComments: List<Comment> = emptyList()
+    val topComments: List<Comment> = emptyList(),
+    val comments: List<Comment> = emptyList()
 )

@@ -15,8 +15,6 @@ data class ArticleUi(
     val numberOfComments: Int = 0,
     val readingTime: Int = 0,
     val topComments: List<CommentUi> = emptyList(),
-    val reactionsUi: ReactionsUi = ReactionsUi(
-        listOf(ReactionType.Fire, ReactionType.Head, ReactionType.Hands, ReactionType.Unicorn, ReactionType.Heart),
-        5
-    )
+    val reactionsUi: ReactionsUi = ReactionsUi(),
+    val comments: List<CommentUi> = emptyList(),
 )

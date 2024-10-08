@@ -10,5 +10,5 @@ val screenModelModule = module {
     factory<HomeScreenModel> { HomeScreenModel(get(), get(), get()) }
     factory<TagScreenModel> { (tagName: String) -> TagScreenModel(tagName) }
     factory<UserScreenModel> { (userName: String) -> UserScreenModel(userName) }
-    factory<ArticleScreenModel> { (articleId: String) -> ArticleScreenModel(articleId) }
+    factory<ArticleScreenModel> { (articleId: String) -> ArticleScreenModel(articleId, getArticleByIdUseCase = get(), stringProvider = get()) }
 }
