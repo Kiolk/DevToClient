@@ -24,7 +24,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.github.kiolk.devto.presentation.screens.home.HomeScreen
-import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
+import com.github.kiolk.devto.presentation.screens.profile.ProfileScreen
 
 class MainScreen : Screen {
     @Composable
@@ -105,7 +105,7 @@ object SearchTab : Tab {
 
     @Composable
     override fun Content() {
-        Navigator(ArticleScreen("", "", ""))
+        Navigator(ProfileScreen())
     }
 }
 
@@ -128,6 +128,6 @@ object ProfileTab : Tab {
 
     @Composable
     override fun Content() {
-        Navigator(ArticleScreen("", "", ""))
+        Navigator(ProfileScreen())
     }
 }
