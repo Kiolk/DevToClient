@@ -102,13 +102,13 @@ fun ArticleItem(
             /**
              * TODO Need find more efficient way to display comments with web formatted text. More information here https://github.com/Kiolk/DevToClient/issues/2
              */
-//            CommentsBlock(
-//                articleUi,
-//                stringProvider = stringProvider,
-//                onCommentClick = { comment -> onArticleClick(articleUi, comment.id.toString(), true) },
-//                onSeeAllCommentsClick = { onArticleClick(articleUi, null, true) },
-//                onUserClick = onUserClick
-//            )
+            CommentsBlock(
+                articleUi,
+                stringProvider = stringProvider,
+                onCommentClick = { comment -> onArticleClick(articleUi, comment.id.toString(), true) },
+                onSeeAllCommentsClick = { onArticleClick(articleUi, null, true) },
+                onUserClick = onUserClick
+            )
         }
     }
 }
@@ -154,7 +154,7 @@ fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -> Unit
     Row(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp).fillMaxWidth()) {
         Box(modifier = Modifier.size(size)) {
             Box(
-                modifier = Modifier.size(size - 15.dp).background(Color.LightGray, CircleShape)
+                modifier = Modifier.size(size - 15.dp).background(MaterialTheme.colors.surface, CircleShape)
                     .border(1.dp, Color.LightGray, CircleShape).align(Alignment.Center)
             ) {
                 AsyncImage(
@@ -169,7 +169,7 @@ fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -> Unit
             }
         }
         Box(
-            modifier = Modifier.background(shape = RoundedCornerShape(4.dp), color = DevToColors.lightGray).fillMaxWidth()
+            modifier = Modifier.background(shape = RoundedCornerShape(4.dp), color = MaterialTheme.colors.surface).fillMaxWidth()
                 .clickable { onCommentClick(commentUi) }
         ) {
             Column(modifier = Modifier.padding(8.dp)) {

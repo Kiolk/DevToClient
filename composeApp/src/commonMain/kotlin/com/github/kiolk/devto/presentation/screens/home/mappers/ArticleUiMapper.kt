@@ -25,7 +25,7 @@ fun Article.mapToArticleUi(stringProvider: StringProvider): ArticleUi {
         readingTime = this.readingTimeMinutes,
         tags = this.tagList.map { it.toTagUi(this.flareTag) },
         reactionsUi = ReactionsUi(types = this.reactions.sortedBy { it.position }.map { it.toReactionType() }, total = this.publicReactionCount),
-        topComments = this.topComments.filter { !it.text.contains("<img") && it.text.length < 100 }.map { it.toCommentUi(stringProvider) },
+        topComments = this.topComments.filter { true }.map { it.toCommentUi(stringProvider) },
         comments = this.comments.map { it.toCommentUi(stringProvider) }
     )
 }

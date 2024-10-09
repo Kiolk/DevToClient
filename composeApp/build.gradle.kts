@@ -39,6 +39,7 @@ kotlin {
             //ktor
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
+            implementation (libs.compose.markdown)
         }
         commonMain.dependencies {
             implementation(compose.runtime)

@@ -15,6 +15,7 @@ androidx-test-junit = "1.2.1"
 coilCompose = "3.0.0-alpha06"
 coilNetworkKtor = "3.0.0-alpha06"
 compose-plugin = "1.6.11"
+composeMarkdown = "0.5.4"
 compottieDot = "2.0.0-rc01"
 junit = "4.13.2"
 koinCore = "3.5.6"
@@ -32,6 +33,7 @@ webkit = "1.12.0"
 accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanistFlowlayout" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coilNetworkKtor" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+compose-markdown = { module = "com.github.jeziellago:compose-markdown", version.ref = "composeMarkdown" }
 compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottieDot" }
 compottie-dot = { module = "io.github.alexzhirkevich:compottie-dot", version.ref = "compottieDot" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
