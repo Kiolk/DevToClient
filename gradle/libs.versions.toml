@@ -17,7 +17,9 @@ coilNetworkKtor = "3.0.0-alpha06"
 compose-plugin = "1.6.11"
 composeMarkdown = "0.5.4"
 compottieDot = "2.0.0-rc01"
+detekt = "1.23.7"
 junit = "4.13.2"
+kiolkDetektRules = "1.0.6"
 koinCore = "3.5.6"
 kotlin = "2.0.20"
 kotlinxSerializationJson = "1.5.1"
@@ -36,6 +38,8 @@ coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCo
 compose-markdown = { module = "com.github.jeziellago:compose-markdown", version.ref = "composeMarkdown" }
 compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottieDot" }
 compottie-dot = { module = "io.github.alexzhirkevich:compottie-dot", version.ref = "compottieDot" }
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+kiolk-detekt-rules = { module = "io.github.kiolk:kiolk-detekt-rules", version.ref = "kiolkDetektRules" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -75,6 +79,7 @@ androidx-webkit = { group = "androidx.webkit", name = "webkit", version.ref = "w
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

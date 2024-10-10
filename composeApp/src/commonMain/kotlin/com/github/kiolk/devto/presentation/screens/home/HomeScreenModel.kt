@@ -23,7 +23,7 @@ class HomeScreenModel(
     private val toggleReactionUseCase: ToggleReactionUseCase
 ) : ScreenModel {
 
-    private var _articlesState: MutableStateFlow<List<ArticleUi>> =
+    private val _articlesState: MutableStateFlow<List<ArticleUi>> =
         MutableStateFlow(emptyList())
     val articlesState = _articlesState.asStateFlow()
 

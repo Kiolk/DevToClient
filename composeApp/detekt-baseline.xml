@@ -1,0 +1,196 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:ArticleItem.kt$( commentUi.userName, style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.Bold), modifier = Modifier.clickable { onUserClick(commentUi.userName) })</ID>
+    <ID>ArgumentListWrapping:ArticleItem.kt$(4.dp)</ID>
+    <ID>ArgumentListWrapping:ArticleItem.kt$(articleUi, null, true)</ID>
+    <ID>ArgumentListWrapping:ArticleItem.kt$(articleUi, stringProvider = stringProvider, onCommentsClick = { onArticleClick(articleUi, null, true) })</ID>
+    <ID>ArgumentListWrapping:ArticleItem.kt$(articleUi.article.user, articleUi.article.organization, onUserClick = onUserClick)</ID>
+    <ID>ArgumentListWrapping:ArticleItem.kt$(shape = RoundedCornerShape(4.dp), color = MaterialTheme.colors.surface)</ID>
+    <ID>ArgumentListWrapping:ArticleItem.kt$(text = user.name, style = MaterialTheme.typography.caption, modifier = Modifier.clickable { onUserClick(user.name) })</ID>
+    <ID>ArgumentListWrapping:ArticleItem.kt$(user.name)</ID>
+    <ID>ArgumentListWrapping:ArticleRepositoryImpl.kt$( result, category, id, reactableId, reactableType, )</ID>
+    <ID>ArgumentListWrapping:ArticleScreen.kt$ArticleScreen$(articleId, commentId, showComments)</ID>
+    <ID>ArgumentListWrapping:ArticleScreen.kt$ArticleScreen$(parameters = { parametersOf(articleId, commentId, showComments) })</ID>
+    <ID>ArgumentListWrapping:ArticleUiMapper.kt$(types = this.reactions.sortedBy { it.position }.map { it.toReactionType() }, total = this.publicReactionCount)</ID>
+    <ID>ArgumentListWrapping:BookMarkButton.kt$(modifier = Modifier .size(20.dp) .focusable() .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) { isPlaying = !isPlaying &amp;&amp; !article.isBookmarked onBookmarkClick(article) haptic.performHapticFeedback(HapticFeedbackType.LongPress) })</ID>
+    <ID>ArgumentListWrapping:CommentsButton.kt$( if (articleUi.numberOfComments != 0) stringProvider.getQualityString( StringsKeys.COMMENTS, articleUi.numberOfComments, ) else stringProvider.getString(StringsKeys.ADD_COMMENT), style = MaterialTheme.typography.caption )</ID>
+    <ID>ArgumentListWrapping:CommentsButton.kt$(verticalAlignment = Alignment.CenterVertically, modifier = Modifier .focusable(true) .clickable { onCommentsClick(articleUi) } .padding(4.dp))</ID>
+    <ID>ArgumentListWrapping:HomeScreen.kt$HomeScreen$(articlesState[articleIndex], stringProvider = stringProvider, onArticleClick = { article, commentId, showComments -&gt; navigator.push( ArticleScreen( article.article.user.username, article.article.slug, article.article.id.toString(), commentId, showComments ) ) }, onTagClick = { navigator.push(TagScreen(it.name)) }, onBookmarkClick = { screenModel.onBookmarkClick(it) }, onUserClick = { navigator.push(UserScreen(it)) })</ID>
+    <ID>ArgumentListWrapping:HomeScreenModel.kt$HomeScreenModel$(articleId = article.article.id, reactionCategory = "readinglist", reactionOn = "Article")</ID>
+    <ID>ArgumentListWrapping:ReactionsButton.kt$(1.dp, color = MaterialTheme.colors.background)</ID>
+    <ID>ArgumentListWrapping:ReactionsButton.kt$(4.dp)</ID>
+    <ID>ArgumentListWrapping:ReactionsButton.kt$(border = BorderStroke(1.dp, color = MaterialTheme.colors.background), shape = CircleShape)</ID>
+    <ID>ArgumentListWrapping:ReactionsButton.kt$(modifier = Modifier.padding(4.dp), painter = painterResource(reactionType.resId), contentDescription = null)</ID>
+    <ID>ArgumentListWrapping:ReactionsButton.kt$(reactionType.resId)</ID>
+    <ID>ArgumentListWrapping:ReactionsButton.kt$(verticalAlignment = Alignment.CenterVertically, modifier = Modifier .focusable(true) .clickable { onReactionClick(articleUi) } .padding(4.dp))</ID>
+    <ID>ArgumentListWrapping:ScreenModelModule.kt$(articleId, getArticleByIdUseCase = get(), stringProvider = get())</ID>
+    <ID>ArgumentListWrapping:SortingChip.kt$( backgroundColor = MaterialTheme.colors.secondary.copy( alpha = 0.5f ), selectedBackgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.5f) )</ID>
+    <ID>ArgumentListWrapping:SortingChip.kt$( selected = isSelected ?: (passedType == currentType), shape = RoundedCornerShape(size = 4.dp), colors = ChipDefaults.filterChipColors( backgroundColor = MaterialTheme.colors.secondary.copy( alpha = 0.5f ), selectedBackgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.5f) ), onClick = { onClick(currentType) }, content = { Text( text ?: stringProvider.getString(currentType.key), modifier = Modifier.padding(8.dp), style = MaterialTheme.typography.caption.copy( fontWeight = if (isSelected ?: (passedType == currentType)) W700 else W400 ) ) })</ID>
+    <ID>ArgumentListWrapping:Tag.kt$(alpha = BACKGROUND_ALPHA)</ID>
+    <ID>ArgumentListWrapping:Tag.kt$(modifier = Modifier.background(shape = RoundedCornerShape(4.dp), color = backgroundColor) .border(width = 1.dp, color = borderColor, shape = RoundedCornerShape(4.dp)) .clickable(interactionSource = interactionSource, indication = null) { onTagClick(tag) })</ID>
+    <ID>CommentSpacing:ArticleUiMapper.kt$//TODO find more efficient way to get image url</ID>
+    <ID>CommentSpacing:HomeScreenModel.kt$HomeScreenModel$//TODO add logic for storing bookmarks</ID>
+    <ID>CommentSpacing:WebViewScreen.android.kt$//TODO Need modify to display correctly content for different themes https://github.com/Kiolk/DevToClient/issues/2</ID>
+    <ID>CommentSpacing:WebViewScreen.ios.kt$//TODO Need implement logic for this issue https://github.com/Kiolk/DevToClient/issues/2</ID>
+    <ID>CyclomaticComplexMethod:Tag.kt$@Composable fun Tag(tag: TagUi, onTagClick: (TagUi) -&gt; Unit = {})</ID>
+    <ID>EmptyFunctionBlock:MainActivity.kt$A${ }</ID>
+    <ID>EmptyFunctionBlock:MainScreen.kt$A${ }</ID>
+    <ID>EmptyFunctionBlock:MainViewController.kt$A${ }</ID>
+    <ID>Filename:FeedOrganisationApi.kt$com.github.kiolk.devto.data.repositories.datasources.network.models.FeedOrganisationApi.kt</ID>
+    <ID>Filename:KoinHelper.android.kt$com.github.kiolk.devto.di.KoinHelper.android.kt</ID>
+    <ID>Filename:KoinHelper.ios.kt$com.github.kiolk.devto.di.KoinHelper.ios.kt</ID>
+    <ID>Filename:Localisation.ios.kt$com.github.kiolk.devto.utils.Localisation.ios.kt</ID>
+    <ID>Filename:PublicReactionCategoriApi.kt$com.github.kiolk.devto.data.repositories.datasources.network.models.PublicReactionCategoriApi.kt</ID>
+    <ID>FunctionNaming:ArticleItem.kt$@Composable fun ArticleItem( articleUi: ArticleUi, stringProvider: StringProvider, onArticleClick: (articleUi: ArticleUi, commentId: String?, showComments: Boolean) -&gt; Unit = { _, _, _ -&gt; }, onTagClick: (tagUi: TagUi) -&gt; Unit = {}, onBookmarkClick: (articleUi: ArticleUi) -&gt; Unit = {}, onUserClick: (userName: String) -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:ArticleItem.kt$@Composable fun ArticleTitle(articleUi: ArticleUi, onArticleClick: (articleUi: ArticleUi) -&gt; Unit)</ID>
+    <ID>FunctionNaming:ArticleItem.kt$@Composable fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -&gt; Unit, size: Dp = 35.dp, onUserClick: (user: String) -&gt; Unit)</ID>
+    <ID>FunctionNaming:ArticleItem.kt$@Composable fun CommentsBlock( articleUi: ArticleUi, onCommentClick: (commentUi: CommentUi) -&gt; Unit, onSeeAllCommentsClick: () -&gt; Unit, stringProvider: StringProvider, onUserClick: (userName: String) -&gt; Unit )</ID>
+    <ID>FunctionNaming:ArticleItem.kt$@Composable fun PublicationDate(articleUi: ArticleUi)</ID>
+    <ID>FunctionNaming:ArticleItem.kt$@Composable fun ReadingTime(readingTimeMinutes: Int, stringProvider: StringProvider)</ID>
+    <ID>FunctionNaming:ArticleItem.kt$@Composable fun UserNameWithOrganisation(user: User, organization: Organization?, onUserClick: (userName: String) -&gt; Unit)</ID>
+    <ID>FunctionNaming:ArticleItem.kt$@OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class) @Composable fun ArticleTags(tagList: List&lt;TagUi&gt;, flareTag: FlareTag?, onTagClick: (tagUi: TagUi) -&gt; Unit)</ID>
+    <ID>FunctionNaming:ArticleItem.kt$@Preview(showBackground = true, device = Devices.DEFAULT, showSystemUi = true) @Composable fun ArticleItemPreview()</ID>
+    <ID>FunctionNaming:BookMarkButton.kt$@OptIn(ExperimentalResourceApi::class) @Composable fun BookMarkButton(article: ArticleUi, onBookmarkClick: (ArticleUi) -&gt; Unit = {})</ID>
+    <ID>FunctionNaming:BookMarkButtonPreview.kt$@Composable @Preview fun BookMarkButtonPreview2()</ID>
+    <ID>FunctionNaming:CommentsButton.kt$@Composable fun CommentsButton(articleUi: ArticleUi, onCommentsClick: (ArticleUi) -&gt; Unit = {}, stringProvider: StringProvider)</ID>
+    <ID>FunctionNaming:HomeScreen.kt$@Composable fun FilterBar( sortingType: SortingTypeUi, screenModel: HomeScreenModel, stringProvider: StringProvider, )</ID>
+    <ID>FunctionNaming:InfinityProgress.kt$@OptIn(ExperimentalResourceApi::class) @Composable fun InfinityProgress(size: ProgressSize = ProgressSize.Small)</ID>
+    <ID>FunctionNaming:MainScreen.kt$@Composable private fun RowScope.TabNavigationItem(tab: Tab)</ID>
+    <ID>FunctionNaming:MainViewController.kt$fun MainViewController()</ID>
+    <ID>FunctionNaming:ReactionsButton.kt$@Composable fun ReactionsButton( articleUi: ArticleUi, stringProvider: StringProvider, onReactionClick: (ArticleUi) -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:SortingChip.kt$@OptIn(ExperimentalMaterialApi::class) @Composable fun SortingChip( currentType: SortingTypeUi, passedType: SortingTypeUi, isSelected: Boolean? = null, onClick: (type: SortingTypeUi) -&gt; Unit, stringProvider: StringProvider, text: String? = null, )</ID>
+    <ID>FunctionNaming:Stub.kt$@OptIn(ExperimentalResourceApi::class) @Composable fun Stub()</ID>
+    <ID>FunctionNaming:Tag.kt$@Composable fun Tag(tag: TagUi, onTagClick: (TagUi) -&gt; Unit = {})</ID>
+    <ID>FunctionNaming:TagPreview.kt$@Preview(showBackground = true, device = Devices.DEFAULT) @Composable fun TagPreview(@PreviewParameter(TagProvider::class) tag: TagUi)</ID>
+    <ID>FunctionNaming:TagScreen.kt$@Composable fun StubWebScreen(path: String)</ID>
+    <ID>FunctionNaming:Theme.kt$@Composable fun DevToTheme( isDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -&gt; Unit )</ID>
+    <ID>FunctionNaming:UserOrganisationAvatar.kt$@Composable fun UserOrganisationAvatar(user: User, organization: Organization?, size: Dp = 35.dp, onUserClick: (userName: String) -&gt; Unit = {})</ID>
+    <ID>FunctionNaming:WebViewScreen.android.kt$@Composable actual fun WebContent(html: String, function: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:WebViewScreen.android.kt$@Composable actual fun WebViewScreen(url: String)</ID>
+    <ID>FunctionNaming:WebViewScreen.ios.kt$@Composable actual fun WebContent(html: String, function: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:WebViewScreen.ios.kt$@OptIn(ExperimentalForeignApi::class) @Composable actual fun WebViewScreen(url: String)</ID>
+    <ID>FunctionNaming:WebViewScreen.kt$@Composable expect fun WebContent(html: String, function: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:WebViewScreen.kt$@Composable expect fun WebViewScreen(url: String)</ID>
+    <ID>Indentation:NetworkModule.kt$ </ID>
+    <ID>LongMethod:HomeScreen.kt$@Composable fun FilterBar( sortingType: SortingTypeUi, screenModel: HomeScreenModel, stringProvider: StringProvider, )</ID>
+    <ID>LongParameterList:ArticleItem.kt$( articleUi: ArticleUi, stringProvider: StringProvider, onArticleClick: (articleUi: ArticleUi, commentId: String?, showComments: Boolean) -&gt; Unit = { _, _, _ -&gt; }, onTagClick: (tagUi: TagUi) -&gt; Unit = {}, onBookmarkClick: (articleUi: ArticleUi) -&gt; Unit = {}, onUserClick: (userName: String) -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:SortingChip.kt$( currentType: SortingTypeUi, passedType: SortingTypeUi, isSelected: Boolean? = null, onClick: (type: SortingTypeUi) -&gt; Unit, stringProvider: StringProvider, text: String? = null, )</ID>
+    <ID>MagicNumber:ArticleItem.kt$40</ID>
+    <ID>MagicNumber:BookMarkButton.kt$0.01f</ID>
+    <ID>MagicNumber:BookMarkButton.kt$0.05f</ID>
+    <ID>MagicNumber:BookMarkButton.kt$0.4f</ID>
+    <ID>MagicNumber:BookMarkButton.kt$0.5f</ID>
+    <ID>MagicNumber:ColorUtils.ios.kt$16</ID>
+    <ID>MagicNumber:DevToColors.kt$DevToColors$0xF39AFEA</ID>
+    <ID>MagicNumber:DevToColors.kt$DevToColors$0xFF140E1B</ID>
+    <ID>MagicNumber:DevToColors.kt$DevToColors$0xFF1976d2</ID>
+    <ID>MagicNumber:DevToColors.kt$DevToColors$0xFF4F4FB</ID>
+    <ID>MagicNumber:DevToColors.kt$DevToColors$0xFF5e69ee</ID>
+    <ID>MagicNumber:DevToColors.kt$DevToColors$0xFFFFEB3B</ID>
+    <ID>MagicNumber:Localisation.ios.kt$IosStringProvider$3</ID>
+    <ID>MagicNumber:Localisation.ios.kt$IosStringProvider$4</ID>
+    <ID>MagicNumber:Localisation.ios.kt$IosStringProvider$5</ID>
+    <ID>MagicNumber:Localisation.ios.kt$IosStringProvider$6</ID>
+    <ID>MagicNumber:Localisation.ios.kt$IosStringProvider$7</ID>
+    <ID>MagicNumber:Localisation.ios.kt$IosStringProvider$8</ID>
+    <ID>MagicNumber:Localisation.ios.kt$IosStringProvider$9</ID>
+    <ID>MagicNumber:NetworkModule.kt$60_000</ID>
+    <ID>MagicNumber:Pagination.kt$Pagination$10000</ID>
+    <ID>MagicNumber:ReactionsButton.kt$10</ID>
+    <ID>MatchingDeclarationName:FeedOrganisationApi.kt$FeedOrganizationApi</ID>
+    <ID>MatchingDeclarationName:KoinHelper.android.kt$PlatformSpecificModule</ID>
+    <ID>MatchingDeclarationName:KoinHelper.ios.kt$PlatformSpecificModule</ID>
+    <ID>MatchingDeclarationName:Localisation.ios.kt$IosStringProvider : StringProvider</ID>
+    <ID>MatchingDeclarationName:Platform.android.kt$Platform</ID>
+    <ID>MatchingDeclarationName:Platform.ios.kt$Platform</ID>
+    <ID>MatchingDeclarationName:PublicReactionCategoriApi.kt$PublicReactionCategoryApi</ID>
+    <ID>MaxLineLength:ArticleItem.kt$CommentsButton(articleUi, stringProvider = stringProvider, onCommentsClick = { onArticleClick(articleUi, null, true) })</ID>
+    <ID>MaxLineLength:ArticleItem.kt$Text(text = user.name, style = MaterialTheme.typography.caption, modifier = Modifier.clickable { onUserClick(user.name) })</ID>
+    <ID>MaxLineLength:ArticleItem.kt$UserOrganisationAvatar(articleUi.article.user, articleUi.article.organization, onUserClick = onUserClick)</ID>
+    <ID>MaxLineLength:ArticleItem.kt$fun</ID>
+    <ID>MaxLineLength:ArticleItem.kt$modifier</ID>
+    <ID>MaxLineLength:ArticleScreen.kt$ArticleScreen$val screenModel = koinScreenModel&lt;ArticleScreenModel&gt;(parameters = { parametersOf(articleId, commentId, showComments) })</ID>
+    <ID>MaxLineLength:ArticleUiMapper.kt$reactionsUi = ReactionsUi(types = this.reactions.sortedBy { it.position }.map { it.toReactionType() }, total = this.publicReactionCount)</ID>
+    <ID>MaxLineLength:HomeScreenModel.kt$HomeScreenModel$val reaction = toggleReactionUseCase(articleId = article.article.id, reactionCategory = "readinglist", reactionOn = "Article")</ID>
+    <ID>MaxLineLength:ReactionsButton.kt$.</ID>
+    <ID>MaxLineLength:ReactionsButton.kt$Image(modifier = Modifier.padding(4.dp), painter = painterResource(reactionType.resId), contentDescription = null)</ID>
+    <ID>MaxLineLength:ScreenModelModule.kt$factory&lt;ArticleScreenModel&gt; { (articleId: String) -&gt; ArticleScreenModel(articleId, getArticleByIdUseCase = get(), stringProvider = get()) }</ID>
+    <ID>MaxLineLength:Tag.kt$else -&gt; if (tag.isFlare &amp;&amp; tag.backgroundColor != null) tag.backgroundColor.copy(alpha = BACKGROUND_ALPHA) else MaterialTheme.colors.surface</ID>
+    <ID>MaxLineLength:Tag.kt$isPressed || isFocused -&gt; if (tag.backgroundColor != null) tag.backgroundColor.copy(alpha = BACKGROUND_ALPHA) else DevToColors.lightGray</ID>
+    <ID>MaxLineLength:UserOrganisationAvatar.kt$fun</ID>
+    <ID>MaximumLineLength:ArticleItem.kt$ </ID>
+    <ID>MaximumLineLength:ArticleItem.kt$fun</ID>
+    <ID>MaximumLineLength:ArticleScreen.kt$ArticleScreen$ </ID>
+    <ID>MaximumLineLength:ArticleUiMapper.kt$ </ID>
+    <ID>MaximumLineLength:HomeScreenModel.kt$HomeScreenModel$ </ID>
+    <ID>MaximumLineLength:ReactionsButton.kt$ </ID>
+    <ID>MaximumLineLength:ScreenModelModule.kt$ </ID>
+    <ID>MaximumLineLength:Tag.kt$ </ID>
+    <ID>MaximumLineLength:UserOrganisationAvatar.kt$fun</ID>
+    <ID>MultiLineIfElse:CommentsButton.kt$stringProvider.getQualityString( StringsKeys.COMMENTS, articleUi.numberOfComments, )</ID>
+    <ID>MultiLineIfElse:CommentsButton.kt$stringProvider.getString(StringsKeys.ADD_COMMENT)</ID>
+    <ID>MultiLineIfElse:Tag.kt$DevToColors.gray</ID>
+    <ID>MultiLineIfElse:Tag.kt$tag.backgroundColor.copy( alpha = BORDER_ALPHA )</ID>
+    <ID>NoBlankLineBeforeRbrace:AppModule.kt$ </ID>
+    <ID>NoBlankLineBeforeRbrace:ArticleRepository.kt$ArticleRepository$ </ID>
+    <ID>NoBlankLineBeforeRbrace:DevToColors.kt$DevToColors$ </ID>
+    <ID>NoBlankLineBeforeRbrace:MainActivity.kt$A$ </ID>
+    <ID>NoBlankLineBeforeRbrace:MainScreen.kt$A$ </ID>
+    <ID>NoBlankLineBeforeRbrace:MainViewController.kt$A$ </ID>
+    <ID>NoBlankLineBeforeRbrace:UserScreenModel.kt$UserScreenModel$ </ID>
+    <ID>NoConsecutiveBlankLines:ArticleItem.kt$ </ID>
+    <ID>NoConsecutiveBlankLines:ArticleRepositoryImpl.kt$ </ID>
+    <ID>NoConsecutiveBlankLines:ArticleScreenModel.kt$ </ID>
+    <ID>NoConsecutiveBlankLines:Theme.kt$ </ID>
+    <ID>NoConsecutiveBlankLines:WebViewScreen.ios.kt$ </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:ArticleItem.kt$ </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:InfinityProgress.kt$ </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:Localisation.ios.kt$IosStringProvider$ </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:MainActivity.kt$A$ </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:MainScreen.kt$A$ </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:MainViewController.kt$ </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:MainViewController.kt$A$ </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:ReactionsButton.kt$ </ID>
+    <ID>NoMultipleSpaces:KoinHelper.android.kt$PlatformSpecificModule$ </ID>
+    <ID>NoSemicolons:AndroidStringProvider.kt$AndroidStringProvider$;</ID>
+    <ID>NoUnusedImports:ArticleItem.kt$com.github.kiolk.devto.presentation.views.article.ArticleItem.kt</ID>
+    <ID>ParameterListWrapping:ArticleItem.kt$(commentUi: CommentUi)</ID>
+    <ID>ParameterListWrapping:ArticleItem.kt$(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -&gt; Unit, size: Dp = 35.dp, onUserClick: (user: String) -&gt; Unit)</ID>
+    <ID>ParameterListWrapping:ArticleItem.kt$(user: String)</ID>
+    <ID>ParameterListWrapping:UserOrganisationAvatar.kt$(user: User, organization: Organization?, size: Dp = 35.dp, onUserClick: (userName: String) -&gt; Unit = {})</ID>
+    <ID>ParameterListWrapping:UserOrganisationAvatar.kt$(userName: String)</ID>
+    <ID>PropertyWrapping:ArticleScreen.kt$ArticleScreen$val screenModel = koinScreenModel&lt;ArticleScreenModel&gt;(parameters = { parametersOf(articleId, commentId, showComments) })</ID>
+    <ID>PropertyWrapping:HomeScreenModel.kt$HomeScreenModel$val reaction = toggleReactionUseCase(articleId = article.article.id, reactionCategory = "readinglist", reactionOn = "Article")</ID>
+    <ID>ReturnCount:DateExtensions.kt$fun Instant.toPublicationDateAgo(stringProvider: StringProvider): String</ID>
+    <ID>ReturnCount:Localisation.ios.kt$IosStringProvider$override fun getString(key: String): String</ID>
+    <ID>SpacingAroundColon:InstantSerializer.kt$InstantSerializer$:</ID>
+    <ID>SpacingAroundColon:ProfileScreen.kt$ProfileScreen$:</ID>
+    <ID>SpacingAroundColon:ToggleReactionUseCase.kt$ToggleReactionUseCaseImpl$:</ID>
+    <ID>SpacingAroundKeyword:Theme.kt$if</ID>
+    <ID>SwallowedException:ColorUtils.ios.kt$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:ColorUtils.ios.kt$e: Exception</ID>
+    <ID>UnnecessaryParenthesesBeforeTrailingLambda:TagPreview.kt$()</ID>
+    <ID>UnusedParameter:ArticleItem.kt$flareTag: FlareTag?</ID>
+    <ID>UnusedPrivateProperty:ArticleScreen.kt$ArticleScreen$val screenModel = koinScreenModel&lt;ArticleScreenModel&gt;(parameters = { parametersOf(articleId, commentId, showComments) })</ID>
+    <ID>UnusedPrivateProperty:ArticleScreenModel.kt$ArticleScreenModel$private val commentId: String = ""</ID>
+    <ID>UnusedPrivateProperty:ArticleScreenModel.kt$ArticleScreenModel$private val seeComments: Boolean = false</ID>
+    <ID>UnusedPrivateProperty:HomeScreenModel.kt$HomeScreenModel$val index = _articlesState.value.indexOfFirst { it.article.id == article.article.id }</ID>
+    <ID>UnusedPrivateProperty:HomeScreenModel.kt$HomeScreenModel$val reaction = toggleReactionUseCase(articleId = article.article.id, reactionCategory = "readinglist", reactionOn = "Article")</ID>
+    <ID>Wrapping:ArticleItem.kt$(</ID>
+    <ID>Wrapping:ArticleItem.kt$( 1, "", "Test", "Description", Clock.System.now(), user = User( name = "User", username = "User name", twitterUsername = null, githubUsername = null, websiteUrl = "", profileImage = "https://picsum.photos/200/300", profileImage90 = "https://picsum.photos/200/300", ), organization = Organization( name = "Daresay", username = "Daresay AB", slug = "We work for future", profileImage = "https://picsum.photos/200/300", profileImage90 = "https://picsum.photos/200/300" ), commentsCount = 0, publicReactionCount = 0, positiveReactionCount = 0, coverImage = "", readingTimeMinutes = 3, tagList = listOf("Development", "VoiceRecognition", "Android", "Kotlin"), flareTag = null )</ID>
+    <ID>Wrapping:ArticleItem.kt$onUserClick(user.name)</ID>
+    <ID>Wrapping:ArticleUiMapper.kt$it.position</ID>
+    <ID>Wrapping:ArticleUiMapper.kt$it.toReactionType()</ID>
+    <ID>Wrapping:BookMarkButton.kt$(</ID>
+    <ID>Wrapping:CommentsButton.kt$(</ID>
+    <ID>Wrapping:CommentsButton.kt$( if (articleUi.numberOfComments != 0) stringProvider.getQualityString( StringsKeys.COMMENTS, articleUi.numberOfComments, ) else stringProvider.getString(StringsKeys.ADD_COMMENT), style = MaterialTheme.typography.caption )</ID>
+    <ID>Wrapping:HomeScreen.kt$HomeScreen$(</ID>
+    <ID>Wrapping:ReactionsButton.kt$(</ID>
+    <ID>Wrapping:SortingChip.kt$(</ID>
+    <ID>Wrapping:SortingChip.kt$( backgroundColor = MaterialTheme.colors.secondary.copy( alpha = 0.5f ), selectedBackgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.5f) )</ID>
+    <ID>Wrapping:Tag.kt$(</ID>
+    <ID>Wrapping:UserOrganisationAvatar.kt$</ID>
+  </CurrentIssues>
+</SmellBaseline>

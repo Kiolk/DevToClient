@@ -77,8 +77,8 @@ private fun rememberWebViewDelegate(onUrlClicked: (String) -> Unit): WKNavigatio
                     if (decidePolicyForNavigationAction.targetFrame == null) {
                         webView.loadRequest(request)
                     }
-                    onUrlClicked(request.URL?.absoluteString ?: "")
-                    println(request.URL?.absoluteString ?: "")
+                    onUrlClicked(request.URL?.absoluteString.orEmpty())
+                    println(request.URL?.absoluteString.orEmpty())
                     decisionHandler(WKNavigationActionPolicy.WKNavigationActionPolicyAllow)
                 }
                 else -> decisionHandler(WKNavigationActionPolicy.WKNavigationActionPolicyAllow)

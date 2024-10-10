@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     kotlin("plugin.serialization") version libs.versions.kotlin
+    alias(libs.plugins.detekt)
 }
 
 kotlin {
@@ -14,6 +15,17 @@ kotlin {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
+        }
+    }
+
+    detekt {
+        // Specify detekt configuration especially for shared module
+        config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
+        buildUponDefaultConfig = true
+        source.setFrom("src/commonMain/kotlin", "src/androidMain/kotlin", "src/iosMain/kotlin")
+        dependencies {
+            detektPlugins(libs.kiolk.detekt.rules)
+            detektPlugins(libs.detekt.formatting)
         }
     }
     
@@ -129,3 +141,27 @@ android {
     }
 }
 
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    jvmTarget = "11" // or "11" based on your project setup
+    classpath = files(
+        // Include necessary dependencies here
+        "$rootDir/shared/build/classes/kotlin/main",
+        "$rootDir/shared/build/tmp/kotlin-classes/commonMain",
+        configurations.getByName("detekt")
+    )
+}
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    reports {
+        xml.required.set(true)
+        xml.outputLocation.set(file("build/reports/detekt/detekt.xml"))
+        html.required.set(true)
+        html.outputLocation.set(file("build/reports/detekt/detekt.html"))
+        txt.required.set(true)
+        txt.outputLocation.set(file("build/reports/detekt/detekt.txt"))
+        sarif.required.set(true)
+        sarif.outputLocation.set(file("build/reports/detekt/detekt.sarif"))
+        md.required.set(true)
+        md.outputLocation.set(file("build/reports/detekt/detekt.md"))
+    }
+}
