@@ -1,6 +1,10 @@
-package com.github.kiolk.devto.presentation.models
+package com.github.kiolk.devto.domain.models
 
 import Organization
+import com.github.kiolk.devto.presentation.models.Comment
+import com.github.kiolk.devto.presentation.models.FlareTag
+import com.github.kiolk.devto.presentation.models.PublicReactionCategory
+import com.github.kiolk.devto.presentation.models.User
 import kotlinx.datetime.Instant
 
 data class Article(
@@ -21,4 +25,4 @@ data class Article(
     val reactions: List<PublicReactionCategory> = emptyList(),
     val topComments: List<Comment> = emptyList(),
     val comments: List<Comment> = emptyList()
-)
+) : Searchable

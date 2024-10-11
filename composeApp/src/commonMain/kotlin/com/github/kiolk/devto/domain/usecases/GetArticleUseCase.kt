@@ -1,7 +1,7 @@
 package com.github.kiolk.devto.domain.usecases
 
 import com.github.kiolk.devto.data.repositories.articles.ArticleRepository
-import com.github.kiolk.devto.presentation.models.Article
+import com.github.kiolk.devto.domain.models.Article
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 
 interface GetArticleUseCase {

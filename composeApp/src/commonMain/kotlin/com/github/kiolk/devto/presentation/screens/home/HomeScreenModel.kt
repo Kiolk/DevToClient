@@ -3,9 +3,9 @@ package com.github.kiolk.devto.presentation.screens.home
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SortingType
+import com.github.kiolk.devto.domain.models.Article
 import com.github.kiolk.devto.domain.usecases.GetArticleUseCase
 import com.github.kiolk.devto.domain.usecases.ToggleReactionUseCase
-import com.github.kiolk.devto.presentation.models.Article
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 import com.github.kiolk.devto.presentation.screens.home.mappers.mapToArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi

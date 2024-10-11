@@ -6,11 +6,14 @@ import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toFl
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toGetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toOrganization
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toUser
+import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.CommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
+import com.github.kiolk.devto.domain.models.Article
 import com.github.kiolk.devto.domain.models.Reaction
-import com.github.kiolk.devto.presentation.models.Article
+import com.github.kiolk.devto.domain.models.SearchParameters
+import com.github.kiolk.devto.domain.models.Searchable
 import com.github.kiolk.devto.presentation.models.Comment
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 
@@ -19,7 +22,11 @@ class ArticleRepositoryImpl(private val articleService: ArticleService) : Articl
         return articleService.getFeed(params.toGetArticlesParamsApi()).map { it.toArticle() }
     }
 
-    override suspend fun toggleReaction(reactionCategory: String, articleId: Int, reactionOn: String): Reaction {
+    override suspend fun toggleReaction(
+        reactionCategory: String,
+        articleId: Int,
+        reactionOn: String
+    ): Reaction {
         return articleService.toggleReaction(reactionCategory, articleId, reactionOn).toReaction()
     }
 
@@ -29,6 +36,13 @@ class ArticleRepositoryImpl(private val articleService: ArticleService) : Articl
 
     override suspend fun getCommentsForArticle(id: Int): List<Comment> {
         return articleService.getCommentsForArticle(id).map { it.mapToComment() }
+    }
+
+    override suspend fun search(searchParameters: SearchParameters): List<Searchable> {
+        return when (searchParameters.searchType) {
+            "Article" -> articleService.search<ArticleApi>(searchParameters).map { it.toArticle() }
+            else -> throw NotImplementedError()
+        }
     }
 }
 

@@ -6,6 +6,7 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedA
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
+import com.github.kiolk.devto.domain.models.SearchParameters
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -18,11 +19,17 @@ interface ArticleService {
 
     suspend fun getFeed(params: GetArticlesParamsApi): List<FeedApi>
 
-    suspend fun toggleReaction(reactionCategory: String, articleId: Int, reactionOn: String): ReactionApi
+    suspend fun toggleReaction(
+        reactionCategory: String,
+        articleId: Int,
+        reactionOn: String
+    ): ReactionApi
 
     suspend fun getArticleById(id: Int): SingleArticleApi
 
     suspend fun getCommentsForArticle(articleId: Int): List<CommentApi>
+
+    suspend fun <T> search(searchParameters: SearchParameters): List<T>
 }
 
 class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
@@ -55,7 +62,11 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         }.body()
     }
 
-    override suspend fun toggleReaction(reactionCategory: String, articleId: Int, reactionOn: String): ReactionApi {
+    override suspend fun toggleReaction(
+        reactionCategory: String,
+        articleId: Int,
+        reactionOn: String
+    ): ReactionApi {
         val resource = httpClient.post(POST_TOGGLE_REACTION_ENDPOINT) {
             parameter("category", reactionCategory)
             parameter("reactable_id", articleId)
@@ -66,7 +77,8 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
     }
 
     override suspend fun getArticleById(id: Int): SingleArticleApi {
-        val article: SingleArticleApi = httpClient.get(GET_ARTICLE_BY_ID_ENDPOINT + id.toString()).body()
+        val article: SingleArticleApi =
+            httpClient.get(GET_ARTICLE_BY_ID_ENDPOINT + id.toString()).body()
         return article
     }
 
@@ -77,11 +89,22 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         return comments
     }
 
+    override suspend fun <T> search(searchParameters: SearchParameters): List<T> {
+        val comments: List<T> = httpClient.get(SEARCH_ENDPOINT) {
+            parameter("per_page", searchParameters.perPage)
+            parameter("page", searchParameters.page)
+            parameter("class_name", searchParameters.searchType)
+            parameter("search_fields", searchParameters.searchField)
+        }.body()
+        return comments
+    }
+
     companion object {
         private const val GET_ARTICLES_ENDPOINT = "api/articles"
         private const val GET_FEED_ENDPOINT = "stories/feed/"
         private const val POST_TOGGLE_REACTION_ENDPOINT = "api/reactions/toggle"
         private const val GET_ARTICLE_BY_ID_ENDPOINT = "api/articles/"
         private const val GET_COMMENTS_FOR_ARTICLE_ENDPOINT = "api/comments"
+        private const val SEARCH_ENDPOINT = "search/feed_content"
     }
 }

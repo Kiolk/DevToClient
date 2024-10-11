@@ -1,6 +1,6 @@
 package com.github.kiolk.devto.presentation.screens.home.models
 
-import com.github.kiolk.devto.presentation.models.Article
+import com.github.kiolk.devto.domain.models.Article
 
 data class ArticleUi(
     val article: Article,

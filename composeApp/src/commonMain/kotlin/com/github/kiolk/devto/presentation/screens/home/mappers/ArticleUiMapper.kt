@@ -1,6 +1,6 @@
 package com.github.kiolk.devto.presentation.screens.home.mappers
 
-import com.github.kiolk.devto.presentation.models.Article
+import com.github.kiolk.devto.domain.models.Article
 import com.github.kiolk.devto.presentation.models.Comment
 import com.github.kiolk.devto.presentation.models.PublicReactionCategory
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi

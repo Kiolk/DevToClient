@@ -4,7 +4,7 @@ import Organization
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import com.github.kiolk.devto.presentation.models.Article
+import com.github.kiolk.devto.domain.models.Article
 import com.github.kiolk.devto.presentation.models.User
 import com.github.kiolk.devto.presentation.screens.home.mappers.mapToArticleUi
 import com.github.kiolk.devto.presentation.theme.DevToTheme

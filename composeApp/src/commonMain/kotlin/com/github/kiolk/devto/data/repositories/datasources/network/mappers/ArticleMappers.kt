@@ -11,7 +11,7 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.Organ
 import com.github.kiolk.devto.data.repositories.datasources.network.models.PublicReactionCategoryApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.TopCommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.UserApi
-import com.github.kiolk.devto.presentation.models.Article
+import com.github.kiolk.devto.domain.models.Article
 import com.github.kiolk.devto.presentation.models.Comment
 import com.github.kiolk.devto.presentation.models.FlareTag
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
