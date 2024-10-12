@@ -9,8 +9,8 @@ data class UserApi(
     @SerialName("username") val username: String,
     @SerialName("twitter_username") val twitterUsername: String? = null,
     @SerialName("github_username") val githubUsername: String? = null,
-    @SerialName("user_id") val userId: Int,
+    @SerialName("user_id") val userId: Int? = null,
     @SerialName("website_url") val websiteUrl: String? = null,
-    @SerialName("profile_image") val profileImage: String,
+    @SerialName("profile_image") val profileImage: String? = null,
     @SerialName("profile_image_90") val profileImage90: String,
 )

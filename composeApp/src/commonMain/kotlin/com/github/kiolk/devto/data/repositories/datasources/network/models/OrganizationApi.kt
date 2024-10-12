@@ -5,9 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class OrganizationApi(
-    @SerialName("name") val name: String,
-    @SerialName("username") val username: String,
-    @SerialName("slug") val slug: String,
-    @SerialName("profile_image") val profileImage: String,
-    @SerialName("profile_image_90") val profileImage90: String,
+    @SerialName("name") val name: String? = null,
+    @SerialName("username") val username: String? = null,
+    @SerialName("slug") val slug: String? = null,
+    @SerialName("profile_image") val profileImage: String? = null,
+    @SerialName("profile_image_90") val profileImage90: String? = null,
 )

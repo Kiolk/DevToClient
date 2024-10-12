@@ -1,14 +1,12 @@
 package com.github.kiolk.devto.data.repositories.datasources.network.mappers
 
-import Organization
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
-import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedOrganizationApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedUserApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FlareTagApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
-import com.github.kiolk.devto.data.repositories.datasources.network.models.OrganizationApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.PublicReactionCategoryApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchArticleApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.TopCommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.UserApi
 import com.github.kiolk.devto.domain.models.Article
@@ -17,6 +15,7 @@ import com.github.kiolk.devto.presentation.models.FlareTag
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 import com.github.kiolk.devto.presentation.models.PublicReactionCategory
 import com.github.kiolk.devto.presentation.models.User
+import kotlinx.datetime.Instant
 
 fun ArticleApi.toArticle(): Article {
     return Article(
@@ -58,6 +57,27 @@ fun FeedApi.toArticle(): Article {
     )
 }
 
+fun SearchArticleApi.toArticle(): Article {
+    return Article(
+        id = this.id ?: 0,
+        slug = "",
+        title = title.orEmpty(),
+        description = "",
+        publishedAt = Instant.fromEpochSeconds(publishedAtInt ?: 0),
+        commentsCount = commentsCount ?: 0,
+        publicReactionCount = publicReactionsCount ?: 0,
+        positiveReactionCount = publicReactionsCount ?: 0,
+        coverImage = "",
+        readingTimeMinutes = readingTime ?: 0,
+        tagList = tagList.orEmpty(),
+        user = user?.toUser() ?: User(),
+        organization = organization?.toOrganization(),
+        flareTag = flareTag?.toFlareTag(),
+        reactions = publicReactionCategories?.map { it.toPublicReactionCategory() }.orEmpty(),
+        topComments = emptyList()
+    )
+}
+
 fun UserApi.toUser(): User {
     return User(
         name = name,
@@ -77,26 +97,6 @@ fun FeedUserApi.toUser(): User {
         twitterUsername = null,
         githubUsername = null,
         websiteUrl = null,
-        profileImage = profileImageUrl,
-        profileImage90 = profileImage90,
-    )
-}
-
-fun OrganizationApi.toOrganization(): Organization {
-    return Organization(
-        name = name,
-        username = username,
-        slug = slug,
-        profileImage = profileImage,
-        profileImage90 = profileImage90,
-    )
-}
-
-fun FeedOrganizationApi.toOrganization(): Organization {
-    return Organization(
-        name = name,
-        username = username,
-        slug = slug,
         profileImage = profileImageUrl,
         profileImage90 = profileImage90,
     )

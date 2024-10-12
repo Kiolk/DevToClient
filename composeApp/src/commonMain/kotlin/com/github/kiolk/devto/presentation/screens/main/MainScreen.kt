@@ -25,6 +25,7 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.github.kiolk.devto.presentation.screens.home.HomeScreen
 import com.github.kiolk.devto.presentation.screens.profile.ProfileScreen
+import com.github.kiolk.devto.presentation.screens.search.SearchScreen
 
 class MainScreen : Screen {
     @Composable
@@ -105,7 +106,7 @@ object SearchTab : Tab {
 
     @Composable
     override fun Content() {
-        Navigator(ProfileScreen())
+        Navigator(SearchScreen())
     }
 }
 

@@ -5,6 +5,8 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.Comme
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchArticleApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchArticleResultApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
 import com.github.kiolk.devto.domain.models.SearchParameters
 import io.ktor.client.HttpClient
@@ -29,7 +31,7 @@ interface ArticleService {
 
     suspend fun getCommentsForArticle(articleId: Int): List<CommentApi>
 
-    suspend fun <T> search(searchParameters: SearchParameters): List<T>
+    suspend fun search(searchParameters: SearchParameters): List<SearchArticleApi>
 }
 
 class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
@@ -89,14 +91,14 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         return comments
     }
 
-    override suspend fun <T> search(searchParameters: SearchParameters): List<T> {
-        val comments: List<T> = httpClient.get(SEARCH_ENDPOINT) {
+    override suspend fun search(searchParameters: SearchParameters): List<SearchArticleApi> {
+        val result: SearchArticleResultApi = httpClient.get(SEARCH_ENDPOINT) {
             parameter("per_page", searchParameters.perPage)
             parameter("page", searchParameters.page)
             parameter("class_name", searchParameters.searchType)
             parameter("search_fields", searchParameters.searchField)
         }.body()
-        return comments
+        return result.result
     }
 
     companion object {

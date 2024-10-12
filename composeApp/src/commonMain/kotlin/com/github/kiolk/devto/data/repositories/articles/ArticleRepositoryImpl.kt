@@ -6,7 +6,6 @@ import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toFl
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toGetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toOrganization
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toUser
-import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.CommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
@@ -40,7 +39,7 @@ class ArticleRepositoryImpl(private val articleService: ArticleService) : Articl
 
     override suspend fun search(searchParameters: SearchParameters): List<Searchable> {
         return when (searchParameters.searchType) {
-            "Article" -> articleService.search<ArticleApi>(searchParameters).map { it.toArticle() }
+            "Article" -> articleService.search(searchParameters).map { it.toArticle() }
             else -> throw NotImplementedError()
         }
     }
@@ -55,7 +54,7 @@ private fun CommentApi.mapToComment(): Comment {
         path = "",
         username = user.username,
         name = user.name,
-        profileImage90 = user.profileImage,
+        profileImage90 = user.profileImage ?: user.profileImage90,
     )
 }
 

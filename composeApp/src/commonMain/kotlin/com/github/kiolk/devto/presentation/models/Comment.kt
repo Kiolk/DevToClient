@@ -4,7 +4,7 @@ import kotlinx.datetime.Instant
 
 data class Comment(
     val commentId: String,
-    val userId: Int,
+    val userId: Int?,
     val text: String,
     val publishedTimestamp: Instant,
     val path: String,
