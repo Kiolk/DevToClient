@@ -30,7 +30,7 @@ const val API_TOKEN = "api_token"
 val networkModule = module {
     /**
      *TODO add your private API_KEY to Secrets files that doesn't track by git. More info here
-    * https://developers.forem.com/api/v1#tag/articles/operation/createArticle:~:text=non%2Dbrowser%20scripts.-,Getting%20an%20API%20key,-To%20obtain%20one
+     * https://developers.forem.com/api/v1#tag/articles/operation/createArticle:~:text=non%2Dbrowser%20scripts.-,Getting%20an%20API%20key,-To%20obtain%20one
      */
     single<String>(named(API_TOKEN)) { Secrets.API_KEY }
     single<ArticleService> { ArticleServiceImpl(get()) }

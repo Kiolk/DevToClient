@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SearchArticleResultApi(
+data class SearchResultApi(
     @SerialName("result")
-    val result: List<SearchArticleApi>
+    val result: List<SearchableApi>
 )

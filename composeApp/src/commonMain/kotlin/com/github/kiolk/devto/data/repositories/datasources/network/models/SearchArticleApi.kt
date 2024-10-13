@@ -39,4 +39,4 @@ data class SearchArticleApi(
     val user: UserApi? = null,
     @SerialName("organization")
     val organization: OrganizationApi? = null
-)
+) : SearchableApi()

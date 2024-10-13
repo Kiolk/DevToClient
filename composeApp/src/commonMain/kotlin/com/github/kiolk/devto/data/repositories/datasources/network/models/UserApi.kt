@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class UserApi(
-    @SerialName("name") val name: String,
-    @SerialName("username") val username: String,
+    @SerialName("name") val name: String = "",
+    @SerialName("username") val username: String = "",
     @SerialName("twitter_username") val twitterUsername: String? = null,
     @SerialName("github_username") val githubUsername: String? = null,
     @SerialName("user_id") val userId: Int? = null,

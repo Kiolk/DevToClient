@@ -8,6 +8,7 @@ import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toOr
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toUser
 import com.github.kiolk.devto.data.repositories.datasources.network.models.CommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchArticleApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
 import com.github.kiolk.devto.domain.models.Article
 import com.github.kiolk.devto.domain.models.Reaction
@@ -39,7 +40,11 @@ class ArticleRepositoryImpl(private val articleService: ArticleService) : Articl
 
     override suspend fun search(searchParameters: SearchParameters): List<Searchable> {
         return when (searchParameters.searchType) {
-            "Article" -> articleService.search(searchParameters).map { it.toArticle() }
+            "Article" -> articleService.search(searchParameters)
+                .map {
+                    (it as SearchArticleApi).toArticle()
+                }
+
             else -> throw NotImplementedError()
         }
     }

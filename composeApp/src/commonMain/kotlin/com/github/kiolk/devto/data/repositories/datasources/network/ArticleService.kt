@@ -5,8 +5,8 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.Comme
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
-import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchArticleApi
-import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchArticleResultApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchResultApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchableApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
 import com.github.kiolk.devto.domain.models.SearchParameters
 import io.ktor.client.HttpClient
@@ -31,7 +31,7 @@ interface ArticleService {
 
     suspend fun getCommentsForArticle(articleId: Int): List<CommentApi>
 
-    suspend fun search(searchParameters: SearchParameters): List<SearchArticleApi>
+    suspend fun search(searchParameters: SearchParameters): List<SearchableApi>
 }
 
 class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
@@ -91,8 +91,8 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         return comments
     }
 
-    override suspend fun search(searchParameters: SearchParameters): List<SearchArticleApi> {
-        val result: SearchArticleResultApi = httpClient.get(SEARCH_ENDPOINT) {
+    override suspend fun search(searchParameters: SearchParameters): List<SearchableApi> {
+        val result: SearchResultApi = httpClient.get(SEARCH_ENDPOINT) {
             parameter("per_page", searchParameters.perPage)
             parameter("page", searchParameters.page)
             parameter("class_name", searchParameters.searchType)
