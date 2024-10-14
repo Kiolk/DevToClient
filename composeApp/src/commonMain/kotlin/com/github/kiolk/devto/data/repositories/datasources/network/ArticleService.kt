@@ -95,7 +95,7 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         val result: SearchResultApi = httpClient.get(SEARCH_ENDPOINT) {
             parameter("per_page", searchParameters.perPage)
             parameter("page", searchParameters.page)
-            parameter("class_name", searchParameters.searchType)
+            parameter("class_name", searchParameters.searchType.value)
             parameter("search_fields", searchParameters.searchField)
         }.body()
         return result.result

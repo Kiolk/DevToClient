@@ -1,7 +1,7 @@
 package com.github.kiolk.devto.presentation.screens.user
 
 import cafe.adriel.voyager.core.model.ScreenModel
-import com.github.kiolk.devto.presentation.models.User
+import com.github.kiolk.devto.domain.models.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

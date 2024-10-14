@@ -1,4 +1,4 @@
-package com.github.kiolk.devto.presentation.models
+package com.github.kiolk.devto.domain.models
 
 import kotlinx.datetime.Instant
 
@@ -12,4 +12,4 @@ data class Comment(
     val name: String,
     val profileImage90: String,
     val children: List<Comment> = emptyList(),
-)
+) : Searchable

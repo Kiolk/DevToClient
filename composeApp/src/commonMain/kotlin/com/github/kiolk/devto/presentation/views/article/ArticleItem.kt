@@ -1,6 +1,5 @@
 package com.github.kiolk.devto.presentation.views.article
 
-import Organization
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -38,8 +37,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.github.kiolk.devto.domain.models.Organization
+import com.github.kiolk.devto.domain.models.User
 import com.github.kiolk.devto.presentation.models.FlareTag
-import com.github.kiolk.devto.presentation.models.User
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.CommentUi
 import com.github.kiolk.devto.presentation.screens.home.models.TagUi
@@ -49,7 +49,6 @@ import com.github.kiolk.devto.presentation.views.buttons.bookMark.BookMarkButton
 import com.github.kiolk.devto.presentation.views.buttons.comment.CommentsButton
 import com.github.kiolk.devto.presentation.views.buttons.reaction.ReactionsButton
 import com.github.kiolk.devto.presentation.views.tag.Tag
-import com.github.kiolk.devto.utils.colors.DevToColors
 import com.github.kiolk.devto.utils.localisation.StringProvider
 import com.github.kiolk.devto.utils.localisation.StringsKeys
 
@@ -248,4 +247,3 @@ fun UserNameWithOrganisation(user: User, organization: Organization?, onUserClic
         }
     }
 }
-

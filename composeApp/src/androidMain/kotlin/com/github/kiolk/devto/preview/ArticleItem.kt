@@ -1,11 +1,11 @@
 package com.github.kiolk.devto.preview
 
-import Organization
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.github.kiolk.devto.domain.models.Article
-import com.github.kiolk.devto.presentation.models.User
+import com.github.kiolk.devto.domain.models.Organization
+import com.github.kiolk.devto.domain.models.User
 import com.github.kiolk.devto.presentation.screens.home.mappers.mapToArticleUi
 import com.github.kiolk.devto.presentation.theme.DevToTheme
 import com.github.kiolk.devto.presentation.views.article.ArticleItem
@@ -20,7 +20,8 @@ fun ArticleItemPreview() {
 }
 
 val fakeArticle = Article(
-    1, "", "Test", "Description", Clock.System.now(), user = User(
+    1, "", "Test", "Description", Clock.System.now(),
+    user = User(
         name = "User",
         username = "User name",
         twitterUsername = null,
@@ -28,12 +29,13 @@ val fakeArticle = Article(
         websiteUrl = "",
         profileImage = "https://picsum.photos/200/300",
         profileImage90 = "https://picsum.photos/200/300",
-    ), organization = Organization(
+    ),
+    organization = Organization(
         name = "Daresay",
         username = "Daresay AB",
         slug = "We work for future",
         profileImage = "https://picsum.photos/200/300",
-        profileImage90 = "https://picsum.photos/200/300"
+        profileImage90 = "https://picsum.photos/200/300",
     ),
     commentsCount = 0,
     publicReactionCount = 0,
@@ -41,5 +43,5 @@ val fakeArticle = Article(
     coverImage = "",
     readingTimeMinutes = 3,
     tagList = listOf("Development", "VoiceRecognition", "Android", "Kotlin"),
-    flareTag = null
+    flareTag = null,
 )

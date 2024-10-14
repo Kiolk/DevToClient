@@ -2,19 +2,16 @@ package com.github.kiolk.devto.data.repositories.datasources.network.mappers
 
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
-import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedUserApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FlareTagApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.PublicReactionCategoryApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchArticleApi
-import com.github.kiolk.devto.data.repositories.datasources.network.models.TopCommentApi
-import com.github.kiolk.devto.data.repositories.datasources.network.models.UserApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
 import com.github.kiolk.devto.domain.models.Article
-import com.github.kiolk.devto.presentation.models.Comment
+import com.github.kiolk.devto.domain.models.User
 import com.github.kiolk.devto.presentation.models.FlareTag
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 import com.github.kiolk.devto.presentation.models.PublicReactionCategory
-import com.github.kiolk.devto.presentation.models.User
 import kotlinx.datetime.Instant
 
 fun ArticleApi.toArticle(): Article {
@@ -78,30 +75,6 @@ fun SearchArticleApi.toArticle(): Article {
     )
 }
 
-fun UserApi.toUser(): User {
-    return User(
-        name = name,
-        username = username,
-        twitterUsername = twitterUsername,
-        githubUsername = githubUsername,
-        websiteUrl = websiteUrl,
-        profileImage = profileImage,
-        profileImage90 = profileImage90,
-    )
-}
-
-fun FeedUserApi.toUser(): User {
-    return User(
-        name = name,
-        username = username,
-        twitterUsername = null,
-        githubUsername = null,
-        websiteUrl = null,
-        profileImage = profileImageUrl,
-        profileImage90 = profileImage90,
-    )
-}
-
 fun FlareTagApi.toFlareTag(): FlareTag {
     return FlareTag(
         name = name,
@@ -134,15 +107,21 @@ fun GetArticlesParams.toGetArticlesParamsApi(): GetArticlesParamsApi {
     )
 }
 
-private fun TopCommentApi.toComment(): Comment {
-    return Comment(
-        commentId = this.commentId.toString(),
-        userId = this.userId,
-        publishedTimestamp = this.publishedTimestamp, // Format Instant as needed
-        path = this.path,
-        username = this.username,
-        name = this.name,
-        profileImage90 = this.profileImage90,
-        text = this.safeProcessedHtml
+fun SingleArticleApi.mapToArticle(): Article {
+    return Article(
+        id = id,
+        slug = slug,
+        title = title,
+        description = description,
+        publishedAt = publishedAt,
+        commentsCount = commentsCount,
+        publicReactionCount = publicReactionsCount,
+        positiveReactionCount = positiveReactionsCount,
+        coverImage = coverImage,
+        readingTimeMinutes = readingTimeMinutes,
+        tagList = tagList.split(","),
+        user = user.toUser(),
+        organization = organization?.toOrganization(),
+        flareTag = flareTag?.toFlareTag(),
     )
 }

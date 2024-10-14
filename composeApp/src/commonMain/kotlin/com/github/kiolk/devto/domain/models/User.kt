@@ -1,4 +1,4 @@
-package com.github.kiolk.devto.presentation.models
+package com.github.kiolk.devto.domain.models
 
 data class User(
     val name: String = "",
@@ -8,4 +8,4 @@ data class User(
     val websiteUrl: String? = null,
     val profileImage: String? = null,
     val profileImage90: String = "",
-)
+) : Searchable
