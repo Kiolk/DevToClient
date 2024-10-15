@@ -12,16 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight.Companion.W400
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.unit.dp
-import com.github.kiolk.devto.presentation.screens.home.SortingTypeUi
+import com.github.kiolk.devto.presentation.screens.search.model.SortTypeUi
 import com.github.kiolk.devto.utils.localisation.StringProvider
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SortingChip(
-    currentType: SortingTypeUi,
-    passedType: SortingTypeUi,
+@Suppress("LongParameterList")
+fun <T : SortTypeUi> SortingChip(
+    currentType: T,
+    passedType: T,
     isSelected: Boolean? = null,
-    onClick: (type: SortingTypeUi) -> Unit,
+    onClick: (type: T) -> Unit,
     stringProvider: StringProvider,
     text: String? = null,
 ) {

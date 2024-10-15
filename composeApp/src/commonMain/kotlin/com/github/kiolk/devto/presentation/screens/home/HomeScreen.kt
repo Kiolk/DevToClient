@@ -25,6 +25,7 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
+import com.github.kiolk.devto.presentation.screens.search.model.SortingTypeUi
 import com.github.kiolk.devto.presentation.screens.tag.TagScreen
 import com.github.kiolk.devto.presentation.screens.user.UserScreen
 import com.github.kiolk.devto.presentation.views.InfinityProgress
