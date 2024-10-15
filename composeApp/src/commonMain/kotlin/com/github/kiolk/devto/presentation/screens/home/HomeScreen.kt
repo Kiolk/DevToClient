@@ -56,7 +56,7 @@ class HomeScreen : Screen {
         }
 
         Column(verticalArrangement = Arrangement.Top, modifier = Modifier.fillMaxSize()) {
-            FilterBar(sortingType, screenModel, stringProvider)
+            FilterBar(sortingType, { screenModel.onSortClick(it) }, stringProvider)
 
             if (articlesState.isEmpty()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -107,7 +107,7 @@ class HomeScreen : Screen {
 @Composable
 fun FilterBar(
     sortingType: SortingTypeUi,
-    screenModel: HomeScreenModel,
+    onSortClick: (sortingType: SortingTypeUi) -> Unit = {},
     stringProvider: StringProvider,
 ) {
     var isTopChipsVisible by remember { mutableStateOf(false) }
@@ -121,7 +121,7 @@ fun FilterBar(
                 currentType = SortingTypeUi.Related,
                 passedType = sortingType,
                 onClick = {
-                    screenModel.onSortClick(SortingTypeUi.Related)
+                    onSortClick(SortingTypeUi.Related)
                     isTopChipsVisible = false
                 },
                 stringProvider = stringProvider,
@@ -130,7 +130,7 @@ fun FilterBar(
                 currentType = SortingTypeUi.Latest,
                 passedType = sortingType,
                 onClick = {
-                    screenModel.onSortClick(SortingTypeUi.Latest)
+                    onSortClick(SortingTypeUi.Latest)
                     isTopChipsVisible = false
                 },
                 stringProvider = stringProvider,
@@ -143,7 +143,7 @@ fun FilterBar(
                     if (isTopChipsVisible) {
                         return@SortingChip
                     }
-                    screenModel.onSortClick(SortingTypeUi.Top.Week)
+                    onSortClick(SortingTypeUi.Top.Week)
                     isTopChipsVisible = !isTopChipsVisible
                 },
                 stringProvider = stringProvider,
@@ -162,7 +162,7 @@ fun FilterBar(
                     currentType = SortingTypeUi.Top.Week,
                     passedType = sortingType,
                     onClick = {
-                        screenModel.onSortClick(SortingTypeUi.Top.Week)
+                        onSortClick(SortingTypeUi.Top.Week)
                     },
                     stringProvider = stringProvider,
                 )
@@ -170,7 +170,7 @@ fun FilterBar(
                     currentType = SortingTypeUi.Top.Month,
                     passedType = sortingType,
                     onClick = {
-                        screenModel.onSortClick(SortingTypeUi.Top.Month)
+                        onSortClick(SortingTypeUi.Top.Month)
                     },
                     stringProvider = stringProvider,
                 )
@@ -178,7 +178,7 @@ fun FilterBar(
                     currentType = SortingTypeUi.Top.Year,
                     passedType = sortingType,
                     onClick = {
-                        screenModel.onSortClick(SortingTypeUi.Top.Year)
+                        onSortClick(SortingTypeUi.Top.Year)
                     },
                     stringProvider = stringProvider,
                 )
@@ -186,7 +186,7 @@ fun FilterBar(
                     currentType = SortingTypeUi.Top.Infinity,
                     passedType = sortingType,
                     onClick = {
-                        screenModel.onSortClick(SortingTypeUi.Top.Infinity)
+                        onSortClick(SortingTypeUi.Top.Infinity)
                     },
                     stringProvider = stringProvider,
                 )

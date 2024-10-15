@@ -1,6 +1,5 @@
 package com.github.kiolk.devto.presentation.views.avatar
 
-import Organization
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,10 +15,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.github.kiolk.devto.presentation.models.User
+import com.github.kiolk.devto.domain.models.Organization
+import com.github.kiolk.devto.domain.models.User
 
 @Composable
-fun UserOrganisationAvatar(user: User, organization: Organization?, size: Dp = 35.dp, onUserClick: (userName: String) -> Unit = {}) {
+fun UserOrganisationAvatar(
+    user: User,
+    organization: Organization?,
+    size: Dp = 35.dp,
+    onUserClick: (userName: String) -> Unit = {}
+) {
     if (organization == null) {
         Box(modifier = Modifier.size(size)) {
             Box(

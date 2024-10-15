@@ -12,5 +12,5 @@ data class UserApi(
     @SerialName("user_id") val userId: Int? = null,
     @SerialName("website_url") val websiteUrl: String? = null,
     @SerialName("profile_image") val profileImage: String? = null,
-    @SerialName("profile_image_90") val profileImage90: String,
+    @SerialName("profile_image_90") val profileImage90: String? = null,
 )

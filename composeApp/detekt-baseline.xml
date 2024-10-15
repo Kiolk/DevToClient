@@ -66,7 +66,7 @@
     <ID>FunctionNaming:TagPreview.kt$@Preview(showBackground = true, device = Devices.DEFAULT) @Composable fun TagPreview(@PreviewParameter(TagProvider::class) tag: TagUi)</ID>
     <ID>FunctionNaming:TagScreen.kt$@Composable fun StubWebScreen(path: String)</ID>
     <ID>FunctionNaming:Theme.kt$@Composable fun DevToTheme( isDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -&gt; Unit )</ID>
-    <ID>FunctionNaming:UserOrganisationAvatar.kt$@Composable fun UserOrganisationAvatar(user: User, organization: Organization?, size: Dp = 35.dp, onUserClick: (userName: String) -&gt; Unit = {})</ID>
+    <ID>FunctionNaming:UserOrganisationAvatar.kt$@Composable fun UserOrganisationAvatar(user: User, organization: com.github.kiolk.devto.domain.models.Organization?, size: Dp = 35.dp, onUserClick: (userName: String) -&gt; Unit = {})</ID>
     <ID>FunctionNaming:WebViewScreen.android.kt$@Composable actual fun WebContent(html: String, function: () -&gt; Unit)</ID>
     <ID>FunctionNaming:WebViewScreen.android.kt$@Composable actual fun WebViewScreen(url: String)</ID>
     <ID>FunctionNaming:WebViewScreen.ios.kt$@Composable actual fun WebContent(html: String, function: () -&gt; Unit)</ID>
@@ -159,7 +159,7 @@
     <ID>ParameterListWrapping:ArticleItem.kt$(commentUi: CommentUi)</ID>
     <ID>ParameterListWrapping:ArticleItem.kt$(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -&gt; Unit, size: Dp = 35.dp, onUserClick: (user: String) -&gt; Unit)</ID>
     <ID>ParameterListWrapping:ArticleItem.kt$(user: String)</ID>
-    <ID>ParameterListWrapping:UserOrganisationAvatar.kt$(user: User, organization: Organization?, size: Dp = 35.dp, onUserClick: (userName: String) -&gt; Unit = {})</ID>
+    <ID>ParameterListWrapping:UserOrganisationAvatar.kt$(user: User, organization: com.github.kiolk.devto.domain.models.Organization?, size: Dp = 35.dp, onUserClick: (userName: String) -&gt; Unit = {})</ID>
     <ID>ParameterListWrapping:UserOrganisationAvatar.kt$(userName: String)</ID>
     <ID>PropertyWrapping:ArticleScreen.kt$ArticleScreen$val screenModel = koinScreenModel&lt;ArticleScreenModel&gt;(parameters = { parametersOf(articleId, commentId, showComments) })</ID>
     <ID>PropertyWrapping:HomeScreenModel.kt$HomeScreenModel$val reaction = toggleReactionUseCase(articleId = article.article.id, reactionCategory = "readinglist", reactionOn = "Article")</ID>
@@ -179,7 +179,7 @@
     <ID>UnusedPrivateProperty:HomeScreenModel.kt$HomeScreenModel$val index = _articlesState.value.indexOfFirst { it.article.id == article.article.id }</ID>
     <ID>UnusedPrivateProperty:HomeScreenModel.kt$HomeScreenModel$val reaction = toggleReactionUseCase(articleId = article.article.id, reactionCategory = "readinglist", reactionOn = "Article")</ID>
     <ID>Wrapping:ArticleItem.kt$(</ID>
-    <ID>Wrapping:ArticleItem.kt$( 1, "", "Test", "Description", Clock.System.now(), user = User( name = "User", username = "User name", twitterUsername = null, githubUsername = null, websiteUrl = "", profileImage = "https://picsum.photos/200/300", profileImage90 = "https://picsum.photos/200/300", ), organization = Organization( name = "Daresay", username = "Daresay AB", slug = "We work for future", profileImage = "https://picsum.photos/200/300", profileImage90 = "https://picsum.photos/200/300" ), commentsCount = 0, publicReactionCount = 0, positiveReactionCount = 0, coverImage = "", readingTimeMinutes = 3, tagList = listOf("Development", "VoiceRecognition", "Android", "Kotlin"), flareTag = null )</ID>
+    <ID>Wrapping:ArticleItem.kt$( 1, "", "Test", "Description", Clock.System.now(), user = User( name = "User", username = "User name", twitterUsername = null, githubUsername = null, websiteUrl = "", profileImage = "https://picsum.photos/200/300", profileImage90 = "https://picsum.photos/200/300", ), organization = com.github.kiolk.devto.domain.models.Organization( name = "Daresay", username = "Daresay AB", slug = "We work for future", profileImage = "https://picsum.photos/200/300", profileImage90 = "https://picsum.photos/200/300" ), commentsCount = 0, publicReactionCount = 0, positiveReactionCount = 0, coverImage = "", readingTimeMinutes = 3, tagList = listOf("Development", "VoiceRecognition", "Android", "Kotlin"), flareTag = null )</ID>
     <ID>Wrapping:ArticleItem.kt$onUserClick(user.name)</ID>
     <ID>Wrapping:ArticleUiMapper.kt$it.position</ID>
     <ID>Wrapping:ArticleUiMapper.kt$it.toReactionType()</ID>

@@ -1,20 +1,26 @@
 package com.github.kiolk.devto.data.repositories.articles
 
 import com.github.kiolk.devto.data.repositories.datasources.network.ArticleService
+import com.github.kiolk.devto.data.repositories.datasources.network.mappers.mapToArticle
+import com.github.kiolk.devto.data.repositories.datasources.network.mappers.mapToComment
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toArticle
-import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toFlareTag
+import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toComment
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toGetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toOrganization
+import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toTag
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toUser
-import com.github.kiolk.devto.data.repositories.datasources.network.models.CommentApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchArticleApi
-import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchCommentApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchOrganizationApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchTagApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchUserApi
 import com.github.kiolk.devto.domain.models.Article
+import com.github.kiolk.devto.domain.models.Comment
 import com.github.kiolk.devto.domain.models.Reaction
 import com.github.kiolk.devto.domain.models.SearchParameters
+import com.github.kiolk.devto.domain.models.SearchType
 import com.github.kiolk.devto.domain.models.Searchable
-import com.github.kiolk.devto.presentation.models.Comment
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 
 class ArticleRepositoryImpl(private val articleService: ArticleService) : ArticleRepository {
@@ -39,47 +45,29 @@ class ArticleRepositoryImpl(private val articleService: ArticleService) : Articl
     }
 
     override suspend fun search(searchParameters: SearchParameters): List<Searchable> {
+        val responseBody = articleService.search(searchParameters)
         return when (searchParameters.searchType) {
-            "Article" -> articleService.search(searchParameters)
-                .map {
-                    (it as SearchArticleApi).toArticle()
-                }
+            SearchType.Article -> responseBody.map {
+                (it as SearchArticleApi).toArticle()
+            }
 
-            else -> throw NotImplementedError()
+            SearchType.User -> responseBody.map {
+                (it as SearchUserApi).toUser()
+            }
+
+            SearchType.Organization -> responseBody.map {
+                (it as SearchOrganizationApi).toOrganization()
+            }
+
+            SearchType.Comment -> responseBody.map {
+                (it as SearchCommentApi).toComment()
+            }
+
+            SearchType.Tag -> responseBody.map {
+                (it as SearchTagApi).toTag()
+            }
         }
     }
-}
-
-private fun CommentApi.mapToComment(): Comment {
-    return Comment(
-        commentId = idCode,
-        userId = user.userId,
-        text = bodyHtml,
-        publishedTimestamp = createdAt,
-        path = "",
-        username = user.username,
-        name = user.name,
-        profileImage90 = user.profileImage ?: user.profileImage90,
-    )
-}
-
-private fun SingleArticleApi.mapToArticle(): Article {
-    return Article(
-        id = id,
-        slug = slug,
-        title = title,
-        description = description,
-        publishedAt = publishedAt,
-        commentsCount = commentsCount,
-        publicReactionCount = publicReactionsCount,
-        positiveReactionCount = positiveReactionsCount,
-        coverImage = coverImage,
-        readingTimeMinutes = readingTimeMinutes,
-        tagList = tagList.split(","),
-        user = user.toUser(),
-        organization = organization?.toOrganization(),
-        flareTag = flareTag?.toFlareTag(),
-    )
 }
 
 private fun ReactionApi.toReaction(): Reaction {
