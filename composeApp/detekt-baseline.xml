@@ -49,7 +49,7 @@
     <ID>FunctionNaming:ArticleItem.kt$@Composable fun CommentsBlock( articleUi: ArticleUi, onCommentClick: (commentUi: CommentUi) -&gt; Unit, onSeeAllCommentsClick: () -&gt; Unit, stringProvider: StringProvider, onUserClick: (userName: String) -&gt; Unit )</ID>
     <ID>FunctionNaming:ArticleItem.kt$@Composable fun PublicationDate(articleUi: ArticleUi)</ID>
     <ID>FunctionNaming:ArticleItem.kt$@Composable fun ReadingTime(readingTimeMinutes: Int, stringProvider: StringProvider)</ID>
-    <ID>FunctionNaming:ArticleItem.kt$@Composable fun UserNameWithOrganisation(user: User, organization: com.github.kiolk.devto.domain.models.Organization?, onUserClick: (userName: String) -&gt; Unit)</ID>
+    <ID>FunctionNaming:ArticleItem.kt$@Composable fun UserNameWithOrganisation(user: User, organization: Organization?, onUserClick: (userName: String) -&gt; Unit)</ID>
     <ID>FunctionNaming:ArticleItem.kt$@OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class) @Composable fun ArticleTags(tagList: List&lt;TagUi&gt;, flareTag: FlareTag?, onTagClick: (tagUi: TagUi) -&gt; Unit)</ID>
     <ID>FunctionNaming:ArticleItem.kt$@Preview(showBackground = true, device = Devices.DEFAULT, showSystemUi = true) @Composable fun ArticleItemPreview()</ID>
     <ID>FunctionNaming:BookMarkButton.kt$@OptIn(ExperimentalResourceApi::class) @Composable fun BookMarkButton(article: ArticleUi, onBookmarkClick: (ArticleUi) -&gt; Unit = {})</ID>

@@ -119,7 +119,7 @@ fun SingleArticleApi.mapToArticle(): Article {
         positiveReactionCount = positiveReactionsCount,
         coverImage = coverImage,
         readingTimeMinutes = readingTimeMinutes,
-        tagList = tagList.split(","),
+        tagList = tagList.split(",").map { it.trim() },
         user = user.toUser(),
         organization = organization?.toOrganization(),
         flareTag = flareTag?.toFlareTag(),
