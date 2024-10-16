@@ -5,4 +5,5 @@ data class SearchParameters(
     val searchType: SearchType = SearchType.Article,
     val searchField: String = "Android",
     val perPage: Int = 60,
+    val sort: SortType? = null,
 )

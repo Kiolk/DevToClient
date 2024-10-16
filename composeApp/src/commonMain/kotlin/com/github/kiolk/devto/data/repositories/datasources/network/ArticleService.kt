@@ -97,6 +97,10 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
             parameter("page", searchParameters.page)
             parameter("class_name", searchParameters.searchType.value)
             parameter("search_fields", searchParameters.searchField)
+            searchParameters.sort?.let { sortType ->
+                parameter("sort_by", "published_at")
+                parameter("sort_direction", sortType.value)
+            }
         }.body()
         return result.result
     }

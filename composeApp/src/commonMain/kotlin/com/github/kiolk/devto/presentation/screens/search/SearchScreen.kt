@@ -5,18 +5,21 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
@@ -44,6 +47,7 @@ class SearchScreen : Screen {
         screenModel.pagination
         val stringProvider = getKoin().get<StringProvider>()
         val searchState by screenModel.searchState.collectAsState()
+        val searchText by screenModel.searchText.collectAsState()
         val isLoading by screenModel.isLoading.collectAsState()
         val sortingType by screenModel.sortingType.collectAsState()
         val searchType by screenModel.searchType.collectAsState()
@@ -59,6 +63,13 @@ class SearchScreen : Screen {
 
         Column(verticalArrangement = Arrangement.Top, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
+                TextField(
+                    modifier = Modifier.padding(8.dp),
+                    value = searchText,
+                    onValueChange = { screenModel.onSearchTextChanged(it) },
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                    label = { Text("Enter search text") }
+                )
                 SortBar(sortingType, stringProvider) {
                     screenModel.onSortClick(it)
                 }
@@ -125,72 +136,33 @@ fun SearchByTypeBar(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        SortingChip(
-            currentType = SearchTypeUi.Post,
-            passedType = searchType,
-            onClick = onSearchTypeClick,
-            stringProvider = stringProvider,
-        )
-        SortingChip(
-            currentType = SearchTypeUi.User,
-            passedType = searchType,
-            onClick = onSearchTypeClick,
-            stringProvider = stringProvider,
-        )
-        SortingChip(
-            currentType = SearchTypeUi.Organization,
-            passedType = searchType,
-            onClick = onSearchTypeClick,
-            stringProvider = stringProvider,
-        )
-        SortingChip(
-            currentType = SearchTypeUi.Comment,
-            passedType = searchType,
-            onClick = onSearchTypeClick,
-            stringProvider = stringProvider,
-        )
-        SortingChip(
-            currentType = SearchTypeUi.Tag,
-            passedType = searchType,
-            onClick = onSearchTypeClick,
-            stringProvider = stringProvider,
-        )
+        SearchTypeUi.values().forEach { type ->
+            SortingChip(
+                currentType = type,
+                passedType = searchType,
+                onClick = onSearchTypeClick,
+                stringProvider = stringProvider,
+            )
+        }
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SortBar(
     sortingType: SearchSortTypeUi,
     stringProvider: StringProvider,
     onSortClick: (sortingType: SearchSortTypeUi) -> Unit = {},
 ) {
-    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-        ) {
+    FlowRow(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        SearchSortTypeUi.values().forEach { type ->
             SortingChip(
-                currentType = SearchSortTypeUi.MostRelevant,
+                currentType = type,
                 passedType = sortingType,
-                onClick = {
-                    onSortClick(SearchSortTypeUi.MostRelevant)
-                },
-                stringProvider = stringProvider,
-            )
-            SortingChip(
-                currentType = SearchSortTypeUi.Newest,
-                passedType = sortingType,
-                onClick = {
-                    onSortClick(SearchSortTypeUi.Newest)
-                },
-                stringProvider = stringProvider,
-            )
-            SortingChip(
-                currentType = SearchSortTypeUi.Oldest,
-                passedType = sortingType,
-                onClick = {
-                    onSortClick(SearchSortTypeUi.Oldest)
-                },
+                onClick = onSortClick,
                 stringProvider = stringProvider,
             )
         }
