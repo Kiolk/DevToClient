@@ -16,4 +16,12 @@ object StringsKeys {
     const val TOP_MONTH = "top_month_sorting"
     const val TOP_YEAR = "top_year_sorting"
     const val TOP_INFINITY = "top_infinity_sorting"
+    const val MOST_RELEVANT = "most_relevant"
+    const val NEWEST = "newest"
+    const val OLDEST = "oldest"
+    const val USER = "people"
+    const val ARTICLE = "posts"
+    const val ORGANIZATION = "organizations"
+    const val TAGS = "tags"
+    const val SEARCH_COMMENTS = "search_comments"
 }

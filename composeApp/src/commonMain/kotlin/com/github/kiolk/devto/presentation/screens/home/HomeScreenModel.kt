@@ -2,15 +2,14 @@ package com.github.kiolk.devto.presentation.screens.home
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.github.kiolk.devto.data.repositories.datasources.network.models.SortingType
 import com.github.kiolk.devto.domain.models.Article
 import com.github.kiolk.devto.domain.usecases.GetArticleUseCase
 import com.github.kiolk.devto.domain.usecases.ToggleReactionUseCase
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 import com.github.kiolk.devto.presentation.screens.home.mappers.mapToArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
+import com.github.kiolk.devto.presentation.screens.search.model.SortingTypeUi
 import com.github.kiolk.devto.utils.localisation.StringProvider
-import com.github.kiolk.devto.utils.localisation.StringsKeys
 import com.github.kiolk.devto.utils.pagination.Pagination
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -87,28 +86,6 @@ class HomeScreenModel(
             _sortingType.value = sortingType
             _articlesState.value = emptyList()
             pagination.restart()
-        }
-    }
-}
-
-sealed class SortingTypeUi(val key: String) {
-    data object Related : SortingTypeUi(StringsKeys.RELATED)
-    data object Latest : SortingTypeUi(StringsKeys.LATEST)
-    sealed class Top(key: String) : SortingTypeUi(key) {
-        data object Week : Top(StringsKeys.TOP_WEEK)
-        data object Month : Top(StringsKeys.TOP_MONTH)
-        data object Year : Top(StringsKeys.TOP_YEAR)
-        data object Infinity : Top(StringsKeys.TOP_INFINITY)
-    }
-
-    fun mapToSortingType(): SortingType {
-        return when (this) {
-            Latest -> SortingType.Latest
-            Related -> SortingType.Relevant
-            Top.Infinity -> SortingType.Infinity
-            Top.Month -> SortingType.Month
-            Top.Week -> SortingType.Week
-            Top.Year -> SortingType.Year
         }
     }
 }
