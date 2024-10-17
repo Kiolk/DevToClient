@@ -18,5 +18,5 @@ val screenModelModule = module {
             stringProvider = get()
         )
     }
-    factory<SearchScreenModel> { SearchScreenModel(get()) }
+    factory<SearchScreenModel> { SearchScreenModel(get(), get()) }
 }

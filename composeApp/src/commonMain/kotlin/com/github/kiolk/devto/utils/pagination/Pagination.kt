@@ -10,18 +10,20 @@ class Pagination<T>(
     private val source: suspend (page: Int) -> List<T>,
     private val onNewPortionLoaded: (data: List<T>) -> Unit,
     private val scope: CoroutineScope,
+    private val portionSize: Int = 10,
     startPosition: Int = START_LOADING_POSITION,
 ) {
 
     private var startPage: Int = startPosition
     private var job: Job? = null
+    private var isReachedEnd = false
 
     fun startLoading() {
         loadNewPortion()
     }
 
     fun loadNewPortion() {
-        if (job != null) {
+        if (job != null || isReachedEnd) {
             return
         }
 
@@ -31,6 +33,7 @@ class Pagination<T>(
             val newPortion = source(startPage)
 
             launch(Dispatchers.Main) {
+                isReachedEnd = newPortion.isEmpty() || newPortion.size < portionSize
                 onNewPortionLoaded(newPortion)
                 job = null
             }
@@ -40,6 +43,7 @@ class Pagination<T>(
     fun restart() {
         job?.cancel()
         job = null
+        isReachedEnd = false
         startPage = START_LOADING_POSITION
         startLoading()
     }

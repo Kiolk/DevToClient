@@ -26,8 +26,6 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
 import com.github.kiolk.devto.presentation.screens.search.model.SortingTypeUi
-import com.github.kiolk.devto.presentation.screens.tag.TagScreen
-import com.github.kiolk.devto.presentation.screens.user.UserScreen
 import com.github.kiolk.devto.presentation.views.InfinityProgress
 import com.github.kiolk.devto.presentation.views.ProgressSize
 import com.github.kiolk.devto.presentation.views.article.ArticleItem
@@ -74,7 +72,8 @@ class HomeScreen : Screen {
             ) {
                 items(articlesState.size) { articleIndex ->
                     if (articleIndex < articlesState.size - 1) {
-                        ArticleItem(articlesState[articleIndex],
+                        ArticleItem(
+                            articlesState[articleIndex],
                             stringProvider = stringProvider,
                             onArticleClick = { article, commentId, showComments ->
                                 navigator.push(
@@ -86,16 +85,8 @@ class HomeScreen : Screen {
                                         showComments
                                     )
                                 )
-                            },
-                            onTagClick = {
-                                navigator.push(TagScreen(it.name))
-                            },
-                            onBookmarkClick = {
-                                screenModel.onBookmarkClick(it)
-                            },
-                            onUserClick = {
-                                navigator.push(UserScreen(it))
-                            })
+                            }
+                        )
                     } else if (isLoading) {
                         InfinityProgress()
                     }

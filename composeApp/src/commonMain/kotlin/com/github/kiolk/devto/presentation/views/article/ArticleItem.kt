@@ -36,6 +36,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import com.github.kiolk.devto.domain.models.Organization
 import com.github.kiolk.devto.domain.models.User
@@ -43,6 +45,8 @@ import com.github.kiolk.devto.presentation.models.FlareTag
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.CommentUi
 import com.github.kiolk.devto.presentation.screens.home.models.TagUi
+import com.github.kiolk.devto.presentation.screens.tag.TagScreen
+import com.github.kiolk.devto.presentation.screens.user.UserScreen
 import com.github.kiolk.devto.presentation.screens.webView.WebContent
 import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
 import com.github.kiolk.devto.presentation.views.buttons.bookMark.BookMarkButton
@@ -57,9 +61,7 @@ fun ArticleItem(
     articleUi: ArticleUi,
     stringProvider: StringProvider,
     onArticleClick: (articleUi: ArticleUi, commentId: String?, showComments: Boolean) -> Unit = { _, _, _ -> },
-    onTagClick: (tagUi: TagUi) -> Unit = {},
     onBookmarkClick: (articleUi: ArticleUi) -> Unit = {},
-    onUserClick: (userName: String) -> Unit = {},
 ) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(8.dp),
@@ -67,9 +69,15 @@ fun ArticleItem(
         elevation = 2.dp,
         border = BorderStroke(0.5.dp, Color.LightGray),
     ) {
+        val navigator = LocalNavigator.currentOrThrow
+
         Column {
             Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.Top) {
-                UserOrganisationAvatar(articleUi.article.user, articleUi.article.organization, onUserClick = onUserClick)
+                UserOrganisationAvatar(
+                    articleUi.article.user,
+                    articleUi.article.organization,
+                    onUserClick = { navigator.push(UserScreen(it)) }
+                )
                 Column(
                     modifier = Modifier.padding(start = 2.dp),
                     verticalArrangement = Arrangement.Top
@@ -79,7 +87,7 @@ fun ArticleItem(
                             UserNameWithOrganisation(
                                 articleUi.article.user,
                                 articleUi.article.organization,
-                                onUserClick = onUserClick,
+                                onUserClick = { navigator.push(UserScreen(it)) },
                             )
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 PublicationDate(articleUi)
@@ -89,10 +97,22 @@ fun ArticleItem(
                         }
                     }
                     ArticleTitle(articleUi) { onArticleClick(it, null, false) }
-                    ArticleTags(articleUi.tags, articleUi.article.flareTag, onTagClick)
+                    ArticleTags(articleUi.tags, articleUi.article.flareTag, {
+                        navigator.push(
+                            TagScreen(it.name)
+                        )
+                    })
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        ReactionsButton(articleUi, stringProvider) { onArticleClick(it, null, false) }
-                        CommentsButton(articleUi, stringProvider = stringProvider, onCommentsClick = { onArticleClick(articleUi, null, true) })
+                        ReactionsButton(articleUi, stringProvider) {
+                            onArticleClick(
+                                it,
+                                null,
+                                false
+                            )
+                        }
+                        CommentsButton(articleUi,
+                            stringProvider = stringProvider,
+                            onCommentsClick = { onArticleClick(articleUi, null, true) })
                         Spacer(Modifier.weight(1f))
                         BookMarkButton(articleUi, onBookmarkClick)
                     }
@@ -104,9 +124,15 @@ fun ArticleItem(
             CommentsBlock(
                 articleUi,
                 stringProvider = stringProvider,
-                onCommentClick = { comment -> onArticleClick(articleUi, comment.id.toString(), true) },
+                onCommentClick = { comment ->
+                    onArticleClick(
+                        articleUi,
+                        comment.id.toString(),
+                        true
+                    )
+                },
                 onSeeAllCommentsClick = { onArticleClick(articleUi, null, true) },
-                onUserClick = onUserClick
+                onUserClick = { navigator.push(UserScreen(it)) }
             )
         }
     }
@@ -142,18 +168,25 @@ fun CommentsBlock(
     if (articleUi.numberOfComments > 2) {
         Text(
             stringProvider.getString(StringsKeys.READING_ALL_COMMENTS, articleUi.numberOfComments),
-            modifier = Modifier.padding(start = 48.dp, end = 8.dp, bottom = 8.dp).clickable { onSeeAllCommentsClick() },
+            modifier = Modifier.padding(start = 48.dp, end = 8.dp, bottom = 8.dp)
+                .clickable { onSeeAllCommentsClick() },
             style = MaterialTheme.typography.caption
         )
     }
 }
 
 @Composable
-fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -> Unit, size: Dp = 35.dp, onUserClick: (user: String) -> Unit) {
+fun Comment(
+    commentUi: CommentUi,
+    onCommentClick: (commentUi: CommentUi) -> Unit,
+    size: Dp = 35.dp,
+    onUserClick: (user: String) -> Unit
+) {
     Row(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp).fillMaxWidth()) {
         Box(modifier = Modifier.size(size)) {
             Box(
-                modifier = Modifier.size(size - 15.dp).background(MaterialTheme.colors.surface, CircleShape)
+                modifier = Modifier.size(size - 15.dp)
+                    .background(MaterialTheme.colors.surface, CircleShape)
                     .border(1.dp, Color.LightGray, CircleShape).align(Alignment.Center)
             ) {
                 AsyncImage(
@@ -161,22 +194,26 @@ fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -> Unit
                     contentDescription = null,
                     modifier = Modifier
                         .size(size - 16.dp)
-                        .align(Alignment.Center)
-                        .clip(CircleShape)
+                        .align(Alignment.Center).clip(CircleShape)
                         .clickable { onUserClick(commentUi.userName) }
                 )
             }
         }
         Box(
-            modifier = Modifier.background(shape = RoundedCornerShape(4.dp), color = MaterialTheme.colors.surface).fillMaxWidth()
-                .clickable { onCommentClick(commentUi) }
+            modifier = Modifier.background(
+                shape = RoundedCornerShape(4.dp),
+                color = MaterialTheme.colors.surface
+            ).fillMaxWidth().clickable { onCommentClick(commentUi) }
         ) {
             Column(modifier = Modifier.padding(8.dp)) {
-                Row(modifier = Modifier) {
+                Row(
+                    modifier = Modifier
+                ) {
                     Text(
                         commentUi.userName,
                         style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.Bold),
-                        modifier = Modifier.clickable { onUserClick(commentUi.userName) })
+                        modifier = Modifier.clickable { onUserClick(commentUi.userName) }
+                    )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         commentUi.commentTime,
@@ -195,9 +232,7 @@ fun Comment(commentUi: CommentUi, onCommentClick: (commentUi: CommentUi) -> Unit
 @Composable
 fun ArticleTags(tagList: List<TagUi>, flareTag: FlareTag?, onTagClick: (tagUi: TagUi) -> Unit) {
     FlowRow(
-        modifier = Modifier
-            .wrapContentHeight()
-            .padding(0.dp),
+        modifier = Modifier.wrapContentHeight().padding(0.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp, alignment = Alignment.Top)
     ) {
@@ -238,9 +273,15 @@ fun PublicationDate(articleUi: ArticleUi) {
 }
 
 @Composable
-fun UserNameWithOrganisation(user: User, organization: Organization?, onUserClick: (userName: String) -> Unit) {
+fun UserNameWithOrganisation(
+    user: User,
+    organization: Organization?,
+    onUserClick: (userName: String) -> Unit
+) {
     Row(verticalAlignment = Alignment.Top) {
-        Text(text = user.name, style = MaterialTheme.typography.caption, modifier = Modifier.clickable { onUserClick(user.name) })
+        Text(text = user.name,
+            style = MaterialTheme.typography.caption,
+            modifier = Modifier.clickable { onUserClick(user.name) })
         if (organization != null) {
             Text(" for ", color = Color.LightGray, style = MaterialTheme.typography.caption)
             Text(organization.name, style = MaterialTheme.typography.caption)
