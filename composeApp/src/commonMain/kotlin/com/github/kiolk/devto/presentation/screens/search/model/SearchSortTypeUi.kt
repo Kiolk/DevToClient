@@ -1,12 +1,19 @@
 package com.github.kiolk.devto.presentation.screens.search.model
 
 import com.github.kiolk.devto.domain.models.SearchType
+import com.github.kiolk.devto.domain.models.SortType
 import com.github.kiolk.devto.utils.localisation.StringsKeys
 
 sealed class SearchSortTypeUi(override val key: String) : SortTypeUi(key) {
     data object MostRelevant : SearchSortTypeUi(StringsKeys.MOST_RELEVANT)
     data object Newest : SearchSortTypeUi(StringsKeys.NEWEST)
     data object Oldest : SearchSortTypeUi(StringsKeys.OLDEST)
+
+    companion object {
+        fun values(): List<SearchSortTypeUi> {
+            return listOf(MostRelevant, Oldest, Newest)
+        }
+    }
 }
 
 sealed class SearchTypeUi(override val key: String) : SortTypeUi(key) {
@@ -25,6 +32,20 @@ sealed class SearchTypeUi(override val key: String) : SortTypeUi(key) {
             User -> SearchType.User
         }
     }
+
+    companion object {
+        fun values(): List<SearchTypeUi> {
+            return listOf(Post, User, Organization, Comment, Tag)
+        }
+    }
 }
 
 sealed class SortTypeUi(open val key: String)
+
+fun SearchSortTypeUi.toSortType(): SortType? {
+    return when (this) {
+        SearchSortTypeUi.MostRelevant -> null
+        SearchSortTypeUi.Newest -> SortType.NEWEST
+        SearchSortTypeUi.Oldest -> SortType.OLDEST
+    }
+}
