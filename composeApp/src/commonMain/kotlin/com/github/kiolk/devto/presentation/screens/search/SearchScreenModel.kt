@@ -5,9 +5,12 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import com.github.kiolk.devto.domain.models.SearchParameters
 import com.github.kiolk.devto.domain.models.Searchable
 import com.github.kiolk.devto.domain.usecases.SearchUseCase
+import com.github.kiolk.devto.presentation.screens.search.mapper.mapToSearchableUi
 import com.github.kiolk.devto.presentation.screens.search.model.SearchSortTypeUi
 import com.github.kiolk.devto.presentation.screens.search.model.SearchTypeUi
+import com.github.kiolk.devto.presentation.screens.search.model.SearchableUi
 import com.github.kiolk.devto.presentation.screens.search.model.toSortType
+import com.github.kiolk.devto.utils.localisation.StringProvider
 import com.github.kiolk.devto.utils.pagination.Pagination
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,9 +20,12 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
 @OptIn(FlowPreview::class)
-class SearchScreenModel(private val searchUseCase: SearchUseCase) : ScreenModel {
+class SearchScreenModel(
+    private val searchUseCase: SearchUseCase,
+    private val stringProvider: StringProvider
+) : ScreenModel {
 
-    private val _searchState: MutableStateFlow<List<Searchable>> =
+    private val _searchState: MutableStateFlow<List<SearchableUi>> =
         MutableStateFlow(emptyList())
     val searchState = _searchState.asStateFlow()
 
@@ -51,7 +57,7 @@ class SearchScreenModel(private val searchUseCase: SearchUseCase) : ScreenModel 
         }
     }
 
-    val pagination: Pagination<Searchable> = Pagination(
+    private val pagination: Pagination<Searchable> = Pagination(
         source = { page ->
             _isLoading.value = true
             searchUseCase(
@@ -66,11 +72,12 @@ class SearchScreenModel(private val searchUseCase: SearchUseCase) : ScreenModel 
         onNewPortionLoaded = ::onNewPortionLoaded,
         scope = screenModelScope,
         startPosition = 0,
+        portionSize = 60,
     )
 
     fun onNewPortionLoaded(data: List<Searchable>) {
         _isLoading.value = false
-        _searchState.value = data
+        _searchState.value += data.map { it.mapToSearchableUi(stringProvider = stringProvider) }
     }
 
     fun loadMore() {
