@@ -1,6 +1,7 @@
 package com.github.kiolk.devto.presentation.screens.home.models
 
 import com.github.kiolk.devto.domain.models.Article
+import com.github.kiolk.devto.presentation.screens.search.model.SearchableUi
 
 data class ArticleUi(
     val article: Article,
@@ -17,4 +18,4 @@ data class ArticleUi(
     val topComments: List<CommentUi> = emptyList(),
     val reactionsUi: ReactionsUi = ReactionsUi(),
     val comments: List<CommentUi> = emptyList(),
-)
+) : SearchableUi
