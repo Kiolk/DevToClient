@@ -35,7 +35,7 @@ fun UserOrganisationAvatar(
                     }
             ) {
                 AsyncImage(
-                    model = user.profileImage, // replace with working URL
+                    model = user.profileImage ?: user.profileImage90, // replace with working URL
                     contentDescription = null,
                     modifier = Modifier
                         .size(size - 6.dp)

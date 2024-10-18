@@ -4,4 +4,5 @@ import com.github.kiolk.devto.domain.models.User
 
 data class UserSearchUi(
     val user: User,
+    val userImage: String,
 ) : SearchableUi

@@ -37,5 +37,5 @@ fun Tag.mapToTagUi(): TagSearchUi {
 }
 
 fun User.mapToUserUi(): UserSearchUi {
-    return UserSearchUi(this)
+    return UserSearchUi(this, userImage = this.profileImage ?: profileImage90)
 }
