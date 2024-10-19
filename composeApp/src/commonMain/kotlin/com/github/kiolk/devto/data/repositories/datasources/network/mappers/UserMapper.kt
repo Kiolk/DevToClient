@@ -32,11 +32,11 @@ fun FeedUserApi.toUser(): User {
 fun SearchUserApi.toUser(): User {
     return User(
         name = user?.name.orEmpty(),
-        username = user?.username.orEmpty(),
+        username = this.title.orEmpty(),
         twitterUsername = user?.twitterUsername.orEmpty(),
         githubUsername = user?.githubUsername.orEmpty(),
         websiteUrl = user?.websiteUrl.orEmpty(),
-        profileImage = user?.profileImage.orEmpty(),
-        profileImage90 = user?.profileImage90.orEmpty(),
+        profileImage = user?.profileImage ?: user?.profileImage90.orEmpty(),
+        profileImage90 = user?.profileImage90 ?: user?.profileImage.orEmpty(),
     )
 }

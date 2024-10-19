@@ -10,7 +10,6 @@ import com.github.kiolk.devto.presentation.screens.home.models.ReactionsUi
 import com.github.kiolk.devto.utils.localisation.StringProvider
 import com.github.kiolk.devto.utils.toPublicationDate
 import com.github.kiolk.devto.utils.toPublicationDateAgo
-import io.ktor.http.decodeURLPart
 
 fun Article.mapToArticleUi(stringProvider: StringProvider): ArticleUi {
     return ArticleUi(
@@ -24,7 +23,11 @@ fun Article.mapToArticleUi(stringProvider: StringProvider): ArticleUi {
         description = this.description,
         readingTime = this.readingTimeMinutes,
         tags = this.tagList.map { it.toTagUi(this.flareTag) },
-        reactionsUi = ReactionsUi(types = this.reactions.sortedBy { it.position }.map { it.toReactionType() }, total = this.publicReactionCount),
+        reactionsUi = ReactionsUi(
+            types = this.reactions.sortedBy { it.position }
+                .map { it.toReactionType() },
+            total = this.publicReactionCount
+        ),
         topComments = this.topComments.filter { true }.map { it.toCommentUi(stringProvider) },
         comments = this.comments.map { it.toCommentUi(stringProvider) }
     )
@@ -46,11 +49,7 @@ private fun Comment.toCommentUi(stringProvider: StringProvider): CommentUi {
         id = this.commentId,
         text = this.text.trim(),
         userName = this.username,
-        //TODO find more efficient way to get image url
-        userProfileImage = this.profileImage90.replace(
-            "https://media.dev.to/cdn-cgi/image/width=90,height=90,fit=cover,gravity=auto,format=auto/",
-            ""
-        ).decodeURLPart(),
+        userProfileImage = this.profileImage90,
         commentTime = this.publishedTimestamp.toPublicationDateAgo(stringProvider),
         children = this.children.map { toCommentUi(stringProvider) }
     )
