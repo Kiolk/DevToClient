@@ -34,7 +34,7 @@ import com.github.kiolk.devto.utils.localisation.StringProvider
 import com.github.kiolk.devto.utils.localisation.StringsKeys
 import org.koin.mp.KoinPlatform.getKoin
 
-class HomeScreen : Screen {
+open class HomeScreen : Screen {
 
     @Composable
     override fun Content() {
@@ -55,6 +55,7 @@ class HomeScreen : Screen {
         }
 
         Column(verticalArrangement = Arrangement.Top, modifier = Modifier.fillMaxSize()) {
+            Header()
             FilterBar(sortingType, { screenModel.onSortClick(it) }, stringProvider)
 
             if (articlesState.isEmpty()) {
@@ -93,6 +94,10 @@ class HomeScreen : Screen {
                 }
             }
         }
+    }
+
+    @Composable
+    open fun Header() {
     }
 }
 

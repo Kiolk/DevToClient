@@ -56,6 +56,7 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
             params.perPage?.let { parameter("per_page", it) }
             params.tag?.let { parameter("tag", it) }
             params.tags?.let { parameter("tags", it) }
+            params.type?.let { parameter("class_name", it.value) }
             params.tagsExclude?.let { parameter("tags_exclude", it) }
             params.username?.let { parameter("username", it) }
             params.state?.let { parameter("state", it) }

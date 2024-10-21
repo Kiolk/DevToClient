@@ -10,19 +10,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
+import com.github.kiolk.devto.domain.models.Tag
+import com.github.kiolk.devto.presentation.screens.home.HomeScreen
+import com.github.kiolk.devto.presentation.screens.search.view.TagSearchCard
 import com.github.kiolk.devto.presentation.screens.webView.WebViewScreen
 import org.koin.core.parameter.parametersOf
 
-class TagScreen(private val tagName: String) : Screen {
+class TagScreen(private val tag: Tag) : HomeScreen() {
 
     @Composable
-    override fun Content() {
-        val screenModel = koinScreenModel<TagScreenModel>(parameters = { parametersOf(tagName) })
-
+    override fun Header() {
+        val screenModel = koinScreenModel<TagScreenModel>(parameters = { parametersOf(tag) })
         val tagName = screenModel.tagName.collectAsState().value
-        StubWebScreen("https://dev.to/t/$tagName")
+
+        TagSearchCard(tagName)
     }
 }
 
@@ -32,7 +34,8 @@ fun StubWebScreen(path: String) {
         Text(
             "Screen in development. Available only web version",
             textAlign = TextAlign.Center,
-            modifier = Modifier.background(Color.Red).fillMaxWidth().align(Alignment.CenterHorizontally)
+            modifier = Modifier.background(Color.Red).fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
         )
         WebViewScreen(path)
     }
