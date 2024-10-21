@@ -65,7 +65,10 @@ class SearchScreen : Screen {
             }
         }
 
-        Column(verticalArrangement = Arrangement.Top, modifier = Modifier.fillMaxSize()) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            modifier = Modifier.fillMaxSize()
+        ) {
             Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
                 TextField(
                     modifier = Modifier.padding(8.dp),
@@ -94,12 +97,12 @@ class SearchScreen : Screen {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(searchState.size) { articleIndex ->
-                    if (articleIndex < searchState.size - 1) {
-                        GetSearchResult(searchState, articleIndex, stringProvider)
-                    } else if (isLoading) {
-                        InfinityProgress()
-                    }
+                    GetSearchResult(searchState, articleIndex, stringProvider)
                 }
+            }
+            if (isLoading) {
+                // TODO check display progress when loading new items
+                InfinityProgress()
             }
         }
     }
@@ -128,6 +131,7 @@ fun GetSearchResult(
                 )
             },
         )
+
         is CommentSearchUi -> CommentSearchCard(item)
         is OrganizationSearchUi -> OrganizationSearchCard(item)
         is TagSearchUi -> TagSearchCard(item)

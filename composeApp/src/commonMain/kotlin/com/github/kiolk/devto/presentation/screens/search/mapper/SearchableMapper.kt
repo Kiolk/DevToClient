@@ -12,6 +12,7 @@ import com.github.kiolk.devto.presentation.screens.search.model.OrganizationSear
 import com.github.kiolk.devto.presentation.screens.search.model.SearchableUi
 import com.github.kiolk.devto.presentation.screens.search.model.TagSearchUi
 import com.github.kiolk.devto.presentation.screens.search.model.UserSearchUi
+import com.github.kiolk.devto.utils.colors.hexToColor
 import com.github.kiolk.devto.utils.localisation.StringProvider
 
 fun Searchable.mapToSearchableUi(stringProvider: StringProvider): SearchableUi {
@@ -33,7 +34,12 @@ fun Organization.mapToOrganizationUi(): OrganizationSearchUi {
 }
 
 fun Tag.mapToTagUi(): TagSearchUi {
-    return TagSearchUi(this)
+    return TagSearchUi(
+        this,
+        backgroundColor = hexToColor(this.bgColorHex).copy(alpha = 0.2f),
+        badgeColor = hexToColor(this.bgColorHex),
+        summary = this.shortSummary.ifEmpty { null }
+    )
 }
 
 fun User.mapToUserUi(): UserSearchUi {
