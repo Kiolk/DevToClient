@@ -1,5 +1,6 @@
 package com.github.kiolk.devto.di
 
+import com.github.kiolk.devto.domain.models.Tag
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreenModel
 import com.github.kiolk.devto.presentation.screens.home.HomeScreenModel
 import com.github.kiolk.devto.presentation.screens.search.SearchScreenModel
@@ -9,7 +10,7 @@ import org.koin.dsl.module
 
 val screenModelModule = module {
     factory<HomeScreenModel> { HomeScreenModel(get(), get(), get()) }
-    factory<TagScreenModel> { (tagName: String) -> TagScreenModel(tagName) }
+    factory<TagScreenModel> { (tag: Tag) -> TagScreenModel(tag, get(), get(), get()) }
     factory<UserScreenModel> { (userName: String) -> UserScreenModel(userName) }
     factory<ArticleScreenModel> { (articleId: String) ->
         ArticleScreenModel(

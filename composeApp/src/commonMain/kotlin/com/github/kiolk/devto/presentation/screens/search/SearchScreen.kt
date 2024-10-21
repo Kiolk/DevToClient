@@ -38,6 +38,7 @@ import com.github.kiolk.devto.presentation.screens.search.view.CommentSearchCard
 import com.github.kiolk.devto.presentation.screens.search.view.OrganizationSearchCard
 import com.github.kiolk.devto.presentation.screens.search.view.TagSearchCard
 import com.github.kiolk.devto.presentation.screens.search.view.UserSearchCard
+import com.github.kiolk.devto.presentation.screens.tag.TagScreen
 import com.github.kiolk.devto.presentation.views.InfinityProgress
 import com.github.kiolk.devto.presentation.views.ProgressSize
 import com.github.kiolk.devto.presentation.views.article.ArticleItem
@@ -134,7 +135,7 @@ fun GetSearchResult(
 
         is CommentSearchUi -> CommentSearchCard(item)
         is OrganizationSearchUi -> OrganizationSearchCard(item)
-        is TagSearchUi -> TagSearchCard(item)
+        is TagSearchUi -> TagSearchCard(item, onTagChecked = { navigator.push(TagScreen(it.tag)) })
         is UserSearchUi -> UserSearchCard(item)
     }
 }
