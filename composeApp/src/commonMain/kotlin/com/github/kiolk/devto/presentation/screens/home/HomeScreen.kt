@@ -55,7 +55,6 @@ open class HomeScreen : Screen {
         }
 
         Column(verticalArrangement = Arrangement.Top, modifier = Modifier.fillMaxSize()) {
-            Header()
             FilterBar(sortingType, { screenModel.onSortClick(it) }, stringProvider)
 
             if (articlesState.isEmpty()) {
@@ -94,10 +93,6 @@ open class HomeScreen : Screen {
                 }
             }
         }
-    }
-
-    @Composable
-    open fun Header() {
     }
 }
 

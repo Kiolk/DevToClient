@@ -105,6 +105,7 @@ fun GetArticlesParams.toGetArticlesParamsApi(): GetArticlesParamsApi {
         collectionId = collectionId,
         sortingType = sortingType,
         type = type,
+        tagName = tagName,
     )
 }
 

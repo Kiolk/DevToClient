@@ -14,5 +14,6 @@ data class GetArticlesParams(
     val top: Int? = null,
     val collectionId: Int? = null,
     val sortingType: SortingType = SortingType.Infinity,
-    val type: SearchType = SearchType.Article
+    val type: SearchType = SearchType.Article,
+    val tagName: String? = null,
 )
