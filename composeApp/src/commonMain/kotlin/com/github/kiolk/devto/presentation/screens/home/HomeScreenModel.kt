@@ -3,6 +3,7 @@ package com.github.kiolk.devto.presentation.screens.home
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.github.kiolk.devto.domain.models.Article
+import com.github.kiolk.devto.domain.models.SearchType
 import com.github.kiolk.devto.domain.usecases.GetArticleUseCase
 import com.github.kiolk.devto.domain.usecases.ToggleReactionUseCase
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
@@ -16,11 +17,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class HomeScreenModel(
+open class HomeScreenModel(
     private val getArticlesUseCase: GetArticleUseCase,
     private val stringProvider: StringProvider,
     private val toggleReactionUseCase: ToggleReactionUseCase
 ) : ScreenModel {
+
+    open val type: SearchType = SearchType.Article
 
     private val _articlesState: MutableStateFlow<List<ArticleUi>> =
         MutableStateFlow(emptyList())
@@ -47,7 +50,8 @@ class HomeScreenModel(
         return getArticlesUseCase(
             GetArticlesParams(
                 page = page,
-                sortingType = _sortingType.value.mapToSortingType()
+                sortingType = _sortingType.value.mapToSortingType(),
+                type = type,
             )
         )
     }
@@ -60,8 +64,12 @@ class HomeScreenModel(
     fun onBookmarkClick(article: ArticleUi) {
         screenModelScope.launch {
             //TODO add logic for storing bookmarks
-            val reaction = toggleReactionUseCase(articleId = article.article.id, reactionCategory = "readinglist", reactionOn = "Article")
-            val index = _articlesState.value.indexOfFirst { it.article.id == article.article.id }
+            toggleReactionUseCase(
+                articleId = article.article.id,
+                reactionCategory = "readinglist",
+                reactionOn = "Article"
+            )
+//            val index = _articlesState.value.indexOfFirst { it.article.id == article.article.id }
             val new = mutableListOf<ArticleUi>()
             articlesState.value.forEach {
                 if (it.article.id == article.article.id) {

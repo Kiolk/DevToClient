@@ -98,9 +98,9 @@ fun ArticleItem(
                     }
                     ArticleTitle(articleUi) { onArticleClick(it, null, false) }
                     ArticleTags(articleUi.tags, articleUi.article.flareTag, {
-                        navigator.push(
-                            TagScreen(it.name)
-                        )
+//                        navigator.push(
+//                            TagScreen(it.toTa)
+//                        )
                     })
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         ReactionsButton(articleUi, stringProvider) {
