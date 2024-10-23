@@ -54,6 +54,7 @@ val networkModule = module {
                 header(ACCEPT_HEADER, ACCEPT_HEADER_VALUE)
             }
             install(Logging) {
+                logger = get()
                 level = LogLevel.ALL
             }
 

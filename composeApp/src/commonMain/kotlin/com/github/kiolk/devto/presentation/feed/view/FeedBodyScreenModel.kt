@@ -5,15 +5,17 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import com.github.kiolk.devto.domain.models.Article
 import com.github.kiolk.devto.domain.models.Comment
 import com.github.kiolk.devto.domain.models.Organization
+import com.github.kiolk.devto.domain.models.SearchParameters
 import com.github.kiolk.devto.domain.models.SearchType
 import com.github.kiolk.devto.domain.models.Searchable
 import com.github.kiolk.devto.domain.models.Tag
+import com.github.kiolk.devto.domain.models.TagSearchParameters
 import com.github.kiolk.devto.domain.models.User
-import com.github.kiolk.devto.domain.usecases.GetArticleUseCase
+import com.github.kiolk.devto.domain.usecases.SearchUseCase
 import com.github.kiolk.devto.domain.usecases.ToggleReactionUseCase
-import com.github.kiolk.devto.presentation.models.GetArticlesParams
-import com.github.kiolk.devto.presentation.screens.home.mappers.mapToArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
+import com.github.kiolk.devto.presentation.screens.search.mapper.mapToSearchableUi
+import com.github.kiolk.devto.presentation.screens.search.model.SearchableUi
 import com.github.kiolk.devto.presentation.screens.search.model.SortingTypeUi
 import com.github.kiolk.devto.utils.localisation.StringProvider
 import com.github.kiolk.devto.utils.pagination.Pagination
@@ -24,7 +26,7 @@ import kotlinx.coroutines.launch
 
 open class FeedBodyScreenModel(
     private val searchable: Searchable? = null,
-    private val getArticlesUseCase: GetArticleUseCase,
+    private val searchUseCase: SearchUseCase,
     private val stringProvider: StringProvider,
     private val toggleReactionUseCase: ToggleReactionUseCase,
 ) : ScreenModel {
@@ -41,7 +43,7 @@ open class FeedBodyScreenModel(
             }
         }
 
-    private val _feedState: MutableStateFlow<List<ArticleUi>> =
+    private val _feedState: MutableStateFlow<List<SearchableUi>> =
         MutableStateFlow(emptyList())
     val feedState = _feedState.asStateFlow()
 
@@ -52,7 +54,7 @@ open class FeedBodyScreenModel(
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
-    private val pagination: Pagination<Article> = Pagination(
+    private val pagination: Pagination<Searchable> = Pagination(
         source = ::loadNext,
         onNewPortionLoaded = ::onNewPortionLoaded,
         scope = screenModelScope,
@@ -62,20 +64,30 @@ open class FeedBodyScreenModel(
         pagination.startLoading()
     }
 
-    private suspend fun loadNext(page: Int): List<Article> {
-        return getArticlesUseCase(
-            GetArticlesParams(
+    private suspend fun loadNext(page: Int): List<Searchable> {
+        val searchParameters = when (searchable) {
+            is Article -> TODO()
+            is Comment -> TODO()
+            is Organization -> TODO()
+            is Tag -> TagSearchParameters(
+                searchable.name,
+                listOf(searchable.name),
+                sortingType = _sortingType.value.mapToSortingType(),
+            )
+
+            is User -> TODO()
+            null -> SearchParameters(
                 page = page,
                 sortingType = _sortingType.value.mapToSortingType(),
-                type = SearchType.Article,
-                tagName = if (searchable is Tag) searchable.name else null
             )
-        )
+        }
+
+        return searchUseCase(searchParameters)
     }
 
-    private fun onNewPortionLoaded(newPortion: List<Article>) {
+    private fun onNewPortionLoaded(newPortion: List<Searchable>) {
         _isLoading.value = false
-        _feedState.value += newPortion.map { it.mapToArticleUi(stringProvider) }
+        _feedState.value += newPortion.map { it.mapToSearchableUi(stringProvider) }
     }
 
     fun onBookmarkClick(article: ArticleUi) {
@@ -89,10 +101,12 @@ open class FeedBodyScreenModel(
 //            val index = _articlesState.value.indexOfFirst { it.article.id == article.article.id }
             val new = mutableListOf<ArticleUi>()
             feedState.value.forEach {
-                if (it.article.id == article.article.id) {
-                    new.add(it.copy(isBookmarked = !article.isBookmarked))
-                } else {
-                    new.add(it)
+                if (it is ArticleUi) {
+                    if (it.article.id == article.article.id) {
+                        new.add(it.copy(isBookmarked = !article.isBookmarked))
+                    } else {
+                        new.add(it)
+                    }
                 }
             }
             _feedState.value = new
