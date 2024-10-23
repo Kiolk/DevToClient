@@ -8,6 +8,7 @@ data class GetArticlesParamsApi(
     val tag: String? = null,
     val tags: String? = null,
     val type: SearchType? = null,
+    val tagName: String? = null,
     val tagsExclude: String? = null,
     val username: String? = null,
     val state: String? = null,

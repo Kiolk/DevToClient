@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
-import com.github.kiolk.devto.presentation.screens.tag.StubWebScreen
+import com.github.kiolk.devto.presentation.feed.StubWebScreen
 import org.koin.core.parameter.parametersOf
 
 class UserScreen(private val userName: String) : Screen {
