@@ -14,8 +14,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.github.kiolk.devto.presentation.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
 import com.github.kiolk.devto.presentation.screens.home.FilterBar
+import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
+import com.github.kiolk.devto.presentation.screens.search.model.CommentSearchUi
+import com.github.kiolk.devto.presentation.screens.search.model.OrganizationSearchUi
+import com.github.kiolk.devto.presentation.screens.search.model.SearchableUi
+import com.github.kiolk.devto.presentation.screens.search.model.TagSearchUi
+import com.github.kiolk.devto.presentation.screens.search.model.UserSearchUi
+import com.github.kiolk.devto.presentation.screens.search.view.CommentSearchCard
+import com.github.kiolk.devto.presentation.screens.search.view.OrganizationSearchCard
+import com.github.kiolk.devto.presentation.screens.search.view.TagSearchCard
+import com.github.kiolk.devto.presentation.screens.search.view.UserSearchCard
 import com.github.kiolk.devto.presentation.views.InfinityProgress
 import com.github.kiolk.devto.presentation.views.ProgressSize
 import com.github.kiolk.devto.presentation.views.article.ArticleItem
@@ -57,25 +68,42 @@ fun FeedBody(screenModel: FeedBodyScreenModel) {
         ) {
             items(articlesState.size) { articleIndex ->
                 if (articleIndex < articlesState.size - 1) {
-                    ArticleItem(
-                        articlesState[articleIndex],
-                        stringProvider = stringProvider,
-                        onArticleClick = { article, commentId, showComments ->
-                            navigator.push(
-                                ArticleScreen(
-                                    article.article.user.username,
-                                    article.article.slug,
-                                    article.article.id.toString(),
-                                    commentId,
-                                    showComments
-                                )
-                            )
-                        }
-                    )
+                    SearchableItem(articlesState, articleIndex, stringProvider)
                 } else if (isLoading) {
                     InfinityProgress()
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun SearchableItem(
+    searchState: List<SearchableUi>,
+    articleIndex: Int,
+    stringProvider: StringProvider
+) {
+    val navigator = LocalNavigator.currentOrThrow
+    when (val item = searchState[articleIndex]) {
+        is ArticleUi -> ArticleItem(
+            item,
+            stringProvider = stringProvider,
+            onArticleClick = { article, commentId, showComments ->
+                navigator.push(
+                    ArticleScreen(
+                        article.article.user.username,
+                        article.article.slug,
+                        article.article.id.toString(),
+                        commentId,
+                        showComments,
+                    )
+                )
+            },
+        )
+
+        is CommentSearchUi -> CommentSearchCard(item)
+        is OrganizationSearchUi -> OrganizationSearchCard(item)
+        is TagSearchUi -> TagSearchCard(item, onTagChecked = { navigator.push(FeedScreen(it.tag)) })
+        is UserSearchUi -> UserSearchCard(item)
     }
 }

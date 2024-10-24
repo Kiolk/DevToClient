@@ -13,7 +13,7 @@ import org.koin.dsl.module
 val screenModelModule = module {
     factory<HomeScreenModel> { HomeScreenModel(get(), get(), get()) }
     factory<FeedBodyScreenModel> { (tag: Searchable) -> FeedBodyScreenModel(tag, get(), get(), get()) }
-    factory<FeedScreenModel> { (tag: Searchable) -> FeedScreenModel(tag, get(), get(), get()) }
+    factory<FeedScreenModel> { (tag: Searchable) -> FeedScreenModel(get(), get(), get()) }
     factory<HeaderModel> { (tag: Searchable) -> HeaderModel(tag) }
     factory<UserScreenModel> { (userName: String) -> UserScreenModel(userName) }
     factory<ArticleScreenModel> { (articleId: String) ->

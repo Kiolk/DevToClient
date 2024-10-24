@@ -8,9 +8,12 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.React
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchResultApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchableApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SortingType
 import com.github.kiolk.devto.domain.models.SearchParameters
+import com.github.kiolk.devto.domain.models.SortBy
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
@@ -99,12 +102,43 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
             parameter("page", searchParameters.page)
             parameter("class_name", searchParameters.searchType.value)
             parameter("search_fields", searchParameters.searchField)
+            searchParameters.tag?.let {
+                parameter("tag", it)
+            }
+            searchParameters.tagNames?.let {
+                parameter("tag_names[]", it.joinToString(","))
+            }
             searchParameters.sort?.let { sortType ->
-                parameter("sort_by", "published_at")
                 parameter("sort_direction", sortType.value)
             }
+            getSortingParams(this, searchParameters.sortingType)
         }.body()
         return result.result
+    }
+
+    private fun getSortingParams(httpRequestBuilder: HttpRequestBuilder, sortingType: SortingType) {
+        with(httpRequestBuilder) {
+            when (sortingType) {
+                SortingType.Infinity -> {
+                    parameter("sort_by", SortBy.PUBLIC_REACTION_COUNT.value)
+                    // TODO implement logic for find date in past
+                }
+
+                SortingType.Latest -> parameter("sort_by", SortBy.PUBLISHED_AT.value)
+                SortingType.Month -> {
+                    parameter("sort_by", SortBy.PUBLIC_REACTION_COUNT.value)
+                }
+
+                SortingType.Relevant -> parameter("sort_by", SortBy.HOTNESS_SCORE.value)
+                SortingType.Week -> {
+                    parameter("sort_by", SortBy.PUBLIC_REACTION_COUNT.value)
+                }
+
+                SortingType.Year -> {
+                    parameter("sort_by", SortBy.PUBLIC_REACTION_COUNT.value)
+                }
+            }
+        }
     }
 
     companion object {
