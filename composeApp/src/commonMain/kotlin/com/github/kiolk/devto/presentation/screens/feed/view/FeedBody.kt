@@ -1,4 +1,4 @@
-package com.github.kiolk.devto.presentation.feed.view
+package com.github.kiolk.devto.presentation.screens.feed.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,8 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.github.kiolk.devto.presentation.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
+import com.github.kiolk.devto.presentation.screens.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.home.FilterBar
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.search.model.CommentSearchUi

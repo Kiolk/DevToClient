@@ -25,8 +25,8 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.github.kiolk.devto.presentation.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
+import com.github.kiolk.devto.presentation.screens.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.search.model.CommentSearchUi
 import com.github.kiolk.devto.presentation.screens.search.model.OrganizationSearchUi
