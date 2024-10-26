@@ -68,6 +68,9 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         val result: SearchResultApi = httpClient.get(SEARCH_ENDPOINT) {
             parameter(PER_PAGE_PARAM, searchParameters.perPage)
             parameter(PAGE_PARAM, searchParameters.page)
+            searchParameters.userId?.let {
+                parameter(USER_ID_PARAM, it)
+            }
             parameter(CLASS_NAME_PARAM, searchParameters.searchType.value)
             parameter(SEARCH_FIELD_PARAM, searchParameters.searchField)
             searchParameters.tag?.let {
@@ -108,5 +111,6 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         const val REACTABLE_ID_PARAM = "reactable_id"
         const val REACTABLE_TYPE_PARAM = "reactable_type"
         const val ARTICLE_ID_PARAM = "a_id"
+        const val USER_ID_PARAM = "user_id"
     }
 }

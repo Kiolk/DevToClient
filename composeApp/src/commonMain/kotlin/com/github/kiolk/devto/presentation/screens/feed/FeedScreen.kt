@@ -1,4 +1,4 @@
-package com.github.kiolk.devto.presentation.feed
+package com.github.kiolk.devto.presentation.screens.feed
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -12,10 +12,10 @@ import androidx.compose.ui.text.style.TextAlign
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import com.github.kiolk.devto.domain.models.Searchable
-import com.github.kiolk.devto.presentation.feed.view.FeedBody
-import com.github.kiolk.devto.presentation.feed.view.FeedBodyScreenModel
-import com.github.kiolk.devto.presentation.feed.view.Header
-import com.github.kiolk.devto.presentation.feed.view.HeaderModel
+import com.github.kiolk.devto.presentation.screens.feed.view.FeedBody
+import com.github.kiolk.devto.presentation.screens.feed.view.FeedBodyScreenModel
+import com.github.kiolk.devto.presentation.screens.feed.view.Header
+import com.github.kiolk.devto.presentation.screens.feed.view.HeaderScreenModel
 import com.github.kiolk.devto.presentation.screens.webView.WebViewScreen
 import org.koin.core.parameter.parametersOf
 
@@ -23,7 +23,7 @@ class FeedScreen(private val tag: Searchable) : Screen {
 
     @Composable
     override fun Content() {
-        val headerModel = koinScreenModel<HeaderModel>(parameters = { parametersOf(tag) })
+        val headerModel = koinScreenModel<HeaderScreenModel>(parameters = { parametersOf(tag) })
         val bodyModel = koinScreenModel<FeedBodyScreenModel>(parameters = { parametersOf(tag) })
 
         Column(modifier = Modifier.fillMaxWidth()) {

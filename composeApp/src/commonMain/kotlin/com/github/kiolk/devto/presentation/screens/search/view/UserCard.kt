@@ -16,8 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.github.kiolk.devto.presentation.screens.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.search.model.UserSearchUi
-import com.github.kiolk.devto.presentation.screens.user.UserScreen
 import com.github.kiolk.devto.presentation.views.article.UserNameWithOrganisation
 import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
 
@@ -35,7 +35,7 @@ fun UserSearchCard(user: UserSearchUi) {
                 UserOrganisationAvatar(
                     user.user,
                     organization = null,
-                    onUserClick = { navigator.push(UserScreen(it)) }
+                    onUserClick = { navigator.push(FeedScreen(user.user)) }
                 )
                 Column(
                     modifier = Modifier.padding(start = 2.dp),
@@ -46,7 +46,7 @@ fun UserSearchCard(user: UserSearchUi) {
                             UserNameWithOrganisation(
                                 user.user,
                                 organization = null,
-                                onUserClick = { navigator.push(UserScreen(it)) },
+                                onUserClick = { navigator.push(FeedScreen(user.user)) },
                             )
                             Text(user.user.username)
                         }

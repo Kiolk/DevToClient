@@ -1,4 +1,4 @@
-package com.github.kiolk.devto.presentation.feed
+package com.github.kiolk.devto.presentation.screens.feed
 
 import com.github.kiolk.devto.domain.models.SearchType
 import com.github.kiolk.devto.domain.usecases.GetArticleUseCase

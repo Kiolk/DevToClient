@@ -1,4 +1,4 @@
-package com.github.kiolk.devto.presentation.feed.view
+package com.github.kiolk.devto.presentation.screens.feed.view
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
@@ -11,6 +11,7 @@ import com.github.kiolk.devto.domain.models.Searchable
 import com.github.kiolk.devto.domain.models.Tag
 import com.github.kiolk.devto.domain.models.TagSearchParameters
 import com.github.kiolk.devto.domain.models.User
+import com.github.kiolk.devto.domain.models.UserSearchParameters
 import com.github.kiolk.devto.domain.usecases.SearchUseCase
 import com.github.kiolk.devto.domain.usecases.ToggleReactionUseCase
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
@@ -74,8 +75,10 @@ open class FeedBodyScreenModel(
                 listOf(searchable.name),
                 sortingType = _sortingType.value.mapToSortingType(),
             )
-
-            is User -> TODO()
+            is User -> UserSearchParameters(
+                userId = 922647,
+                sortingType = _sortingType.value.mapToSortingType(),
+            )
             null -> SearchParameters(
                 page = page,
                 sortingType = _sortingType.value.mapToSortingType(),
