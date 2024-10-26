@@ -9,7 +9,7 @@ import kotlin.time.toDuration
 
 private const val YEARS_AGO_FOR_INFINITY = 5
 
-fun SortingType.toSortBy(): String {
+fun SortingType?.toSortBy(): String? {
     return when (this) {
         SortingType.Infinity -> SortBy.PUBLIC_REACTION_COUNT.value
         SortingType.Latest -> SortBy.PUBLISHED_AT.value
@@ -17,10 +17,11 @@ fun SortingType.toSortBy(): String {
         SortingType.Relevant -> SortBy.HOTNESS_SCORE.value
         SortingType.Week -> SortBy.PUBLIC_REACTION_COUNT.value
         SortingType.Year -> SortBy.PUBLIC_REACTION_COUNT.value
+        else -> null
     }
 }
 
-fun SortingType.toTime(): Instant? {
+fun SortingType?.toTime(): Instant? {
     val currentInstant: Instant = Clock.System.now()
 
     return when (this) {

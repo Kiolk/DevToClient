@@ -10,7 +10,7 @@ open class SearchParameters(
     val perPage: Int = 60,
     open val userId: Int? = null,
     open val sort: SortDirection? = null,
-    open val sortingType: SortingType = SortingType.Infinity,
+    open val sortingType: SortingType? = null,
     open val tag: String? = null,
     open val tagNames: List<String>? = null,
 )

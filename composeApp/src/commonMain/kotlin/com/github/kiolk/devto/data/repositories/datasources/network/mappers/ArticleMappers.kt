@@ -67,7 +67,7 @@ fun SearchArticleApi.toArticle(): Article {
         coverImage = "",
         readingTimeMinutes = readingTime ?: 0,
         tagList = tagList.orEmpty(),
-        user = user?.toUser() ?: User(),
+        user = user?.toUser() ?: User(id = 0),
         organization = organization?.toOrganization(),
         flareTag = flareTag?.toFlareTag(),
         reactions = publicReactionCategories?.map { it.toPublicReactionCategory() }.orEmpty(),

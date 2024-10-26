@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 class UserScreenModel(userName: String) : ScreenModel {
 
-    private val _user = MutableStateFlow(User(name = "", username = userName))
+    private val _user = MutableStateFlow(User(name = "", id = 0, username = userName))
     val user: StateFlow<User> = _user
 
 }

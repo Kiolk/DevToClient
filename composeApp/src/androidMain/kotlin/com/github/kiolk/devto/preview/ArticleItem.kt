@@ -23,6 +23,7 @@ val fakeArticle = Article(
     1, "", "Test", "Description", Clock.System.now(),
     user = User(
         name = "User",
+        id = 0,
         username = "User name",
         twitterUsername = null,
         githubUsername = null,

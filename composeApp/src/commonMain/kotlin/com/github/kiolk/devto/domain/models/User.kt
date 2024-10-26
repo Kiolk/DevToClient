@@ -2,6 +2,7 @@ package com.github.kiolk.devto.domain.models
 
 data class User(
     val name: String = "",
+    val id: Int,
     val username: String = "",
     val twitterUsername: String? = null,
     val githubUsername: String? = null,

@@ -10,6 +10,7 @@ import com.github.kiolk.devto.presentation.screens.search.model.SearchSortTypeUi
 import com.github.kiolk.devto.presentation.screens.search.model.SearchTypeUi
 import com.github.kiolk.devto.presentation.screens.search.model.SearchableUi
 import com.github.kiolk.devto.presentation.screens.search.model.toSortType
+import com.github.kiolk.devto.presentation.screens.search.model.toSortingDirection
 import com.github.kiolk.devto.utils.localisation.StringProvider
 import com.github.kiolk.devto.utils.pagination.Pagination
 import kotlinx.coroutines.FlowPreview
@@ -65,7 +66,8 @@ class SearchScreenModel(
                     page = page,
                     searchField = _searchText.value,
                     searchType = _searchType.value.mapToSearchType(),
-                    sort = _sortingType.value.toSortType(),
+                    sort = _sortingType.value.toSortingDirection(),
+                    sortingType = _sortingType.value.toSortType(),
                 )
             )
         },

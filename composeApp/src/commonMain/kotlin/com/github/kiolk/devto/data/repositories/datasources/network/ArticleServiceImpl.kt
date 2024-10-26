@@ -84,7 +84,7 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
                 parameter(SORT_DIRECTION_PARAM, sortType.value)
             }
             parameter(SORT_BY_PARAM, searchParameters.sortingType.toSortBy())
-            searchParameters.sortingType.toTime()?.let {
+            searchParameters.sortingType?.toTime()?.let {
                 parameter(PUBLISHED_AT_PARAM, it)
             }
         }.body()

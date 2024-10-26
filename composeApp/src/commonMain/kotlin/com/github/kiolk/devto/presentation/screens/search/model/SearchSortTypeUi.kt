@@ -1,5 +1,6 @@
 package com.github.kiolk.devto.presentation.screens.search.model
 
+import com.github.kiolk.devto.data.repositories.datasources.network.models.SortingType
 import com.github.kiolk.devto.domain.models.SearchType
 import com.github.kiolk.devto.domain.models.SortDirection
 import com.github.kiolk.devto.utils.localisation.StringsKeys
@@ -42,10 +43,18 @@ sealed class SearchTypeUi(override val key: String) : SortTypeUi(key) {
 
 sealed class SortTypeUi(open val key: String)
 
-fun SearchSortTypeUi.toSortType(): SortDirection? {
+fun SearchSortTypeUi.toSortingDirection(): SortDirection? {
     return when (this) {
         SearchSortTypeUi.MostRelevant -> null
         SearchSortTypeUi.Newest -> SortDirection.DESC
         SearchSortTypeUi.Oldest -> SortDirection.ASC
+    }
+}
+
+fun SearchSortTypeUi.toSortType(): SortingType? {
+    return when (this) {
+        SearchSortTypeUi.MostRelevant -> null
+        SearchSortTypeUi.Newest -> SortingType.Latest
+        SearchSortTypeUi.Oldest -> SortingType.Latest
     }
 }

@@ -8,6 +8,7 @@ import com.github.kiolk.devto.domain.models.User
 fun UserApi.toUser(): User {
     return User(
         name = name,
+        id = 0,
         username = username,
         twitterUsername = twitterUsername,
         githubUsername = githubUsername,
@@ -20,6 +21,7 @@ fun UserApi.toUser(): User {
 fun FeedUserApi.toUser(): User {
     return User(
         name = name,
+        id = 0,
         username = username,
         twitterUsername = null,
         githubUsername = null,
@@ -32,6 +34,7 @@ fun FeedUserApi.toUser(): User {
 fun SearchUserApi.toUser(): User {
     return User(
         name = user?.name.orEmpty(),
+        id = id ?: 0,
         username = this.title.orEmpty(),
         twitterUsername = user?.twitterUsername.orEmpty(),
         githubUsername = user?.githubUsername.orEmpty(),

@@ -75,10 +75,12 @@ open class FeedBodyScreenModel(
                 listOf(searchable.name),
                 sortingType = _sortingType.value.mapToSortingType(),
             )
+
             is User -> UserSearchParameters(
-                userId = 922647,
+                userId = searchable.id,
                 sortingType = _sortingType.value.mapToSortingType(),
             )
+
             null -> SearchParameters(
                 page = page,
                 sortingType = _sortingType.value.mapToSortingType(),
