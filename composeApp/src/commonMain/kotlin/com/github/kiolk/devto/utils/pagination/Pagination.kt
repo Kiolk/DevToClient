@@ -28,9 +28,8 @@ class Pagination<T>(
         }
 
         job = scope.launch(Dispatchers.IO) {
-            startPage += 1
-
             val newPortion = source(startPage)
+            startPage += 1
 
             launch(Dispatchers.Main) {
                 isReachedEnd = newPortion.isEmpty() || newPortion.size < portionSize
@@ -48,7 +47,9 @@ class Pagination<T>(
         startLoading()
     }
 
+    fun isFistPage(): Boolean = startPage - 1 == START_LOADING_POSITION
+
     companion object {
-        const val START_LOADING_POSITION = -1
+        const val START_LOADING_POSITION = 0
     }
 }

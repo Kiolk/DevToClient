@@ -1,5 +1,6 @@
 package com.github.kiolk.devto.presentation.screens.search
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,6 +44,7 @@ import com.github.kiolk.devto.presentation.views.InfinityProgress
 import com.github.kiolk.devto.presentation.views.ProgressSize
 import com.github.kiolk.devto.presentation.views.article.ArticleItem
 import com.github.kiolk.devto.presentation.views.chip.SortingChip
+import com.github.kiolk.devto.presentation.views.stub.EmptyResultIndicator
 import com.github.kiolk.devto.utils.localisation.StringProvider
 import org.koin.mp.KoinPlatform.getKoin
 
@@ -57,6 +59,7 @@ class SearchScreen : Screen {
         val isLoading by screenModel.isLoading.collectAsState()
         val sortingType by screenModel.sortingType.collectAsState()
         val searchType by screenModel.searchType.collectAsState()
+        val isEmptyResult by screenModel.isEmptyResult.collectAsState()
 
         val listState = rememberLazyListState()
 
@@ -65,7 +68,6 @@ class SearchScreen : Screen {
                 screenModel.loadMore()
             }
         }
-
         Column(
             verticalArrangement = Arrangement.Top,
             modifier = Modifier.fillMaxSize()
@@ -85,12 +87,23 @@ class SearchScreen : Screen {
                     screenModel.onSearchByTypeClicked(it)
                 }
             }
+
+            if (isEmptyResult) {
+                AnimatedVisibility(
+                    visible = isEmptyResult
+                ) {
+                    EmptyResultIndicator()
+                }
+                return
+            }
+
             if (searchState.isEmpty()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     InfinityProgress(size = ProgressSize.Large)
                 }
                 return
             }
+
             LazyColumn(
                 state = listState,
                 modifier = Modifier,
