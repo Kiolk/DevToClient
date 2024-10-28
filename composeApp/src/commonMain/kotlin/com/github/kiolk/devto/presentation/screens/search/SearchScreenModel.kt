@@ -42,6 +42,9 @@ class SearchScreenModel(
         MutableStateFlow(SearchTypeUi.Post)
     val searchType: StateFlow<SearchTypeUi> = _searchType
 
+    private val _isEmptyResult: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isEmptyResult: StateFlow<Boolean> = _isEmptyResult
+
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
@@ -51,6 +54,7 @@ class SearchScreenModel(
                 .debounce(DEBOUNCE_TIME)
                 .collect { text ->
                     if (text.isNotEmpty()) {
+                        _isEmptyResult.value = false
                         _searchState.value = emptyList()
                         pagination.restart()
                     }
@@ -78,6 +82,10 @@ class SearchScreenModel(
     )
 
     fun onNewPortionLoaded(data: List<Searchable>) {
+        if (pagination.isFirstPage()) {
+            _isEmptyResult.value = data.isEmpty()
+        }
+
         _isLoading.value = false
         _searchState.value += data.map { it.mapToSearchableUi(stringProvider = stringProvider) }
     }
@@ -99,6 +107,7 @@ class SearchScreenModel(
             state.value = pressedValue
             _searchState.value = emptyList()
             pagination.restart()
+            _isEmptyResult.value = false
         }
     }
 

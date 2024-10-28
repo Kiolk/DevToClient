@@ -28,9 +28,8 @@ class Pagination<T>(
         }
 
         job = scope.launch(Dispatchers.IO) {
-            startPage += 1
-
             val newPortion = source(startPage)
+            startPage += 1
 
             launch(Dispatchers.Main) {
                 isReachedEnd = newPortion.isEmpty() || newPortion.size < portionSize
@@ -48,7 +47,13 @@ class Pagination<T>(
         startLoading()
     }
 
+    /**
+     * Check if the current page is first in pagination sequence.
+     * @return true is current page is the first, otherwise false
+     */
+    fun isFirstPage(): Boolean = startPage == START_LOADING_POSITION + 1
+
     companion object {
-        const val START_LOADING_POSITION = -1
+        const val START_LOADING_POSITION = 0
     }
 }

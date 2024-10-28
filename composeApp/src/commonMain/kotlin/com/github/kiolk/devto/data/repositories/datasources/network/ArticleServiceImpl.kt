@@ -64,8 +64,9 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         return comments
     }
 
+    @Suppress("TooGenericExceptionCaught")
     override suspend fun search(searchParameters: SearchParameters): List<SearchableApi> {
-        val result: SearchResultApi = httpClient.get(SEARCH_ENDPOINT) {
+        val result = httpClient.get(SEARCH_ENDPOINT) {
             parameter(PER_PAGE_PARAM, searchParameters.perPage)
             parameter(PAGE_PARAM, searchParameters.page)
             searchParameters.userId?.let {
@@ -87,8 +88,14 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
             searchParameters.sortingType?.toTime()?.let {
                 parameter(PUBLISHED_AT_PARAM, it)
             }
-        }.body()
-        return result.result
+        }
+        return try {
+            result.body<SearchResultApi>().result
+        } catch (e: Exception) {
+            // TODO implement logic for handling exceptions https://github.com/Kiolk/DevToClient/issues/20
+            println("Error during search: ${e.message}")
+            emptyList()
+        }
     }
 
     private companion object {
