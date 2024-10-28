@@ -6,4 +6,5 @@ data class Organization(
     val slug: String,
     val profileImage: String,
     val profileImage90: String,
+    val summary: String,
 ) : Searchable

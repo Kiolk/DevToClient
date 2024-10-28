@@ -12,6 +12,7 @@ fun OrganizationApi.toOrganization(): Organization {
         slug = slug.orEmpty(),
         profileImage = profileImage.orEmpty(),
         profileImage90 = profileImage90.orEmpty(),
+        summary = summary.orEmpty(),
     )
 }
 
@@ -22,6 +23,7 @@ fun FeedOrganizationApi.toOrganization(): Organization {
         slug = slug,
         profileImage = profileImageUrl,
         profileImage90 = profileImage90,
+        summary = summary.orEmpty(),
     )
 }
 
@@ -30,6 +32,7 @@ fun SearchOrganizationApi.toOrganization(): Organization {
         name = name.orEmpty(),
         username = "",
         slug = slug.orEmpty(),
+        summary = summary.orEmpty(),
         profileImage = profileImage?.url.orEmpty(),
         profileImage90 = profileImage?.url.orEmpty(),
     )
