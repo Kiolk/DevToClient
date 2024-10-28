@@ -92,7 +92,7 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         return try {
             result.body<SearchResultApi>().result
         } catch (e: Exception) {
-            // TODO implement logic for handling exceptions
+            // TODO implement logic for handling exceptions https://github.com/Kiolk/DevToClient/issues/20
             println("Error during search: ${e.message}")
             emptyList()
         }

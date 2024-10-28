@@ -47,7 +47,11 @@ class Pagination<T>(
         startLoading()
     }
 
-    fun isFistPage(): Boolean = startPage - 1 == START_LOADING_POSITION
+    /**
+     * Check if the current page is first in pagination sequence.
+     * @return true is current page is the first, otherwise false
+     */
+    fun isFirstPage(): Boolean = startPage == START_LOADING_POSITION + 1
 
     companion object {
         const val START_LOADING_POSITION = 0

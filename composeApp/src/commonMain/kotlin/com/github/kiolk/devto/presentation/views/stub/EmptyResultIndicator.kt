@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.github.kiolk.devto.utils.res.FilesKeys.EMPTY
 import devto.composeapp.generated.resources.Res
 import io.github.alexzhirkevich.compottie.Compottie
 import io.github.alexzhirkevich.compottie.LottieCompositionSpec
@@ -23,7 +24,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 fun EmptyResultIndicator() {
     val composition by rememberLottieComposition {
         LottieCompositionSpec.JsonString(
-            Res.readBytes("files/empty.json").decodeToString()
+            Res.readBytes(EMPTY).decodeToString()
         )
     }
 

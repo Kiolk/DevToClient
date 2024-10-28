@@ -54,6 +54,7 @@ class SearchScreenModel(
                 .debounce(DEBOUNCE_TIME)
                 .collect { text ->
                     if (text.isNotEmpty()) {
+                        _isEmptyResult.value = false
                         _searchState.value = emptyList()
                         pagination.restart()
                     }
@@ -81,8 +82,8 @@ class SearchScreenModel(
     )
 
     fun onNewPortionLoaded(data: List<Searchable>) {
-        if (pagination.isFistPage() && data.isEmpty()) {
-            _isEmptyResult.value = true
+        if (pagination.isFirstPage()) {
+            _isEmptyResult.value = data.isEmpty()
         }
 
         _isLoading.value = false
@@ -111,7 +112,6 @@ class SearchScreenModel(
     }
 
     fun onSearchTextChanged(searchText: String) {
-        _isEmptyResult.value = false
         _searchText.value = searchText
     }
 
