@@ -31,4 +31,12 @@
         <item quantity="one">%d reaction</item>
         <item quantity="other">%d reactions</item>
     </plurals>
+    <string name="most_relevant">Most Relevant</string>
+    <string name="newest">Newest</string>
+    <string name="oldest">Oldest</string>
+    <string name="posts">Posts</string>
+    <string name="people">People</string>
+    <string name="organizations">Organizations</string>
+    <string name="tags">Tags</string>
+    <string name="search_comments">Comments</string>
 </resources>

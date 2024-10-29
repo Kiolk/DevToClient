@@ -88,8 +88,7 @@ private fun rememberWebViewDelegate(onUrlClicked: (String) -> Unit): WKNavigatio
 }
 
 @Composable
-actual fun WebContent(html: String, function: () -> Unit) {
+actual fun WebContent(html: String, maxLines: Int, function: () -> Unit) {
 //TODO Need implement logic for this issue https://github.com/Kiolk/DevToClient/issues/2
     Text(html)
 }
-

@@ -6,4 +6,4 @@ import androidx.compose.runtime.Composable
 expect fun WebViewScreen(url: String)
 
 @Composable
-expect fun WebContent(html: String, function: () -> Unit)
+expect fun WebContent(html: String, maxLines: Int = 3, function: () -> Unit)
