@@ -6,10 +6,17 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FeedOrganizationApi(
-    @SerialName("name") val name: String,
-    @SerialName("username") val username: String,
-    @SerialName("slug") val slug: String,
+    @SerialName("name")
+    val name: String,
+    @SerialName("username")
+    val username: String,
+    @SerialName("slug")
+    val slug: String,
     @Serializable(ImageSerializer::class)
-    @SerialName("profile_image_90") val profileImage90: String,
-    @SerialName("profile_image_url") val profileImageUrl: String,
+    @SerialName("profile_image_90")
+    val profileImage90: String,
+    @SerialName("profile_image_url")
+    val profileImageUrl: String,
+    @SerialName("summary")
+    val summary: String? = null,
 )

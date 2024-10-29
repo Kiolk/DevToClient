@@ -37,6 +37,7 @@ val fakeArticle = Article(
         slug = "We work for future",
         profileImage = "https://picsum.photos/200/300",
         profileImage90 = "https://picsum.photos/200/300",
+        summary = ""
     ),
     commentsCount = 0,
     publicReactionCount = 0,
