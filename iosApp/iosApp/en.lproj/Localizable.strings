@@ -15,3 +15,11 @@
 "top_month_sorting" = "Month";
 "top_year_sorting" = "Year";
 "top_infinity_sorting" = "Infinity";
+"most_relevant" = "Top";
+"newest" = "Latest";
+"oldest" = "Oldest";
+"posts" = "Posts";
+"people" = "People";
+"organizations" = "Organizations";
+"tags" = "Tags";
+"search_comments" = "Comments";

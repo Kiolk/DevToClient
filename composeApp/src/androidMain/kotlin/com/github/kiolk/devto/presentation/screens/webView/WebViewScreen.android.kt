@@ -28,12 +28,12 @@ actual fun WebViewScreen(url: String) {
 }
 
 @Composable
-actual fun WebContent(html: String, function: () -> Unit) {
+actual fun WebContent(html: String, maxLines: Int, function: () -> Unit) {
     //TODO Need modify to display correctly content for different themes https://github.com/Kiolk/DevToClient/issues/2
     MarkdownText(
         markdown = html,
         modifier = Modifier.padding(8.dp),
-        maxLines = 3,
+        maxLines = maxLines,
         style = TextStyle(
             color = MaterialTheme.colors.onSurface,
         ),

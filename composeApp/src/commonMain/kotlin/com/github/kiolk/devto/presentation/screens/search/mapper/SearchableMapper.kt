@@ -14,19 +14,23 @@ import com.github.kiolk.devto.presentation.screens.search.model.TagSearchUi
 import com.github.kiolk.devto.presentation.screens.search.model.UserSearchUi
 import com.github.kiolk.devto.utils.colors.hexToColor
 import com.github.kiolk.devto.utils.localisation.StringProvider
+import com.github.kiolk.devto.utils.toPublicationDateAgo
 
 fun Searchable.mapToSearchableUi(stringProvider: StringProvider): SearchableUi {
     return when (this) {
         is Article -> this.mapToArticleUi(stringProvider)
-        is Comment -> this.mapToCommentUi()
+        is Comment -> this.mapToCommentUi(stringProvider)
         is Organization -> this.mapToOrganizationUi()
         is Tag -> this.mapToTagUi()
         is User -> this.mapToUserUi()
     }
 }
 
-fun Comment.mapToCommentUi(): CommentSearchUi {
-    return CommentSearchUi(this)
+fun Comment.mapToCommentUi(stringProvider: StringProvider): CommentSearchUi {
+    return CommentSearchUi(
+        this,
+        publishedAt = this.publishedTimestamp.toPublicationDateAgo(stringProvider)
+    )
 }
 
 fun Organization.mapToOrganizationUi(): OrganizationSearchUi {
@@ -44,4 +48,13 @@ fun Tag.mapToTagUi(): TagSearchUi {
 
 fun User.mapToUserUi(): UserSearchUi {
     return UserSearchUi(this, userImage = this.profileImage ?: profileImage90)
+}
+
+fun Comment.mapToUser(): User {
+    return User(
+        id = this.userId ?: 0,
+        name = this.name,
+        username = this.username,
+        profileImage90 = this.profileImage90,
+    )
 }

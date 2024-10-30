@@ -1,6 +1,8 @@
 package com.github.kiolk.devto.presentation.screens.search
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -89,7 +91,9 @@ class SearchScreen : Screen {
             }
 
             AnimatedVisibility(
-                visible = isEmptyResult
+                visible = isEmptyResult,
+                enter = fadeIn(),
+                exit = fadeOut()
             ) {
                 EmptyResultIndicator()
             }
@@ -142,7 +146,14 @@ fun GetSearchResult(
             },
         )
 
-        is CommentSearchUi -> CommentSearchCard(item)
+        is CommentSearchUi -> CommentSearchCard(
+            item,
+            onCommentClick = {},
+            onUserClick = {
+                navigator.push(FeedScreen(it))
+            }
+        )
+
         is OrganizationSearchUi -> OrganizationSearchCard(item)
         is TagSearchUi -> TagSearchCard(
             item,
@@ -151,7 +162,9 @@ fun GetSearchResult(
             }
         )
 
-        is UserSearchUi -> UserSearchCard(item)
+        is UserSearchUi -> UserSearchCard(item, onUserClick = {
+            navigator.push(FeedScreen(it))
+        })
     }
 }
 
