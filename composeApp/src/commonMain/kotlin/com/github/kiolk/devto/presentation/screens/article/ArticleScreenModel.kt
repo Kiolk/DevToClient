@@ -3,6 +3,7 @@ package com.github.kiolk.devto.presentation.screens.article
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.github.kiolk.devto.domain.usecases.GetArticleByIdUseCase
+import com.github.kiolk.devto.domain.usecases.GetArticleByTitleUseCase
 import com.github.kiolk.devto.presentation.screens.home.mappers.mapToArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.utils.localisation.StringProvider
@@ -10,11 +11,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+sealed class OpenArticleParams {
+    class OpenById(val articleId: Int) : OpenArticleParams()
+    class OpenByTitle(val title: String, val commentId: String? = null) : OpenArticleParams()
+}
+
 class ArticleScreenModel(
-    private val articleId: String,
-    private val commentId: String = "",
-    private val seeComments: Boolean = false,
+    private val openArticleParams: OpenArticleParams,
     private val getArticleByIdUseCase: GetArticleByIdUseCase,
+    private val getArticleByTitleUseCase: GetArticleByTitleUseCase,
     private val stringProvider: StringProvider,
 ) : ScreenModel {
 
@@ -27,8 +32,20 @@ class ArticleScreenModel(
 
     private fun loadArticle() {
         screenModelScope.launch {
-            val article: ArticleUi = getArticleByIdUseCase(articleId = articleId.toInt()).mapToArticleUi(stringProvider)
-            println(article.toString())
+            val article: ArticleUi = when (openArticleParams) {
+                is OpenArticleParams.OpenById -> {
+                    getArticleByIdUseCase(articleId = openArticleParams.articleId).mapToArticleUi(
+                        stringProvider
+                    )
+                }
+
+                is OpenArticleParams.OpenByTitle -> {
+                    getArticleByTitleUseCase(title = openArticleParams.title).mapToArticleUi(
+                        stringProvider
+                    )
+                }
+            }
+            _articleUi.value = article
         }
     }
 }

@@ -29,6 +29,7 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
+import com.github.kiolk.devto.presentation.screens.article.OpenArticleParams
 import com.github.kiolk.devto.presentation.screens.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.search.model.CommentSearchUi
@@ -136,11 +137,9 @@ fun GetSearchResult(
             onArticleClick = { article, commentId, showComments ->
                 navigator.push(
                     ArticleScreen(
-                        article.article.user.username,
-                        article.article.slug,
-                        article.article.id.toString(),
-                        commentId,
-                        showComments,
+                        OpenArticleParams.OpenById(
+                            article.article.id
+                        )
                     )
                 )
             },
@@ -148,7 +147,16 @@ fun GetSearchResult(
 
         is CommentSearchUi -> CommentSearchCard(
             item,
-            onCommentClick = {},
+            onCommentClick = {
+                navigator.push(
+                    ArticleScreen(
+                        OpenArticleParams.OpenByTitle(
+                            it.title.orEmpty(),
+                            it.commentId,
+                        )
+                    )
+                )
+            },
             onUserClick = {
                 navigator.push(FeedScreen(it))
             }

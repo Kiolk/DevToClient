@@ -7,59 +7,59 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SingleArticleApi(
     @SerialName("type_of")
-    val typeOf: String,
+    val typeOf: String? = null,
     @SerialName("id")
     val id: Int,
     @SerialName("title")
-    val title: String,
+    val title: String? = null,
     @SerialName("description")
-    val description: String,
+    val description: String? = null,
     @SerialName("readable_publish_date")
-    val readablePublishDate: String,
+    val readablePublishDate: String? = null,
     @SerialName("slug")
-    val slug: String,
+    val slug: String? = null,
     @SerialName("path")
-    val path: String,
+    val path: String? = null,
     @SerialName("url")
-    val url: String,
+    val url: String? = null,
     @SerialName("comments_count")
-    val commentsCount: Int,
+    val commentsCount: Int? = null,
     @SerialName("public_reactions_count")
-    val publicReactionsCount: Int,
+    val publicReactionsCount: Int? = null,
     @SerialName("collection_id")
     val collectionId: Int? = null,
     @SerialName("published_timestamp")
-    val publishedTimestamp: Instant,
+    val publishedTimestamp: Instant? = null,
     @SerialName("positive_reactions_count")
-    val positiveReactionsCount: Int,
+    val positiveReactionsCount: Int? = null,
     @SerialName("cover_image")
-    val coverImage: String,
+    val coverImage: String? = null,
     @SerialName("social_image")
-    val socialImage: String,
+    val socialImage: String? = null,
     @SerialName("canonical_url")
-    val canonicalUrl: String,
+    val canonicalUrl: String? = null,
     @SerialName("created_at")
-    val createdAt: Instant,
+    val createdAt: Instant? = null,
     @SerialName("edited_at")
     val editedAt: Instant? = null,
     @SerialName("crossposted_at")
     val crosspostedAt: Instant? = null,
     @SerialName("published_at")
-    val publishedAt: Instant,
+    val publishedAt: Instant? = null,
     @SerialName("last_comment_at")
-    val lastCommentAt: Instant,
+    val lastCommentAt: Instant? = null,
     @SerialName("reading_time_minutes")
-    val readingTimeMinutes: Int,
+    val readingTimeMinutes: Int? = null,
     @SerialName("tag_list")
-    val tagList: String,
+    val tagList: String? = null,
     @SerialName("tags")
-    val tags: List<String>,
+    val tags: List<String>? = null,
     @SerialName("body_html")
-    val bodyHtml: String,
+    val bodyHtml: String? = null,
     @SerialName("body_markdown")
-    val bodyMarkdown: String,
+    val bodyMarkdown: String? = null,
     @SerialName("user")
-    val user: UserApi,
+    val user: UserApi? = null,
     @SerialName("flare_tag")
     val flareTag: FlareTagApi? = null,
     @SerialName("organization")

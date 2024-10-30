@@ -12,6 +12,7 @@ import com.github.kiolk.devto.domain.models.User
 import com.github.kiolk.devto.presentation.models.FlareTag
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 import com.github.kiolk.devto.presentation.models.PublicReactionCategory
+import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
 fun ArticleApi.toArticle(): Article {
@@ -112,17 +113,17 @@ fun GetArticlesParams.toGetArticlesParamsApi(): GetArticlesParamsApi {
 fun SingleArticleApi.mapToArticle(): Article {
     return Article(
         id = id,
-        slug = slug,
-        title = title,
-        description = description,
-        publishedAt = publishedAt,
-        commentsCount = commentsCount,
-        publicReactionCount = publicReactionsCount,
-        positiveReactionCount = positiveReactionsCount,
+        slug = slug.orEmpty(),
+        title = title.orEmpty(),
+        description = description.orEmpty(),
+        publishedAt = publishedAt ?: Clock.System.now(),
+        commentsCount = commentsCount ?: 0,
+        publicReactionCount = publicReactionsCount ?: 0,
+        positiveReactionCount = positiveReactionsCount ?: 0,
         coverImage = coverImage,
-        readingTimeMinutes = readingTimeMinutes,
-        tagList = tagList.split(",").map { it.trim() },
-        user = user.toUser(),
+        readingTimeMinutes = readingTimeMinutes ?: 0,
+        tagList = tagList?.split(",")?.map { it.trim() }.orEmpty(),
+        user = user?.toUser() ?: User(id = 0),
         organization = organization?.toOrganization(),
         flareTag = flareTag?.toFlareTag(),
     )
