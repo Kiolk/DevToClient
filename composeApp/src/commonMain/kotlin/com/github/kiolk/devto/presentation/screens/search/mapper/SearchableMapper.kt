@@ -29,7 +29,8 @@ fun Searchable.mapToSearchableUi(stringProvider: StringProvider): SearchableUi {
 fun Comment.mapToCommentUi(stringProvider: StringProvider): CommentSearchUi {
     return CommentSearchUi(
         this,
-        publishedAt = this.publishedTimestamp.toPublicationDateAgo(stringProvider)
+        publishedAt = this.publishedTimestamp.toPublicationDateAgo(stringProvider),
+        articleTitle = this.title.orEmpty()
     )
 }
 
