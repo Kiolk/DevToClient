@@ -32,6 +32,8 @@ import com.github.kiolk.devto.presentation.screens.search.mapper.mapToUser
 import com.github.kiolk.devto.presentation.screens.search.model.CommentSearchUi
 import com.github.kiolk.devto.presentation.screens.webView.WebContent
 
+private const val MAX_COMMENT_LENGTH = 100
+
 @Composable
 fun CommentSearchCard(
     comment: CommentSearchUi,
@@ -69,7 +71,6 @@ fun CommentSearchCard(
             }
             Box(
                 modifier = Modifier
-                    .clickable { onCommentClick(comment.comment) }
                     .background(
                         shape = RoundedCornerShape(4.dp),
                         color = MaterialTheme.colors.surface
@@ -95,7 +96,7 @@ fun CommentSearchCard(
                     }
                     WebContent(
                         comment.comment.text,
-                        maxLines = 100,
+                        maxLines = MAX_COMMENT_LENGTH,
                     ) { onCommentClick(comment.comment) }
                 }
             }
