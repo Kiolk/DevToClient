@@ -30,6 +30,8 @@ fun ArticleApi.toArticle(): Article {
         user = user.toUser(),
         organization = organization?.toOrganization(),
         flareTag = flareTag?.toFlareTag(),
+        bodyHtml = bodyHtml.orEmpty(),
+        bodyMarkdown = bodyMarkdown.orEmpty(),
     )
 }
 
@@ -125,5 +127,7 @@ fun SingleArticleApi.mapToArticle(): Article {
         user = user?.toUser() ?: User(id = 0),
         organization = organization?.toOrganization(),
         flareTag = flareTag?.toFlareTag(),
+        bodyHtml = bodyHtml.orEmpty(),
+        bodyMarkdown = bodyMarkdown.orEmpty(),
     )
 }

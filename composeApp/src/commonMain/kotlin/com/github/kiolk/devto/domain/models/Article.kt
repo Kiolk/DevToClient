@@ -21,5 +21,7 @@ data class Article(
     val flareTag: FlareTag? = null,
     val reactions: List<PublicReactionCategory> = emptyList(),
     val topComments: List<Comment> = emptyList(),
-    val comments: List<Comment> = emptyList()
+    val comments: List<Comment> = emptyList(),
+    val bodyHtml: String = "",
+    val bodyMarkdown: String = "",
 ) : Searchable
