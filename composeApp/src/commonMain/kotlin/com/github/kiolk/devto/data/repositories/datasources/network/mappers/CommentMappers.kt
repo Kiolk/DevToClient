@@ -29,6 +29,7 @@ fun SearchCommentApi.toComment(): Comment {
         name = user?.name.orEmpty(),
         profileImage90 = user?.profileImage90.orEmpty(),
         text = bodyText.orEmpty(),
+        title = title,
     )
 }
 

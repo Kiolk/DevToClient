@@ -7,11 +7,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -23,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -77,18 +76,22 @@ fun CommentSearchCard(
                     ).fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(8.dp)) {
-                    Text(comment.articleTitle, maxLines = 1)
-                    Row(
-                        modifier = Modifier
-                    ) {
-                        Text(
-                            comment.comment.username,
-                            style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.Bold),
-                            modifier = Modifier.clickable { onUserClick(comment.comment.mapToUser()) }
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        comment.articleTitle,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.Bold),
+                    )
+                    Text(
+                        "@" + comment.comment.username,
+                        style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.Bold),
+                        modifier = Modifier.clickable { onUserClick(comment.comment.mapToUser()) }
+                    )
+                    if (comment.publishedAt.isNotEmpty()) {
                         Text(
                             text = comment.publishedAt,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                             style = MaterialTheme.typography.overline.copy(
                                 fontWeight = FontWeight.Bold,
                             )

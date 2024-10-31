@@ -12,4 +12,5 @@ data class Comment(
     val name: String,
     val profileImage90: String,
     val children: List<Comment> = emptyList(),
+    val title: String? = null,
 ) : Searchable

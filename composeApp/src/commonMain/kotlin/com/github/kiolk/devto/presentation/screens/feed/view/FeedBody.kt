@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
+import com.github.kiolk.devto.presentation.screens.article.OpenArticleParams
 import com.github.kiolk.devto.presentation.screens.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.home.FilterBar
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
@@ -91,11 +92,9 @@ private fun SearchableItem(
             onArticleClick = { article, commentId, showComments ->
                 navigator.push(
                     ArticleScreen(
-                        article.article.user.username,
-                        article.article.slug,
-                        article.article.id.toString(),
-                        commentId,
-                        showComments,
+                        OpenArticleParams.OpenById(
+                            article.article.id,
+                        )
                     )
                 )
             },

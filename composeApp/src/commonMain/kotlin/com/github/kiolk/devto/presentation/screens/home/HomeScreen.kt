@@ -25,6 +25,7 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
+import com.github.kiolk.devto.presentation.screens.article.OpenArticleParams
 import com.github.kiolk.devto.presentation.screens.search.model.SortingTypeUi
 import com.github.kiolk.devto.presentation.views.InfinityProgress
 import com.github.kiolk.devto.presentation.views.ProgressSize
@@ -78,11 +79,9 @@ open class HomeScreen : Screen {
                             onArticleClick = { article, commentId, showComments ->
                                 navigator.push(
                                     ArticleScreen(
-                                        article.article.user.username,
-                                        article.article.slug,
-                                        article.article.id.toString(),
-                                        commentId,
-                                        showComments
+                                        OpenArticleParams.OpenById(
+                                            article.article.id,
+                                        )
                                     )
                                 )
                             }
