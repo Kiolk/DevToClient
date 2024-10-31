@@ -12,7 +12,6 @@ import com.github.kiolk.devto.domain.models.User
 import com.github.kiolk.devto.presentation.models.FlareTag
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 import com.github.kiolk.devto.presentation.models.PublicReactionCategory
-import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
 fun ArticleApi.toArticle(): Article {
@@ -116,7 +115,7 @@ fun SingleArticleApi.mapToArticle(): Article {
         slug = slug.orEmpty(),
         title = title.orEmpty(),
         description = description.orEmpty(),
-        publishedAt = publishedAt ?: Clock.System.now(),
+        publishedAt = publishedAt ?: Instant.DISTANT_PAST,
         commentsCount = commentsCount ?: 0,
         publicReactionCount = publicReactionsCount ?: 0,
         positiveReactionCount = positiveReactionsCount ?: 0,

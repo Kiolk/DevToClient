@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 sealed class OpenArticleParams {
-    class OpenById(val articleId: Int) : OpenArticleParams()
-    class OpenByTitle(val title: String, val commentId: String? = null) : OpenArticleParams()
+    data class OpenById(val articleId: Int) : OpenArticleParams()
+    data class OpenByTitle(val title: String, val commentId: String? = null) : OpenArticleParams()
 }
 
 class ArticleScreenModel(
