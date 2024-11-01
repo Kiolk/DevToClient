@@ -5,6 +5,7 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.Comme
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionsForArticleApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchableApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
 import com.github.kiolk.devto.domain.models.SearchParameters
@@ -26,4 +27,6 @@ interface ArticleService {
     suspend fun getCommentsForArticle(articleId: Int): List<CommentApi>
 
     suspend fun search(searchParameters: SearchParameters): List<SearchableApi>
+
+    suspend fun getReactionsById(id: Int): ReactionsForArticleApi
 }

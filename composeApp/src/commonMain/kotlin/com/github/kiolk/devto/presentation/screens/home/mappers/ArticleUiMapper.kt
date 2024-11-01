@@ -35,12 +35,12 @@ fun Article.mapToArticleUi(stringProvider: StringProvider): ArticleUi {
 
 fun PublicReactionCategory.toReactionType(): ReactionType {
     return when (this.slug) {
-        ReactionType.Heart.name -> ReactionType.Heart
-        ReactionType.Head.name -> ReactionType.Head
-        ReactionType.Unicorn.name -> ReactionType.Unicorn
-        ReactionType.Hands.name -> ReactionType.Hands
-        ReactionType.Fire.name -> ReactionType.Fire
-        else -> ReactionType.Heart
+        "like" -> ReactionType.Heart(this.count)
+        "exploding_head" -> ReactionType.Head(this.count)
+        "unicorn" -> ReactionType.Unicorn(this.count)
+        "raised_hands" -> ReactionType.Hands(this.count)
+        "fire" -> ReactionType.Fire(this.count)
+        else -> ReactionType.Heart(this.count)
     }
 }
 

@@ -12,7 +12,8 @@ class GetArticleByIdUseCaseImpl(private val articleRepository: ArticleRepository
     override suspend fun invoke(articleId: Int): Article {
         val article = articleRepository.getArticleById(articleId)
         val comments = articleRepository.getCommentsForArticle(articleId)
+        val reactions = articleRepository.getReactionsById(articleId)
 
-        return article.copy(comments = comments)
+        return article.copy(comments = comments, reactions = reactions)
     }
 }

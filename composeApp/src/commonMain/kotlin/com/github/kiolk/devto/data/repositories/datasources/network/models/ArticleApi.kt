@@ -34,4 +34,8 @@ data class ArticleApi(
     val organization: OrganizationApi? = null,
     @SerialName("flare_tag")
     val flareTag: FlareTagApi? = null,
+    @SerialName("body_html")
+    val bodyHtml: String? = null,
+    @SerialName("body_markdown")
+    val bodyMarkdown: String? = null,
 )

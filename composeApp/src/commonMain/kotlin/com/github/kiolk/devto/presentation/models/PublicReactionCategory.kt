@@ -5,4 +5,5 @@ data class PublicReactionCategory(
     val name: String,
     val icon: String,
     val position: Int,
+    val count: Int = 0,
 )

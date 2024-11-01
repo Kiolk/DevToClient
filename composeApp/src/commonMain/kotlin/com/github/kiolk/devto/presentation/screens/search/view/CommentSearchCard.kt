@@ -31,7 +31,7 @@ import com.github.kiolk.devto.presentation.screens.search.mapper.mapToUser
 import com.github.kiolk.devto.presentation.screens.search.model.CommentSearchUi
 import com.github.kiolk.devto.presentation.screens.webView.WebContent
 
-private const val MAX_COMMENT_LENGTH = 100
+const val MAX_COMMENT_LENGTH = 100
 
 @Composable
 fun CommentSearchCard(

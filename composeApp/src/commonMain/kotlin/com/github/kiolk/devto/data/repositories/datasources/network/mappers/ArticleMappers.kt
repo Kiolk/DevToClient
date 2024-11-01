@@ -1,6 +1,7 @@
 package com.github.kiolk.devto.data.repositories.datasources.network.mappers
 
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleReactionCount
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FlareTagApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
@@ -30,6 +31,8 @@ fun ArticleApi.toArticle(): Article {
         user = user.toUser(),
         organization = organization?.toOrganization(),
         flareTag = flareTag?.toFlareTag(),
+        bodyHtml = bodyHtml.orEmpty(),
+        bodyMarkdown = bodyMarkdown.orEmpty(),
     )
 }
 
@@ -92,6 +95,16 @@ fun PublicReactionCategoryApi.toPublicReactionCategory(): PublicReactionCategory
     )
 }
 
+fun ArticleReactionCount.toPublicReactionCategory(): PublicReactionCategory {
+    return PublicReactionCategory(
+        name = category.orEmpty(),
+        slug = category.orEmpty(),
+        icon = "",
+        position = 0,
+        count = count ?: 0
+    )
+}
+
 fun GetArticlesParams.toGetArticlesParamsApi(): GetArticlesParamsApi {
     return GetArticlesParamsApi(
         page = page,
@@ -125,5 +138,7 @@ fun SingleArticleApi.mapToArticle(): Article {
         user = user?.toUser() ?: User(id = 0),
         organization = organization?.toOrganization(),
         flareTag = flareTag?.toFlareTag(),
+        bodyHtml = bodyHtml.orEmpty(),
+        bodyMarkdown = bodyMarkdown.orEmpty(),
     )
 }
