@@ -1,6 +1,7 @@
 package com.github.kiolk.devto.data.repositories.datasources.network.mappers
 
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.ArticleReactionCount
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FlareTagApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
@@ -91,6 +92,16 @@ fun PublicReactionCategoryApi.toPublicReactionCategory(): PublicReactionCategory
         slug = slug,
         icon = icon,
         position = position,
+    )
+}
+
+fun ArticleReactionCount.toPublicReactionCategory(): PublicReactionCategory {
+    return PublicReactionCategory(
+        name = category.orEmpty(),
+        slug = category.orEmpty(),
+        icon = "",
+        position = 0,
+        count = count ?: 0
     )
 }
 

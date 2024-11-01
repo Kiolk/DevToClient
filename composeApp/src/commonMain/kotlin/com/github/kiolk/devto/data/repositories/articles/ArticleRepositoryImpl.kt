@@ -7,6 +7,7 @@ import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toAr
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toComment
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toGetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toOrganization
+import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toPublicReactionCategory
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toTag
 import com.github.kiolk.devto.data.repositories.datasources.network.mappers.toUser
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
@@ -22,6 +23,7 @@ import com.github.kiolk.devto.domain.models.SearchParameters
 import com.github.kiolk.devto.domain.models.SearchType
 import com.github.kiolk.devto.domain.models.Searchable
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
+import com.github.kiolk.devto.presentation.models.PublicReactionCategory
 
 class ArticleRepositoryImpl(private val articleService: ArticleService) : ArticleRepository {
     override suspend fun getArticles(params: GetArticlesParams): List<Article> {
@@ -67,6 +69,14 @@ class ArticleRepositoryImpl(private val articleService: ArticleService) : Articl
                 (it as SearchTagApi).toTag()
             }
         }
+    }
+
+    override suspend fun getReactionsById(id: Int): List<PublicReactionCategory> {
+        val reactions = articleService.getReactionsById(id)
+        // TODO fix logic with readinglist
+        return reactions.articleReactionCounts?.map { it.toPublicReactionCategory() }
+            ?.filter { it.name != "readinglist" }
+            ?.sortedByDescending { it.count }.orEmpty()
     }
 }
 

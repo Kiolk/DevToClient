@@ -8,8 +8,10 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -47,9 +49,17 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
+import com.github.kiolk.devto.presentation.screens.user.UserScreen
 import com.github.kiolk.devto.presentation.screens.webView.WebContent
+import com.github.kiolk.devto.presentation.views.article.ArticleTags
+import com.github.kiolk.devto.presentation.views.article.PublicationDate
+import com.github.kiolk.devto.presentation.views.article.UserNameWithOrganisation
+import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
+import com.github.kiolk.devto.presentation.views.reactions.Reactions
 import org.koin.core.parameter.parametersOf
 
 class ArticleScreen(private val openArticlesParams: OpenArticleParams) : Screen {
@@ -93,17 +103,20 @@ fun CollapsingToolbarParallaxEffect(article: ArticleUi?, modifier: Modifier = Mo
 
     Box(modifier = modifier) {
         Header(
+            imageUrl = article?.article?.coverImage,
             scroll = scroll,
             headerHeightPx = headerHeightPx,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(headerHeight)
         )
-        Body(
-            article?.article?.bodyMarkdown.orEmpty(),
-            scroll = scroll,
-            modifier = Modifier.fillMaxSize()
-        )
+        article?.let {
+            Body(
+                article,
+                scroll = scroll,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
         Toolbar(
             scroll = scroll,
             headerHeightPx = headerHeightPx,
@@ -116,6 +129,7 @@ fun CollapsingToolbarParallaxEffect(article: ArticleUi?, modifier: Modifier = Mo
 
 @Composable
 private fun Header(
+    imageUrl: String?,
     scroll: ScrollState,
     headerHeightPx: Float,
     modifier: Modifier = Modifier
@@ -128,7 +142,7 @@ private fun Header(
             }
     ) {
         AsyncImage(
-            model = "",
+            model = imageUrl,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -148,16 +162,51 @@ private fun Header(
 }
 
 @Composable
-private fun Body(body: String, scroll: ScrollState, modifier: Modifier = Modifier) {
+private fun Body(articleUi: ArticleUi, scroll: ScrollState, modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.verticalScroll(scroll)
     ) {
+        val navigator = LocalNavigator.currentOrThrow
+
         Spacer(Modifier.height(headerHeight))
-        WebContent(
-            body,
-            maxLines = 1000,
-        ) { }
+        Column {
+            Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.Top) {
+                UserOrganisationAvatar(
+                    articleUi.article.user,
+                    articleUi.article.organization,
+                    onUserClick = { navigator.push(UserScreen(it)) }
+                )
+                Column(
+                    modifier = Modifier.padding(start = 2.dp),
+                    verticalArrangement = Arrangement.Top
+                ) {
+                    Row {
+                        Column(verticalArrangement = Arrangement.Top) {
+                            UserNameWithOrganisation(
+                                articleUi.article.user,
+                                articleUi.article.organization,
+                                onUserClick = { navigator.push(UserScreen(it)) },
+                            )
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                PublicationDate(articleUi)
+                                Spacer(Modifier.weight(1f))
+                            }
+                        }
+                    }
+                }
+            }
+            ArticleTags(articleUi.tags, articleUi.article.flareTag, {
+//                        navigator.push(
+//                            FeedScreen(it.)
+//                        )
+            })
+            Reactions(articleUi)
+            WebContent(
+                articleUi.article.bodyMarkdown,
+                maxLines = 1000,
+            ) { }
+        }
     }
 }
 

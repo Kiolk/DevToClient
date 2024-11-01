@@ -7,6 +7,7 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.Comme
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.GetArticlesParamsApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionsForArticleApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchResultApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchableApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
@@ -59,7 +60,7 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
 
     override suspend fun getCommentsForArticle(articleId: Int): List<CommentApi> {
         val comments: List<CommentApi> = httpClient.get(GET_COMMENTS_FOR_ARTICLE_ENDPOINT) {
-            parameter(ARTICLE_ID_PARAM, articleId)
+            parameter(SHORT_ARTICLE_ID_PARAM, articleId)
         }.body()
         return comments
     }
@@ -98,6 +99,12 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         }
     }
 
+    override suspend fun getReactionsById(id: Int): ReactionsForArticleApi {
+        return httpClient.get(REACTIONS_ENDPOINT) {
+            parameter(ARTICLE_ID_PARAM, id)
+        }.body()
+    }
+
     private companion object {
         const val GET_ARTICLES_ENDPOINT = "api/articles"
         const val GET_FEED_ENDPOINT = "stories/feed/"
@@ -105,6 +112,8 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         const val GET_ARTICLE_BY_ID_ENDPOINT = "api/articles/"
         const val GET_COMMENTS_FOR_ARTICLE_ENDPOINT = "api/comments"
         const val SEARCH_ENDPOINT = "search/feed_content"
+        const val REACTIONS_ENDPOINT = "reactions"
+
         const val PUBLISHED_AT_PARAM = "published_at[gte]"
         const val SORT_BY_PARAM = "sort_by"
         const val SORT_DIRECTION_PARAM = "sort_direction"
@@ -117,7 +126,8 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         const val CATEGORY_PARAM = "category"
         const val REACTABLE_ID_PARAM = "reactable_id"
         const val REACTABLE_TYPE_PARAM = "reactable_type"
-        const val ARTICLE_ID_PARAM = "a_id"
+        const val ARTICLE_ID_PARAM = "article_id"
+        const val SHORT_ARTICLE_ID_PARAM = "a_id"
         const val USER_ID_PARAM = "user_id"
     }
 }
