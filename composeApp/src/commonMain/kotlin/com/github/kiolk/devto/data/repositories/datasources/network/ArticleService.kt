@@ -8,6 +8,7 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.React
 import com.github.kiolk.devto.data.repositories.datasources.network.models.ReactionsForArticleApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchableApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.UserProfileApi
 import com.github.kiolk.devto.domain.models.SearchParameters
 
 interface ArticleService {
@@ -29,4 +30,6 @@ interface ArticleService {
     suspend fun search(searchParameters: SearchParameters): List<SearchableApi>
 
     suspend fun getReactionsById(id: Int): ReactionsForArticleApi
+
+    suspend fun getUserById(userId: Int): UserProfileApi
 }

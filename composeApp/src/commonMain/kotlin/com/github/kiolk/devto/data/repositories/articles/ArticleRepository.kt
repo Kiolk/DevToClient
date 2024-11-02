@@ -5,6 +5,7 @@ import com.github.kiolk.devto.domain.models.Comment
 import com.github.kiolk.devto.domain.models.Reaction
 import com.github.kiolk.devto.domain.models.SearchParameters
 import com.github.kiolk.devto.domain.models.Searchable
+import com.github.kiolk.devto.domain.models.User
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 import com.github.kiolk.devto.presentation.models.PublicReactionCategory
 
@@ -21,5 +22,7 @@ interface ArticleRepository {
     suspend fun search(searchParameters: SearchParameters): List<Searchable>
 
     suspend fun getReactionsById(id: Int): List<PublicReactionCategory>
+
+    suspend fun getUserById(userId: Int): User
 
 }

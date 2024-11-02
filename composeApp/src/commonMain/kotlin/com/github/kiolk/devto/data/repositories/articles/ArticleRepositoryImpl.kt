@@ -16,12 +16,14 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.Searc
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchOrganizationApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchTagApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchUserApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.UserProfileApi
 import com.github.kiolk.devto.domain.models.Article
 import com.github.kiolk.devto.domain.models.Comment
 import com.github.kiolk.devto.domain.models.Reaction
 import com.github.kiolk.devto.domain.models.SearchParameters
 import com.github.kiolk.devto.domain.models.SearchType
 import com.github.kiolk.devto.domain.models.Searchable
+import com.github.kiolk.devto.domain.models.User
 import com.github.kiolk.devto.presentation.models.GetArticlesParams
 import com.github.kiolk.devto.presentation.models.PublicReactionCategory
 
@@ -77,6 +79,11 @@ class ArticleRepositoryImpl(private val articleService: ArticleService) : Articl
         return reactions.articleReactionCounts?.map { it.toPublicReactionCategory() }
             ?.filter { it.name != "readinglist" }
             ?.sortedByDescending { it.count }.orEmpty()
+    }
+
+    override suspend fun getUserById(userId: Int): User {
+        val user: UserProfileApi = articleService.getUserById(userId)
+        return user.toUser()
     }
 }
 

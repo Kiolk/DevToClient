@@ -2,15 +2,8 @@ package com.github.kiolk.devto.presentation.screens.feed.view
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.github.kiolk.devto.domain.models.Article
-import com.github.kiolk.devto.domain.models.Comment
-import com.github.kiolk.devto.domain.models.Organization
-import com.github.kiolk.devto.domain.models.SearchParameters
-import com.github.kiolk.devto.domain.models.SearchType
 import com.github.kiolk.devto.domain.models.Searchable
-import com.github.kiolk.devto.domain.models.Tag
 import com.github.kiolk.devto.domain.models.TagSearchParameters
-import com.github.kiolk.devto.domain.models.User
 import com.github.kiolk.devto.domain.models.UserSearchParameters
 import com.github.kiolk.devto.domain.usecases.SearchUseCase
 import com.github.kiolk.devto.domain.usecases.ToggleReactionUseCase
@@ -26,23 +19,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 open class FeedBodyScreenModel(
-    private val searchable: Searchable? = null,
+    private val params: FeedParameter? = null,
     private val searchUseCase: SearchUseCase,
     private val stringProvider: StringProvider,
     private val toggleReactionUseCase: ToggleReactionUseCase,
 ) : ScreenModel {
-
-    val type: SearchType
-        get() {
-            return when (searchable) {
-                is Article -> SearchType.Article
-                is Comment -> SearchType.Comment
-                is Organization -> SearchType.Organization
-                is Searchable -> SearchType.Tag
-                is User -> SearchType.User
-                null -> SearchType.Article
-            }
-        }
 
     private val _feedState: MutableStateFlow<List<SearchableUi>> =
         MutableStateFlow(emptyList())
@@ -66,25 +47,23 @@ open class FeedBodyScreenModel(
     }
 
     private suspend fun loadNext(page: Int): List<Searchable> {
-        val searchParameters = when (searchable) {
-            is Article -> TODO()
-            is Comment -> TODO()
-            is Organization -> TODO()
-            is Tag -> TagSearchParameters(
-                searchable.name,
-                listOf(searchable.name),
-                sortingType = _sortingType.value.mapToSortingType(),
-            )
-
-            is User -> UserSearchParameters(
-                userId = searchable.id,
-                sortingType = _sortingType.value.mapToSortingType(),
-            )
-
-            null -> SearchParameters(
+        val searchParameters = when (val param = params) {
+            is FeedParameter.Tag -> TagSearchParameters(
+                param.tagName,
+                listOf(param.tagName),
                 page = page,
                 sortingType = _sortingType.value.mapToSortingType(),
             )
+
+            is FeedParameter.User -> {
+                UserSearchParameters(
+                    userId = param.userId,
+                    page = page,
+                    sortingType = _sortingType.value.mapToSortingType(),
+                )
+            }
+
+            null -> TODO()
         }
 
         return searchUseCase(searchParameters)
@@ -132,4 +111,9 @@ open class FeedBodyScreenModel(
             pagination.restart()
         }
     }
+}
+
+sealed class FeedParameter {
+    data class Tag(val tagName: String) : FeedParameter()
+    data class User(val userId: Int) : FeedParameter()
 }

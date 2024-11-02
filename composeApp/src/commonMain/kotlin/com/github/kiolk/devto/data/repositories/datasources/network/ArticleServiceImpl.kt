@@ -11,6 +11,7 @@ import com.github.kiolk.devto.data.repositories.datasources.network.models.React
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchResultApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchableApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SingleArticleApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.UserProfileApi
 import com.github.kiolk.devto.domain.models.SearchParameters
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -105,6 +106,10 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         }.body()
     }
 
+    override suspend fun getUserById(userId: Int): UserProfileApi {
+        return httpClient.get(USER_ENDPOINT + userId.toString()).body()
+    }
+
     private companion object {
         const val GET_ARTICLES_ENDPOINT = "api/articles"
         const val GET_FEED_ENDPOINT = "stories/feed/"
@@ -113,6 +118,7 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         const val GET_COMMENTS_FOR_ARTICLE_ENDPOINT = "api/comments"
         const val SEARCH_ENDPOINT = "search/feed_content"
         const val REACTIONS_ENDPOINT = "reactions"
+        const val USER_ENDPOINT = "api/users/"
 
         const val PUBLISHED_AT_PARAM = "published_at[gte]"
         const val SORT_BY_PARAM = "sort_by"

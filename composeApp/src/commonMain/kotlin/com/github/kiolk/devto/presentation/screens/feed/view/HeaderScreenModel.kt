@@ -1,31 +1,30 @@
 package com.github.kiolk.devto.presentation.screens.feed.view
 
 import cafe.adriel.voyager.core.model.ScreenModel
-import com.github.kiolk.devto.domain.models.Article
-import com.github.kiolk.devto.domain.models.Comment
-import com.github.kiolk.devto.domain.models.Organization
-import com.github.kiolk.devto.domain.models.Searchable
-import com.github.kiolk.devto.domain.models.Tag
-import com.github.kiolk.devto.domain.models.User
-import com.github.kiolk.devto.presentation.screens.search.mapper.mapToTagUi
+import cafe.adriel.voyager.core.model.screenModelScope
+import com.github.kiolk.devto.domain.usecases.GetUserByIdUseCase
 import com.github.kiolk.devto.presentation.screens.search.mapper.mapToUserUi
 import com.github.kiolk.devto.presentation.screens.search.model.SearchableUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
-class HeaderScreenModel(searchable: Searchable) : ScreenModel {
+class HeaderScreenModel(params: FeedParameter, private val getUserByIdUseCase: GetUserByIdUseCase) :
+    ScreenModel {
 
     private val _searchableItem: MutableStateFlow<SearchableUi> =
         MutableStateFlow(object : SearchableUi {})
     val searchableItem: StateFlow<SearchableUi> = _searchableItem
 
     init {
-        _searchableItem.value = when (searchable) {
-            is Article -> TODO()
-            is Comment -> TODO()
-            is Organization -> TODO()
-            is Tag -> searchable.mapToTagUi()
-            is User -> searchable.mapToUserUi()
+        when (params) {
+            is FeedParameter.Tag -> TODO()
+            is FeedParameter.User -> {
+                screenModelScope.launch {
+                    val user = getUserByIdUseCase(params.userId)
+                    _searchableItem.value = user.mapToUserUi()
+                }
+            }
         }
     }
 }

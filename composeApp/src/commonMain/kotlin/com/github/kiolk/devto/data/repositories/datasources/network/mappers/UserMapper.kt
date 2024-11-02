@@ -3,6 +3,7 @@ package com.github.kiolk.devto.data.repositories.datasources.network.mappers
 import com.github.kiolk.devto.data.repositories.datasources.network.models.FeedUserApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.SearchUserApi
 import com.github.kiolk.devto.data.repositories.datasources.network.models.UserApi
+import com.github.kiolk.devto.data.repositories.datasources.network.models.UserProfileApi
 import com.github.kiolk.devto.domain.models.User
 
 fun UserApi.toUser(): User {
@@ -41,5 +42,21 @@ fun SearchUserApi.toUser(): User {
         websiteUrl = user?.websiteUrl.orEmpty(),
         profileImage = user?.profileImage ?: user?.profileImage90.orEmpty(),
         profileImage90 = user?.profileImage90 ?: user?.profileImage.orEmpty(),
+    )
+}
+
+fun UserProfileApi.toUser(): User {
+    return User(
+        name = name.orEmpty(),
+        id = id ?: 0,
+        username = username.orEmpty(),
+        summary = summary.orEmpty(),
+        location = location.orEmpty(),
+        joinAt = joinedAt,
+        twitterUsername = twitterUsername,
+        githubUsername = githubUsername,
+        websiteUrl = websiteUrl,
+        profileImage = profileImage,
+        profileImage90 = "",
     )
 }

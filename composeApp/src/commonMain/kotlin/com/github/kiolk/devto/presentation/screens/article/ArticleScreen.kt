@@ -48,11 +48,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
+import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
+import com.github.kiolk.devto.domain.models.Tag
+import com.github.kiolk.devto.presentation.screens.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
+import com.github.kiolk.devto.presentation.screens.home.models.TagUi
 import com.github.kiolk.devto.presentation.screens.user.UserScreen
 import com.github.kiolk.devto.presentation.screens.webView.WebContent
 import com.github.kiolk.devto.presentation.views.article.ArticleTags
@@ -61,27 +66,6 @@ import com.github.kiolk.devto.presentation.views.article.UserNameWithOrganisatio
 import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
 import com.github.kiolk.devto.presentation.views.reactions.Reactions
 import org.koin.core.parameter.parametersOf
-
-class ArticleScreen(private val openArticlesParams: OpenArticleParams) : Screen {
-    @Composable
-    override fun Content() {
-        val screenModel =
-            koinScreenModel<ArticleScreenModel>(parameters = { parametersOf(openArticlesParams) })
-
-        val article by screenModel.articleUi.collectAsState()
-
-        Surface {
-            CollapsingToolbarParallaxEffect(
-                article,
-                Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colors.surface)
-            )
-        }
-    }
-}
-
-// TODO clean up the code
 
 private val headerHeight = 250.dp
 private val toolbarHeight = 56.dp
@@ -94,8 +78,42 @@ private val titlePaddingEnd = 72.dp
 private const val SCALE_START = 1f
 private const val SCALE_END = 0.66f
 
+private val Blue500 = Color(0xff026586)
+private val Blue800 = Color(0xff032C45)
+private val Black900 = Color(0x88000000)
+
+class ArticleScreen(private val openArticlesParams: OpenArticleParams) : Screen {
+
+    override val key: ScreenKey = uniqueScreenKey
+
+    @Composable
+    override fun Content() {
+        val screenModel =
+            koinScreenModel<ArticleScreenModel>(parameters = { parametersOf(openArticlesParams) })
+
+        val article by screenModel.articleUi.collectAsState()
+        val navigator = LocalNavigator.currentOrThrow
+
+        Surface {
+            CollapsingToolbarParallaxEffect(
+                article,
+                Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colors.surface),
+                onTagClicked = {
+                    navigator.push(FeedScreen(Tag(name = it.name)))
+                }
+            )
+        }
+    }
+}
+
 @Composable
-fun CollapsingToolbarParallaxEffect(article: ArticleUi?, modifier: Modifier = Modifier) {
+fun CollapsingToolbarParallaxEffect(
+    article: ArticleUi?,
+    modifier: Modifier = Modifier,
+    onTagClicked: (tagUi: TagUi) -> Unit = {}
+) {
     val scroll: ScrollState = rememberScrollState(0)
 
     val headerHeightPx = with(LocalDensity.current) { headerHeight.toPx() }
@@ -113,6 +131,7 @@ fun CollapsingToolbarParallaxEffect(article: ArticleUi?, modifier: Modifier = Mo
         article?.let {
             Body(
                 article,
+                onTagClicked,
                 scroll = scroll,
                 modifier = Modifier.fillMaxSize()
             )
@@ -162,7 +181,12 @@ private fun Header(
 }
 
 @Composable
-private fun Body(articleUi: ArticleUi, scroll: ScrollState, modifier: Modifier = Modifier) {
+private fun Body(
+    articleUi: ArticleUi,
+    onTagClicked: (tagUi: TagUi) -> Unit = {},
+    scroll: ScrollState,
+    modifier: Modifier = Modifier
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.verticalScroll(scroll)
@@ -171,7 +195,7 @@ private fun Body(articleUi: ArticleUi, scroll: ScrollState, modifier: Modifier =
 
         Spacer(Modifier.height(headerHeight))
         Column {
-            Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.Top) {
+            Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.Top) {
                 UserOrganisationAvatar(
                     articleUi.article.user,
                     articleUi.article.organization,
@@ -197,9 +221,7 @@ private fun Body(articleUi: ArticleUi, scroll: ScrollState, modifier: Modifier =
                 }
             }
             ArticleTags(articleUi.tags, articleUi.article.flareTag, {
-//                        navigator.push(
-//                            FeedScreen(it.)
-//                        )
+                onTagClicked(it)
             })
             Reactions(articleUi)
             WebContent(
@@ -334,7 +356,3 @@ private fun Title(
             }
     )
 }
-
-val Blue500 = Color(0xff026586)
-val Blue800 = Color(0xff032C45)
-val Black900 = Color(0x88000000)

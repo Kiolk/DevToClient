@@ -5,6 +5,7 @@ import com.github.kiolk.devto.presentation.screens.article.ArticleScreenModel
 import com.github.kiolk.devto.presentation.screens.article.OpenArticleParams
 import com.github.kiolk.devto.presentation.screens.feed.FeedScreenModel
 import com.github.kiolk.devto.presentation.screens.feed.view.FeedBodyScreenModel
+import com.github.kiolk.devto.presentation.screens.feed.view.FeedParameter
 import com.github.kiolk.devto.presentation.screens.feed.view.HeaderScreenModel
 import com.github.kiolk.devto.presentation.screens.home.HomeScreenModel
 import com.github.kiolk.devto.presentation.screens.search.SearchScreenModel
@@ -13,7 +14,7 @@ import org.koin.dsl.module
 
 val screenModelModule = module {
     factory<HomeScreenModel> { HomeScreenModel(get(), get(), get()) }
-    factory<FeedBodyScreenModel> { (tag: Searchable) ->
+    factory<FeedBodyScreenModel> { (tag: FeedParameter) ->
         FeedBodyScreenModel(
             tag,
             get(),
@@ -22,7 +23,7 @@ val screenModelModule = module {
         )
     }
     factory<FeedScreenModel> { (tag: Searchable) -> FeedScreenModel(get(), get(), get()) }
-    factory<HeaderScreenModel> { (tag: Searchable) -> HeaderScreenModel(tag) }
+    factory<HeaderScreenModel> { (param: FeedParameter) -> HeaderScreenModel(param, get()) }
     factory<UserScreenModel> { (userName: String) -> UserScreenModel(userName) }
     factory<ArticleScreenModel> { (openArticlesParams: OpenArticleParams) ->
         ArticleScreenModel(
