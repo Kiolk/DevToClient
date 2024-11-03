@@ -43,5 +43,6 @@ fun CommentApi.mapToComment(): Comment {
         username = user.username,
         name = user.name,
         profileImage90 = user.profileImage ?: user.profileImage90.orEmpty(),
+        children = children.map { it.mapToComment() }
     )
 }

@@ -64,6 +64,7 @@ import com.github.kiolk.devto.presentation.views.article.ArticleTags
 import com.github.kiolk.devto.presentation.views.article.PublicationDate
 import com.github.kiolk.devto.presentation.views.article.UserNameWithOrganisation
 import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
+import com.github.kiolk.devto.presentation.views.comments.CommentsFeed
 import com.github.kiolk.devto.presentation.views.reactions.Reactions
 import org.koin.core.parameter.parametersOf
 
@@ -228,6 +229,11 @@ private fun Body(
                 articleUi.article.bodyMarkdown,
                 maxLines = 1000,
             ) { }
+            CommentsFeed(
+                articleUi.comments,
+                onUserClick = { navigator.push(UserScreen(it.toString())) },
+                onCommentClick = { }
+            )
         }
     }
 }

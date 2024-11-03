@@ -7,4 +7,7 @@ data class CommentUi(
     val userName: String,
     val commentTime: String,
     val children: List<CommentUi> = emptyList(),
+    val userId: Int = 0,
+    val published: String = "",
+    val edited: String = "",
 )

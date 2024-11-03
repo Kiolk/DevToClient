@@ -51,6 +51,6 @@ private fun Comment.toCommentUi(stringProvider: StringProvider): CommentUi {
         userName = this.username,
         userProfileImage = this.profileImage90,
         commentTime = this.publishedTimestamp.toPublicationDateAgo(stringProvider),
-        children = this.children.map { toCommentUi(stringProvider) }
+        children = this.children.map { it.toCommentUi(stringProvider) }
     )
 }
