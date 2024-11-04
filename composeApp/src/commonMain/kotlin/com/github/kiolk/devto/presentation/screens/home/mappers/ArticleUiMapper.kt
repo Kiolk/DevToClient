@@ -48,6 +48,7 @@ private fun Comment.toCommentUi(stringProvider: StringProvider): CommentUi {
     return CommentUi(
         id = this.commentId,
         text = this.text.trim(),
+        name = this.name,
         userName = this.username,
         userProfileImage = this.profileImage90,
         commentTime = this.publishedTimestamp.toPublicationDateAgo(stringProvider),
