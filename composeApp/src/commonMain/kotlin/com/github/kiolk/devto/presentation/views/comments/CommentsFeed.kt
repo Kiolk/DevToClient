@@ -16,7 +16,7 @@ fun CommentsFeed(
     onCommentClick: (commentId: Int) -> Unit = {},
 ) {
     Column(modifier = Modifier.padding(horizontal = 8.dp)) {
-        Text("Top comments($totalComments)")
+        Text("Top comments ($totalComments)")
         comments.forEach {
             Comment(
                 commentUi = it,

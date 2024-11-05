@@ -31,6 +31,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreen
 import com.github.kiolk.devto.presentation.screens.article.OpenArticleParams
 import com.github.kiolk.devto.presentation.screens.feed.FeedScreen
+import com.github.kiolk.devto.presentation.screens.feed.view.FeedParameter
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.search.model.CommentSearchUi
 import com.github.kiolk.devto.presentation.screens.search.model.OrganizationSearchUi
@@ -158,7 +159,7 @@ fun GetSearchResult(
                 )
             },
             onUserClick = {
-                navigator.push(FeedScreen(it))
+                navigator.push(FeedScreen(FeedParameter.User(it.id)))
             }
         )
 
@@ -166,12 +167,12 @@ fun GetSearchResult(
         is TagSearchUi -> TagSearchCard(
             item,
             onTagChecked = {
-                navigator.push(FeedScreen(it.tag))
+                navigator.push(FeedScreen(FeedParameter.Tag(it.tag.name)))
             }
         )
 
         is UserSearchUi -> UserSearchCard(item, onUserClick = {
-            navigator.push(FeedScreen(it))
+            navigator.push(FeedScreen(FeedParameter.User(it.id)))
         })
     }
 }

@@ -18,4 +18,5 @@ data class ArticleUi(
     val topComments: List<CommentUi> = emptyList(),
     val reactionsUi: ReactionsUi = ReactionsUi(),
     val comments: List<CommentUi> = emptyList(),
+    val totalComments: Int = 0,
 ) : SearchableUi

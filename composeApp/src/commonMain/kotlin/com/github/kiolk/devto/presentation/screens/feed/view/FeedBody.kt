@@ -102,7 +102,10 @@ private fun SearchableItem(
 
         is CommentSearchUi -> CommentSearchCard(item)
         is OrganizationSearchUi -> OrganizationSearchCard(item)
-        is TagSearchUi -> TagSearchCard(item, onTagChecked = { navigator.push(FeedScreen(it.tag)) })
+        is TagSearchUi -> TagSearchCard(
+            item,
+            onTagChecked = { navigator.push(FeedScreen(FeedParameter.Tag(it.tag.name))) }
+        )
         is UserSearchUi -> UserSearchCard(item)
     }
 }

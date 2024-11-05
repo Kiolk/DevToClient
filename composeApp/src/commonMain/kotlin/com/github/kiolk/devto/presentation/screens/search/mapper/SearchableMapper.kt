@@ -53,7 +53,7 @@ fun User.mapToUserUi(): UserSearchUi {
 
 fun Comment.mapToUser(): User {
     return User(
-        id = this.userId ?: 0,
+        id = this.userId,
         name = this.name,
         username = this.username,
         profileImage90 = this.profileImage90,

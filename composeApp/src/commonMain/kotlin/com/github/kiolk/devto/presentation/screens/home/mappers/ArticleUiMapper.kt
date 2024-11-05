@@ -10,8 +10,10 @@ import com.github.kiolk.devto.presentation.screens.home.models.ReactionsUi
 import com.github.kiolk.devto.utils.localisation.StringProvider
 import com.github.kiolk.devto.utils.toPublicationDate
 import com.github.kiolk.devto.utils.toPublicationDateAgo
+import com.github.kiolk.devto.utils.toPublicationDateString
 
 fun Article.mapToArticleUi(stringProvider: StringProvider): ArticleUi {
+    val comments = this.comments.map { it.toCommentUi(stringProvider) }
     return ArticleUi(
         article = this,
         userName = this.user.name,
@@ -29,7 +31,8 @@ fun Article.mapToArticleUi(stringProvider: StringProvider): ArticleUi {
             total = this.publicReactionCount
         ),
         topComments = this.topComments.filter { true }.map { it.toCommentUi(stringProvider) },
-        comments = this.comments.map { it.toCommentUi(stringProvider) }
+        comments = comments,
+        totalComments = comments.sumOf { it.replies() + 1 },
     )
 }
 
@@ -52,6 +55,8 @@ private fun Comment.toCommentUi(stringProvider: StringProvider): CommentUi {
         userName = this.username,
         userProfileImage = this.profileImage90,
         commentTime = this.publishedTimestamp.toPublicationDateAgo(stringProvider),
-        children = this.children.map { it.toCommentUi(stringProvider) }
+        children = this.children.map { it.toCommentUi(stringProvider) },
+        published = this.publishedTimestamp.toPublicationDateString(),
+        userId = this.userId,
     )
 }

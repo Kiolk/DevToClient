@@ -56,6 +56,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import com.github.kiolk.devto.domain.models.Tag
 import com.github.kiolk.devto.presentation.screens.feed.FeedScreen
+import com.github.kiolk.devto.presentation.screens.feed.view.FeedParameter
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
 import com.github.kiolk.devto.presentation.screens.home.models.TagUi
 import com.github.kiolk.devto.presentation.screens.user.UserScreen
@@ -102,7 +103,7 @@ class ArticleScreen(private val openArticlesParams: OpenArticleParams) : Screen 
                     .fillMaxSize()
                     .background(MaterialTheme.colors.surface),
                 onTagClicked = {
-                    navigator.push(FeedScreen(Tag(name = it.name)))
+                    navigator.push(FeedScreen(FeedParameter.Tag(it.name)))
                 }
             )
         }
@@ -200,7 +201,7 @@ private fun Body(
                 UserOrganisationAvatar(
                     articleUi.article.user,
                     articleUi.article.organization,
-                    onUserClick = { navigator.push(UserScreen(it)) }
+                    onUserClick = { navigator.push(FeedScreen(FeedParameter.User(articleUi.article.user.id))) }
                 )
                 Column(
                     modifier = Modifier.padding(start = 2.dp),
@@ -231,7 +232,8 @@ private fun Body(
             ) { }
             CommentsFeed(
                 articleUi.comments,
-                onUserClick = { navigator.push(UserScreen(it.toString())) },
+                articleUi.totalComments,
+                onUserClick = { navigator.push(FeedScreen(FeedParameter.User(it))) },
                 onCommentClick = { }
             )
         }

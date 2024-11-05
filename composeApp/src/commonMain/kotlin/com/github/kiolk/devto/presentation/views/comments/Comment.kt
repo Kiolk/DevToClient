@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.github.kiolk.devto.presentation.screens.home.models.CommentUi
@@ -33,6 +34,7 @@ import devto.composeapp.generated.resources.ic_collaps
 import devto.composeapp.generated.resources.ic_expand
 import org.jetbrains.compose.resources.painterResource
 
+@Suppress("LongMethod")
 @Composable
 fun Comment(
     commentUi: CommentUi,
@@ -63,6 +65,11 @@ fun Comment(
                     )
                 }
                 Text(commentUi.name)
+                if (commentUi.children.isNotEmpty()) {
+                    Text(" + ")
+                    Text(commentUi.replies().toString())
+                    Text(" replies")
+                }
             }
         }
         return
@@ -93,10 +100,30 @@ fun Comment(
                 }
             }
             Spacer(modifier = Modifier.width(4.dp))
-            Card {
+            Card(modifier = Modifier.fillMaxWidth()) {
                 Column {
-                    Row {
-                        Text(commentUi.name)
+                    Row(
+                        modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            commentUi.name,
+                            modifier = Modifier.clickable { onUserClick(commentUi.userId) }
+                        )
+                        Text(
+                            " · ",
+                            style = MaterialTheme.typography.overline.copy(
+                                fontWeight = FontWeight.Bold,
+                                color = DevToColors.lightGray,
+                            )
+                        )
+                        Text(
+                            commentUi.published,
+                            style = MaterialTheme.typography.overline.copy(
+                                fontWeight = FontWeight.Bold,
+                                color = DevToColors.lightGray,
+                            )
+                        )
                     }
                     WebContent(
                         html = commentUi.text,
