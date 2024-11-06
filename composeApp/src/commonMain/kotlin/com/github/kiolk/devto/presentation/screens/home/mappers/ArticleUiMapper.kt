@@ -47,7 +47,7 @@ fun PublicReactionCategory.toReactionType(): ReactionType {
     }
 }
 
-private fun Comment.toCommentUi(stringProvider: StringProvider): CommentUi {
+fun Comment.toCommentUi(stringProvider: StringProvider): CommentUi {
     return CommentUi(
         id = this.commentId,
         text = this.text.trim(),

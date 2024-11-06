@@ -13,7 +13,7 @@ fun CommentsFeed(
     comments: List<CommentUi>,
     totalComments: Int = 0,
     onUserClick: (userId: Int) -> Unit = {},
-    onCommentClick: (commentId: Int) -> Unit = {},
+    onCommentClick: (commentId: String) -> Unit = {},
 ) {
     Column(modifier = Modifier.padding(horizontal = 8.dp)) {
         Text("Top comments ($totalComments)")

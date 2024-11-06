@@ -110,6 +110,10 @@ class ArticleServiceImpl(private val httpClient: HttpClient) : ArticleService {
         return httpClient.get(USER_ENDPOINT + userId.toString()).body()
     }
 
+    override suspend fun getCommentById(commentId: String): CommentApi {
+        return httpClient.get("$GET_COMMENTS_FOR_ARTICLE_ENDPOINT/$commentId").body<CommentApi>()
+    }
+
     private companion object {
         const val GET_ARTICLES_ENDPOINT = "api/articles"
         const val GET_FEED_ENDPOINT = "stories/feed/"

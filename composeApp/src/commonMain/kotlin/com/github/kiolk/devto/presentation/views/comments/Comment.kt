@@ -3,6 +3,7 @@ package com.github.kiolk.devto.presentation.views.comments
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,7 +41,7 @@ fun Comment(
     commentUi: CommentUi,
     level: Int = 0,
     onUserClick: (userId: Int) -> Unit = {},
-    onCommentClick: (commentId: Int) -> Unit = {},
+    onCommentClick: (commentId: String) -> Unit = {},
 ) {
     val isExpanded = remember { mutableStateOf(true) }
 
@@ -101,7 +102,13 @@ fun Comment(
             }
             Spacer(modifier = Modifier.width(4.dp))
             Card(modifier = Modifier.fillMaxWidth()) {
-                Column {
+                Column(
+                    modifier = Modifier
+                        .focusable()
+                        .clickable {
+                            onCommentClick(commentUi.id)
+                        }
+                ) {
                     Row(
                         modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 4.dp),
                         verticalAlignment = Alignment.CenterVertically
@@ -129,7 +136,7 @@ fun Comment(
                         html = commentUi.text,
                         maxLines = 100,
                     ) {
-                        onCommentClick(commentUi.id.toIntOrNull() ?: 0)
+                        onCommentClick(commentUi.id)
                     }
                 }
             }

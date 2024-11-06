@@ -54,7 +54,7 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
-import com.github.kiolk.devto.domain.models.Tag
+import com.github.kiolk.devto.presentation.screens.comments.CommentsScreen
 import com.github.kiolk.devto.presentation.screens.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.feed.view.FeedParameter
 import com.github.kiolk.devto.presentation.screens.home.models.ArticleUi
@@ -234,7 +234,7 @@ private fun Body(
                 articleUi.comments,
                 articleUi.totalComments,
                 onUserClick = { navigator.push(FeedScreen(FeedParameter.User(it))) },
-                onCommentClick = { }
+                onCommentClick = { navigator.push(CommentsScreen(it)) }
             )
         }
     }

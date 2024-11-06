@@ -85,6 +85,10 @@ class ArticleRepositoryImpl(private val articleService: ArticleService) : Articl
         val user: UserProfileApi = articleService.getUserById(userId)
         return user.toUser()
     }
+
+    override suspend fun getCommentById(commentId: String): Comment {
+        return articleService.getCommentById(commentId).mapToComment()
+    }
 }
 
 private fun ReactionApi.toReaction(): Reaction {

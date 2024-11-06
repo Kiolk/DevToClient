@@ -3,6 +3,7 @@ package com.github.kiolk.devto.di
 import com.github.kiolk.devto.domain.models.Searchable
 import com.github.kiolk.devto.presentation.screens.article.ArticleScreenModel
 import com.github.kiolk.devto.presentation.screens.article.OpenArticleParams
+import com.github.kiolk.devto.presentation.screens.comments.CommentsScreenModel
 import com.github.kiolk.devto.presentation.screens.feed.FeedScreenModel
 import com.github.kiolk.devto.presentation.screens.feed.view.FeedBodyScreenModel
 import com.github.kiolk.devto.presentation.screens.feed.view.FeedParameter
@@ -34,4 +35,11 @@ val screenModelModule = module {
         )
     }
     factory<SearchScreenModel> { SearchScreenModel(get(), get()) }
+    factory<CommentsScreenModel> { (commentId: String) ->
+        CommentsScreenModel(
+            commentId,
+            get(),
+            get(),
+        )
+    }
 }

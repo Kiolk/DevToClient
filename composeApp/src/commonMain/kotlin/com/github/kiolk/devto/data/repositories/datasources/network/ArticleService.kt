@@ -32,4 +32,6 @@ interface ArticleService {
     suspend fun getReactionsById(id: Int): ReactionsForArticleApi
 
     suspend fun getUserById(userId: Int): UserProfileApi
+
+    suspend fun getCommentById(commentId: String): CommentApi
 }
