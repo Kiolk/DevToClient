@@ -67,7 +67,9 @@ import com.github.kiolk.devto.presentation.views.article.UserNameWithOrganisatio
 import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
 import com.github.kiolk.devto.presentation.views.comments.CommentsFeed
 import com.github.kiolk.devto.presentation.views.reactions.Reactions
+import com.github.kiolk.devto.utils.localisation.StringProvider
 import org.koin.core.parameter.parametersOf
+import org.koin.mp.KoinPlatform.getKoin
 
 private val headerHeight = 250.dp
 private val toolbarHeight = 56.dp
@@ -87,6 +89,7 @@ private val Black900 = Color(0x88000000)
 class ArticleScreen(private val openArticlesParams: OpenArticleParams) : Screen {
 
     override val key: ScreenKey = uniqueScreenKey
+    val stringProvider = getKoin().get<StringProvider>()
 
     @Composable
     override fun Content() {
@@ -102,6 +105,7 @@ class ArticleScreen(private val openArticlesParams: OpenArticleParams) : Screen 
                 Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colors.surface),
+                stringProvider = stringProvider,
                 onTagClicked = {
                     navigator.push(FeedScreen(FeedParameter.Tag(it.name)))
                 }
@@ -114,6 +118,7 @@ class ArticleScreen(private val openArticlesParams: OpenArticleParams) : Screen 
 fun CollapsingToolbarParallaxEffect(
     article: ArticleUi?,
     modifier: Modifier = Modifier,
+    stringProvider: StringProvider,
     onTagClicked: (tagUi: TagUi) -> Unit = {}
 ) {
     val scroll: ScrollState = rememberScrollState(0)
@@ -134,6 +139,7 @@ fun CollapsingToolbarParallaxEffect(
             Body(
                 article,
                 onTagClicked,
+                stringProvider = stringProvider,
                 scroll = scroll,
                 modifier = Modifier.fillMaxSize()
             )
@@ -187,7 +193,8 @@ private fun Body(
     articleUi: ArticleUi,
     onTagClicked: (tagUi: TagUi) -> Unit = {},
     scroll: ScrollState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    stringProvider: StringProvider,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -233,6 +240,7 @@ private fun Body(
             CommentsFeed(
                 articleUi.comments,
                 articleUi.totalComments,
+                stringProvider = stringProvider,
                 onUserClick = { navigator.push(FeedScreen(FeedParameter.User(it))) },
                 onCommentClick = { navigator.push(CommentsScreen(it)) }
             )

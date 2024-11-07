@@ -26,6 +26,7 @@ class CommentsScreenModel(
         screenModelScope.launch {
             val comment = getCommentByIdUseCase(commentId)
             _commentsUi.value = listOf(comment.toCommentUi(stringProvider))
+            _totalComments.value = _commentsUi.value.sumOf { it.replies() + 1 }
         }
     }
 }

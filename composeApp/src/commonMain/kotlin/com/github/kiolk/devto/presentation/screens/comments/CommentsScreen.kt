@@ -12,11 +12,14 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.kiolk.devto.presentation.screens.feed.FeedScreen
 import com.github.kiolk.devto.presentation.screens.feed.view.FeedParameter
 import com.github.kiolk.devto.presentation.views.comments.CommentsFeed
+import com.github.kiolk.devto.utils.localisation.StringProvider
 import org.koin.core.parameter.parametersOf
+import org.koin.mp.KoinPlatform.getKoin
 
 class CommentsScreen(private val commentId: String) : Screen {
 
     override val key: ScreenKey = uniqueScreenKey
+    private val stringProvider = getKoin().get<StringProvider>()
 
     @Composable
     override fun Content() {
@@ -29,6 +32,7 @@ class CommentsScreen(private val commentId: String) : Screen {
         CommentsFeed(
             comments,
             totalComments,
+            stringProvider = stringProvider,
             onUserClick = { navigator.push(FeedScreen(FeedParameter.User(it))) },
             onCommentClick = { navigator.push(CommentsScreen(it)) }
         )

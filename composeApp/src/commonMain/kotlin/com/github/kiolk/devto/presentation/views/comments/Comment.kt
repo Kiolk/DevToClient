@@ -29,7 +29,8 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.github.kiolk.devto.presentation.screens.home.models.CommentUi
 import com.github.kiolk.devto.presentation.screens.webView.WebContent
-import com.github.kiolk.devto.utils.colors.DevToColors
+import com.github.kiolk.devto.utils.localisation.StringProvider
+import com.github.kiolk.devto.utils.localisation.StringsKeys
 import devto.composeapp.generated.resources.Res
 import devto.composeapp.generated.resources.ic_collaps
 import devto.composeapp.generated.resources.ic_expand
@@ -40,24 +41,30 @@ import org.jetbrains.compose.resources.painterResource
 fun Comment(
     commentUi: CommentUi,
     level: Int = 0,
+    stringProvider: StringProvider,
     onUserClick: (userId: Int) -> Unit = {},
     onCommentClick: (commentId: String) -> Unit = {},
 ) {
     val isExpanded = remember { mutableStateOf(true) }
 
     if (!isExpanded.value) {
-        Row(modifier = Modifier.padding(top = 8.dp)) {
+        Row(
+            modifier = Modifier.padding(top = 8.dp).clickable {
+                isExpanded.value = true
+            }
+        ) {
             Spacer(level)
             Row(
                 modifier = Modifier.fillMaxWidth()
-                    .background(shape = RoundedCornerShape(4.dp), color = DevToColors.lightGray)
+                    .background(
+                        shape = RoundedCornerShape(4.dp),
+                        color = MaterialTheme.colors.surface
+                    )
                     .padding(8.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Box(
-                    modifier = Modifier.size(20.dp).padding(4.dp).clickable {
-                        isExpanded.value = true
-                    }
+                    modifier = Modifier.size(20.dp).padding(4.dp)
                 ) {
                     Image(
                         painter = painterResource(Res.drawable.ic_expand),
@@ -69,7 +76,7 @@ fun Comment(
                 if (commentUi.children.isNotEmpty()) {
                     Text(" + ")
                     Text(commentUi.replies().toString())
-                    Text(" replies")
+                    Text(stringProvider.getString(StringsKeys.REPLIES))
                 }
             }
         }
@@ -121,14 +128,12 @@ fun Comment(
                             " · ",
                             style = MaterialTheme.typography.overline.copy(
                                 fontWeight = FontWeight.Bold,
-                                color = DevToColors.lightGray,
                             )
                         )
                         Text(
                             commentUi.published,
                             style = MaterialTheme.typography.overline.copy(
                                 fontWeight = FontWeight.Bold,
-                                color = DevToColors.lightGray,
                             )
                         )
                     }
@@ -145,6 +150,7 @@ fun Comment(
             Comment(
                 commentUi = it,
                 level = level + 1,
+                stringProvider = stringProvider,
                 onUserClick = onUserClick,
                 onCommentClick = onCommentClick,
             )

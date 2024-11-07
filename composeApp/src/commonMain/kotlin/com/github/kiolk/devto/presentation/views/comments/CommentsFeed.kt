@@ -7,11 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.github.kiolk.devto.presentation.screens.home.models.CommentUi
+import com.github.kiolk.devto.utils.localisation.StringProvider
 
 @Composable
 fun CommentsFeed(
     comments: List<CommentUi>,
     totalComments: Int = 0,
+    stringProvider: StringProvider,
     onUserClick: (userId: Int) -> Unit = {},
     onCommentClick: (commentId: String) -> Unit = {},
 ) {
@@ -21,6 +23,7 @@ fun CommentsFeed(
             Comment(
                 commentUi = it,
                 level = 0,
+                stringProvider = stringProvider,
                 onUserClick,
                 onCommentClick,
             )

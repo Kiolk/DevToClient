@@ -13,10 +13,6 @@ data class CommentUi(
     val edited: String = "",
 ) {
     fun replies(): Int {
-        var replays = 0
-        children.forEach {
-            replays += 1 + it.replies()
-        }
-        return replays
+        return children.sumOf { 1 + it.replies() }
     }
 }
