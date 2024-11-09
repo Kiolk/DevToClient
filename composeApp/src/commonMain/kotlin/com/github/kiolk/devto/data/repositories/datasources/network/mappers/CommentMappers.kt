@@ -22,7 +22,7 @@ fun TopCommentApi.toComment(): Comment {
 fun SearchCommentApi.toComment(): Comment {
     return Comment(
         commentId = id.orEmpty(),
-        userId = user?.userId,
+        userId = user?.userId ?: 0,
         publishedTimestamp = publishedAt ?: Clock.System.now(), // Format Instant as needed
         path = path.orEmpty(),
         username = user?.username.orEmpty(),
@@ -36,12 +36,13 @@ fun SearchCommentApi.toComment(): Comment {
 fun CommentApi.mapToComment(): Comment {
     return Comment(
         commentId = idCode,
-        userId = user.userId,
+        userId = user.userId ?: 0,
         text = bodyHtml,
         publishedTimestamp = createdAt,
         path = "",
         username = user.username,
         name = user.name,
         profileImage90 = user.profileImage ?: user.profileImage90.orEmpty(),
+        children = children.map { it.mapToComment() }
     )
 }

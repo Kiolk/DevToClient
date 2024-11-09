@@ -24,4 +24,5 @@ object StringsKeys {
     const val ORGANIZATION = "organizations"
     const val TAGS = "tags"
     const val SEARCH_COMMENTS = "search_comments"
+    const val REPLIES = "replies"
 }

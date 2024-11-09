@@ -25,4 +25,6 @@ interface ArticleRepository {
 
     suspend fun getUserById(userId: Int): User
 
+    suspend fun getCommentById(commentId: String): Comment
+
 }

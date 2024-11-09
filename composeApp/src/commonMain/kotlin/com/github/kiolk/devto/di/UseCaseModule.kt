@@ -6,6 +6,8 @@ import com.github.kiolk.devto.domain.usecases.GetArticleByTitleUseCase
 import com.github.kiolk.devto.domain.usecases.GetArticleByTitleUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.GetArticleUseCase
 import com.github.kiolk.devto.domain.usecases.GetArticleUseCaseImpl
+import com.github.kiolk.devto.domain.usecases.GetCommentByIdUseCase
+import com.github.kiolk.devto.domain.usecases.GetCommentByIdUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.GetUserByIdUseCase
 import com.github.kiolk.devto.domain.usecases.GetUserByIdUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.SearchUseCase
@@ -21,4 +23,5 @@ val useCaseModule = module {
     factory<GetArticleByTitleUseCase> { GetArticleByTitleUseCaseImpl(get()) }
     factory<SearchUseCase> { SearchUseCaseImpl(get()) }
     factory<GetUserByIdUseCase> { GetUserByIdUseCaseImpl(get()) }
+    factory<GetCommentByIdUseCase> { GetCommentByIdUseCaseImpl(get()) }
 }

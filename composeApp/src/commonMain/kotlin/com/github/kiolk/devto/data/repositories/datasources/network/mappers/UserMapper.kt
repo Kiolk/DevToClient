@@ -9,7 +9,7 @@ import com.github.kiolk.devto.domain.models.User
 fun UserApi.toUser(): User {
     return User(
         name = name,
-        id = 0,
+        id = userId ?: 0,
         username = username,
         twitterUsername = twitterUsername,
         githubUsername = githubUsername,

@@ -13,12 +13,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.koinScreenModel
-import com.github.kiolk.devto.domain.models.Article
-import com.github.kiolk.devto.domain.models.Comment
-import com.github.kiolk.devto.domain.models.Organization
-import com.github.kiolk.devto.domain.models.Searchable
-import com.github.kiolk.devto.domain.models.Tag
-import com.github.kiolk.devto.domain.models.User
 import com.github.kiolk.devto.presentation.screens.feed.view.FeedBody
 import com.github.kiolk.devto.presentation.screens.feed.view.FeedBodyScreenModel
 import com.github.kiolk.devto.presentation.screens.feed.view.FeedParameter
@@ -27,29 +21,19 @@ import com.github.kiolk.devto.presentation.screens.feed.view.HeaderScreenModel
 import com.github.kiolk.devto.presentation.screens.webView.WebViewScreen
 import org.koin.core.parameter.parametersOf
 
-class FeedScreen(private val tag: Searchable) : Screen {
+class FeedScreen(private val param: FeedParameter) : Screen {
 
     override val key: ScreenKey = uniqueScreenKey
 
     @Composable
     override fun Content() {
-        val headerModel = koinScreenModel<HeaderScreenModel>(parameters = { parametersOf(tag.toFeedParam()) })
-        val bodyModel = koinScreenModel<FeedBodyScreenModel>(parameters = { parametersOf(tag.toFeedParam()) })
+        val headerModel = koinScreenModel<HeaderScreenModel>(parameters = { parametersOf(param) })
+        val bodyModel = koinScreenModel<FeedBodyScreenModel>(parameters = { parametersOf(param) })
 
         Column(modifier = Modifier.fillMaxWidth()) {
             Header(headerModel)
             FeedBody(bodyModel)
         }
-    }
-}
-
-private fun Searchable.toFeedParam(): FeedParameter? {
-    return when (this) {
-        is Article -> TODO()
-        is Comment -> TODO()
-        is Organization -> TODO()
-        is Tag -> FeedParameter.Tag(this.name)
-        is User -> FeedParameter.User(this.id)
     }
 }
 

@@ -65,3 +65,24 @@ val PUBLICATION_DATE_FORMAT: DateTimeFormat<LocalDateTime> = LocalDateTime.Forma
     char(' ')
     dayOfMonth()
 }
+
+fun Instant.toPublicationDateString(): String {
+    val currentDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+    val dateTime = this.toLocalDateTime(TimeZone.currentSystemDefault())
+    val formatter = if (dateTime.year == currentDateTime.year) {
+        LocalDateTime.Format {
+            dayOfMonth()
+            char(' ')
+            monthName(names = MonthNames.ENGLISH_ABBREVIATED)
+        }
+    } else {
+        LocalDateTime.Format {
+            dayOfMonth()
+            char(' ')
+            monthName(names = MonthNames.ENGLISH_ABBREVIATED)
+            char(' ')
+            year()
+        }
+    }
+    return formatter.format(dateTime)
+}
