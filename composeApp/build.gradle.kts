@@ -95,6 +95,7 @@ kotlin {
             implementation(libs.compottie.dot)
 
             implementation(libs.multiplatform.settings)
+
         }
 
         iosMain.dependencies {
