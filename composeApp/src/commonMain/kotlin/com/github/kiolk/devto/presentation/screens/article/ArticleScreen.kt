@@ -26,8 +26,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -52,6 +50,7 @@ import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import com.github.kiolk.devto.presentation.screens.comments.CommentsScreen
@@ -68,6 +67,9 @@ import com.github.kiolk.devto.presentation.views.avatar.UserOrganisationAvatar
 import com.github.kiolk.devto.presentation.views.comments.CommentsFeed
 import com.github.kiolk.devto.presentation.views.reactions.Reactions
 import com.github.kiolk.devto.utils.localisation.StringProvider
+import devto.composeapp.generated.resources.Res
+import devto.composeapp.generated.resources.ic_back
+import org.jetbrains.compose.resources.painterResource
 import org.koin.core.parameter.parametersOf
 import org.koin.mp.KoinPlatform.getKoin
 
@@ -108,7 +110,8 @@ class ArticleScreen(private val openArticlesParams: OpenArticleParams) : Screen 
                 stringProvider = stringProvider,
                 onTagClicked = {
                     navigator.push(FeedScreen(FeedParameter.Tag(it.name)))
-                }
+                },
+                navigator = navigator,
             )
         }
     }
@@ -119,7 +122,8 @@ fun CollapsingToolbarParallaxEffect(
     article: ArticleUi?,
     modifier: Modifier = Modifier,
     stringProvider: StringProvider,
-    onTagClicked: (tagUi: TagUi) -> Unit = {}
+    onTagClicked: (tagUi: TagUi) -> Unit = {},
+    navigator: Navigator,
 ) {
     val scroll: ScrollState = rememberScrollState(0)
 
@@ -147,7 +151,8 @@ fun CollapsingToolbarParallaxEffect(
         Toolbar(
             scroll = scroll,
             headerHeightPx = headerHeightPx,
-            toolbarHeightPx = toolbarHeightPx
+            toolbarHeightPx = toolbarHeightPx,
+            navigator = navigator,
         )
         Title(title = article?.title.orEmpty(), scroll = scroll)
         Title(title = article?.title.orEmpty(), scroll = scroll)
@@ -253,7 +258,8 @@ private fun Toolbar(
     scroll: ScrollState,
     headerHeightPx: Float,
     toolbarHeightPx: Float,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigator: Navigator,
 ) {
     val toolbarBottom by remember {
         mutableStateOf(headerHeightPx - toolbarHeightPx)
@@ -279,15 +285,17 @@ private fun Toolbar(
             ),
             navigationIcon = {
                 IconButton(
-                    onClick = {},
+                    onClick = {
+                        navigator.pop()
+                    },
                     modifier = Modifier
                         .padding(16.dp)
                         .size(24.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Menu,
+                        painter = painterResource(Res.drawable.ic_back),
                         contentDescription = null,
-                        tint = Color.White
+                        tint = MaterialTheme.colors.onSurface
                     )
                 }
             },
