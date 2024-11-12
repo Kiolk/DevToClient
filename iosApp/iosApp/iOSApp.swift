@@ -5,7 +5,8 @@ import ComposeApp
 struct iOSApp: App {
 
     init() {
-        KoinHelperKt.doInitKoin()
+        let iosThemeHelper: ThemeHelper = IosThemeHelper()
+        KoinHelperKt.doInitKoin(themeHelper: iosThemeHelper)
     }
 
     var body: some Scene {

@@ -1,9 +1,11 @@
 package com.github.kiolk.devto.di
 
+import com.github.kiolk.devto.utils.theme.ThemeHelper
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
+import org.koin.dsl.module
 
-fun initKoin() {
+fun initKoin(themeHelper: ThemeHelper) {
     startKoin {
         modules(
             appModule,
@@ -12,7 +14,10 @@ fun initKoin() {
             repositoryModule,
             useCaseModule,
             screenModelModule,
-            PlatformSpecificModule.getModule()
+            PlatformSpecificModule.getModule(),
+            module {
+                single<ThemeHelper> { themeHelper }
+            }
         )
     }
 }

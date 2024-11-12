@@ -15,6 +15,7 @@
 		9372EA852C96C90C005970D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9372EA872C96C90C005970D3 /* Localizable.strings */; };
 		9372EA992C98C3E7005970D3 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 9372EA9B2C98C3E7005970D3 /* Localizable.stringsdict */; };
 		938E4C702CA9BAF700158F91 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938E4C6F2CA9BAF700158F91 /* WebView.swift */; };
+		93ACB68D2CE3631D00752D26 /* IosThemeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ACB68C2CE3631400752D26 /* IosThemeHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9372EA912C96CC9C005970D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9372EA9A2C98C3E7005970D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		938E4C6F2CA9BAF700158F91 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		93ACB68C2CE3631400752D26 /* IosThemeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosThemeHelper.swift; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				93ACB68C2CE3631400752D26 /* IosThemeHelper.swift */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -200,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				938E4C702CA9BAF700158F91 /* WebView.swift in Sources */,
+				93ACB68D2CE3631D00752D26 /* IosThemeHelper.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
