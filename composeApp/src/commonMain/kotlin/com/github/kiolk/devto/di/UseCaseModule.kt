@@ -1,5 +1,7 @@
 package com.github.kiolk.devto.di
 
+import com.github.kiolk.devto.domain.usecases.GetAppThemeUseCase
+import com.github.kiolk.devto.domain.usecases.GetAppThemeUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.GetArticleByIdUseCase
 import com.github.kiolk.devto.domain.usecases.GetArticleByIdUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.GetArticleByTitleUseCase
@@ -24,4 +26,5 @@ val useCaseModule = module {
     factory<SearchUseCase> { SearchUseCaseImpl(get()) }
     factory<GetUserByIdUseCase> { GetUserByIdUseCaseImpl(get()) }
     factory<GetCommentByIdUseCase> { GetCommentByIdUseCaseImpl(get()) }
+    factory<GetAppThemeUseCase> { GetAppThemeUseCaseImpl(get()) }
 }

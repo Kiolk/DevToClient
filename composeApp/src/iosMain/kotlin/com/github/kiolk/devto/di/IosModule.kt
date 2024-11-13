@@ -2,6 +2,8 @@ package com.github.kiolk.devto.di
 
 import com.github.kiolk.devto.utils.IosStringProvider
 import com.github.kiolk.devto.utils.localisation.StringProvider
+import com.github.kiolk.devto.utils.theme.ThemeHelper
+import com.github.kiolk.devto.utils.theme.ThemeHelperIos
 import com.russhwolf.settings.NSUserDefaultsSettings
 import com.russhwolf.settings.Settings
 import io.ktor.client.plugins.logging.DEFAULT
@@ -13,4 +15,5 @@ val iosModule = module {
     single<StringProvider> { IosStringProvider() }
     single<Settings> { NSUserDefaultsSettings(NSUserDefaults("devto_settings")) }
     single<Logger> { Logger.DEFAULT }
+    single<ThemeHelper> { ThemeHelperIos() }
 }
