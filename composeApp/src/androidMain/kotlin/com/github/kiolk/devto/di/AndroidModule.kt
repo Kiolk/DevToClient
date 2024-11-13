@@ -3,6 +3,7 @@ package com.github.kiolk.devto.di
 import android.content.Context
 import com.github.kiolk.devto.utils.AndroidStringProvider
 import com.github.kiolk.devto.utils.localisation.StringProvider
+import com.github.kiolk.devto.utils.theme.ThemeChangeReceiver
 import com.github.kiolk.devto.utils.theme.ThemeHelper
 import com.github.kiolk.devto.utils.theme.ThemeHelperAndroid
 import com.russhwolf.settings.Settings
@@ -25,4 +26,5 @@ val androidModule = module {
     }
     single<ThemeHelper> { ThemeHelperAndroid(get()) }
     single<Logger> { Logger.ANDROID }
+    factory<ThemeChangeReceiver> { ThemeChangeReceiver(get()) }
 }

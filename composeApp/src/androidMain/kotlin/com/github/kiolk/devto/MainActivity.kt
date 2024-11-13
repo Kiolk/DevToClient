@@ -9,13 +9,16 @@ import cafe.adriel.voyager.navigator.Navigator
 import com.github.kiolk.devto.domain.usecases.GetAppThemeUseCase
 import com.github.kiolk.devto.presentation.screens.main.MainScreen
 import com.github.kiolk.devto.presentation.theme.DevToTheme
+import com.github.kiolk.devto.utils.theme.ThemeChangeReceiver
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
     private val getAppThemeUseCase: GetAppThemeUseCase by inject()
+    private val themeChangeReceiver: ThemeChangeReceiver by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        themeChangeReceiver.register(this)
 
         setContent {
             val isDark by getAppThemeUseCase().collectAsState(false)
@@ -23,5 +26,10 @@ class MainActivity : ComponentActivity() {
                 Navigator(MainScreen())
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        themeChangeReceiver.unregister(this)
     }
 }

@@ -14,6 +14,8 @@ import com.github.kiolk.devto.domain.usecases.GetUserByIdUseCase
 import com.github.kiolk.devto.domain.usecases.GetUserByIdUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.SearchUseCase
 import com.github.kiolk.devto.domain.usecases.SearchUseCaseImpl
+import com.github.kiolk.devto.domain.usecases.SystemThemeChangedUseCase
+import com.github.kiolk.devto.domain.usecases.SystemThemeChangedUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.ToggleReactionUseCase
 import com.github.kiolk.devto.domain.usecases.ToggleReactionUseCaseImpl
 import org.koin.dsl.module
@@ -26,5 +28,6 @@ val useCaseModule = module {
     factory<SearchUseCase> { SearchUseCaseImpl(get()) }
     factory<GetUserByIdUseCase> { GetUserByIdUseCaseImpl(get()) }
     factory<GetCommentByIdUseCase> { GetCommentByIdUseCaseImpl(get()) }
-    factory<GetAppThemeUseCase> { GetAppThemeUseCaseImpl(get()) }
+    factory<GetAppThemeUseCase> { GetAppThemeUseCaseImpl(get(), get()) }
+    factory<SystemThemeChangedUseCase> { SystemThemeChangedUseCaseImpl(get()) }
 }
