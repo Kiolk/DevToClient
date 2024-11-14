@@ -10,10 +10,14 @@ import com.github.kiolk.devto.domain.usecases.GetArticleUseCase
 import com.github.kiolk.devto.domain.usecases.GetArticleUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.GetCommentByIdUseCase
 import com.github.kiolk.devto.domain.usecases.GetCommentByIdUseCaseImpl
+import com.github.kiolk.devto.domain.usecases.GetUserAppThemeUseCase
+import com.github.kiolk.devto.domain.usecases.GetUserAppThemeUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.GetUserByIdUseCase
 import com.github.kiolk.devto.domain.usecases.GetUserByIdUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.SearchUseCase
 import com.github.kiolk.devto.domain.usecases.SearchUseCaseImpl
+import com.github.kiolk.devto.domain.usecases.SetUserAppThemeUseCase
+import com.github.kiolk.devto.domain.usecases.SetUserAppThemeUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.SystemThemeChangedUseCase
 import com.github.kiolk.devto.domain.usecases.SystemThemeChangedUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.ToggleReactionUseCase
@@ -30,4 +34,6 @@ val useCaseModule = module {
     factory<GetCommentByIdUseCase> { GetCommentByIdUseCaseImpl(get()) }
     factory<GetAppThemeUseCase> { GetAppThemeUseCaseImpl(get(), get()) }
     factory<SystemThemeChangedUseCase> { SystemThemeChangedUseCaseImpl(get()) }
+    factory<SetUserAppThemeUseCase> { SetUserAppThemeUseCaseImpl(get()) }
+    factory<GetUserAppThemeUseCase> { GetUserAppThemeUseCaseImpl(get()) }
 }

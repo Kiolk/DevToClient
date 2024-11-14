@@ -11,4 +11,8 @@ interface SettingsRepository {
     fun setToken(token: String)
 
     fun onSystemThemeChanged(darkTheme: Boolean)
+
+    fun isUserAppThemeDark(): Flow<Boolean?>
+
+    fun setUserAppThemeDark(isDarkTheme: Boolean)
 }

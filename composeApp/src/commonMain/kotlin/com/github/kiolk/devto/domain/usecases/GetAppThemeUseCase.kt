@@ -20,8 +20,12 @@ class GetAppThemeUseCaseImpl(
         return flow {
             // TODO check the logic to reduce call to themeHelper.isDarkTheme()
             emit(themeHelper.isDarkTheme())
-        }.combine(settingsRepository.isDarkSystemTheme) { theme, systemTheme ->
-            systemTheme ?: theme
         }
+            .combine(settingsRepository.isDarkSystemTheme) { theme, systemTheme ->
+                systemTheme ?: theme
+            }
+            .combine(settingsRepository.isUserAppThemeDark()) { systemTheme, userTheme ->
+                userTheme ?: systemTheme
+            }
     }
 }
