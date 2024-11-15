@@ -4,6 +4,7 @@ import com.github.kiolk.devto.data.repositories.settings.SettingsRepository
 import com.github.kiolk.devto.utils.theme.ThemeHelper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flow
 
 interface GetAppThemeUseCase {
@@ -33,6 +34,6 @@ class GetAppThemeUseCaseImpl(
                 } else {
                     userTheme
                 }
-            }
+            }.distinctUntilChanged()
     }
 }
