@@ -23,3 +23,6 @@
 "organizations" = "Organizations";
 "tags" = "Tags";
 "search_comments" = "Comments";
+"settings" = "Settings: ";
+"dark_theme" = "Dark theme: ";
+"follow_as_in_system" = "Follow as in the system: ";

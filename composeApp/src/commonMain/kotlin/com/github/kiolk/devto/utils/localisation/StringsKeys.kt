@@ -25,4 +25,7 @@ object StringsKeys {
     const val TAGS = "tags"
     const val SEARCH_COMMENTS = "search_comments"
     const val REPLIES = "replies"
+    const val SETTINGS = "settings"
+    const val DARK_THEME = "dark_theme"
+    const val FOLLOW_AS_IN_SYSTEM = "follow_as_in_system"
 }

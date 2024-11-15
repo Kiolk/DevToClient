@@ -6,8 +6,12 @@ import com.russhwolf.settings.coroutines.getBooleanOrNullFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 
-class SettingsRepositoryImpl(private val settings: ObservableSettings, private val defaultToken: String) :
+class SettingsRepositoryImpl(
+    private val settings: ObservableSettings,
+    private val defaultToken: String
+) :
     SettingsRepository {
     private val _isDarkSystemTheme = MutableStateFlow<Boolean?>(null)
     override val isDarkSystemTheme: Flow<Boolean?> = _isDarkSystemTheme.asStateFlow()
@@ -34,8 +38,18 @@ class SettingsRepositoryImpl(private val settings: ObservableSettings, private v
         settings.putBoolean(IS_DARK_THEM, isDarkTheme)
     }
 
+    override fun setFollowAsInSystem(followAsInSystem: Boolean) {
+        settings.putBoolean(FOLLOW_AS_IN_SYSTEM, followAsInSystem)
+    }
+
+    @OptIn(ExperimentalSettingsApi::class)
+    override fun getFollowAsInSystem(): Flow<Boolean> {
+        return settings.getBooleanOrNullFlow(FOLLOW_AS_IN_SYSTEM).map { it ?: false }
+    }
+
     companion object {
         private const val SETTINGS_TOKEN = "settings_token"
         private const val IS_DARK_THEM = "is_dark_theme"
+        private const val FOLLOW_AS_IN_SYSTEM = "follow_as_in_system"
     }
 }

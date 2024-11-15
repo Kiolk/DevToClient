@@ -27,5 +27,12 @@ class GetAppThemeUseCaseImpl(
             .combine(settingsRepository.isUserAppThemeDark()) { systemTheme, userTheme ->
                 userTheme ?: systemTheme
             }
+            .combine(settingsRepository.getFollowAsInSystem()) { userTheme, followAsInSystem ->
+                if (followAsInSystem) {
+                    themeHelper.isDarkTheme()
+                } else {
+                    userTheme
+                }
+            }
     }
 }

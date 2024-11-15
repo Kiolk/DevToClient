@@ -10,12 +10,16 @@ import com.github.kiolk.devto.domain.usecases.GetArticleUseCase
 import com.github.kiolk.devto.domain.usecases.GetArticleUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.GetCommentByIdUseCase
 import com.github.kiolk.devto.domain.usecases.GetCommentByIdUseCaseImpl
+import com.github.kiolk.devto.domain.usecases.GetFollowAsInSystemUseCase
+import com.github.kiolk.devto.domain.usecases.GetFollowAsInSystemUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.GetUserAppThemeUseCase
 import com.github.kiolk.devto.domain.usecases.GetUserAppThemeUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.GetUserByIdUseCase
 import com.github.kiolk.devto.domain.usecases.GetUserByIdUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.SearchUseCase
 import com.github.kiolk.devto.domain.usecases.SearchUseCaseImpl
+import com.github.kiolk.devto.domain.usecases.SetFollowAsInSystemUseCase
+import com.github.kiolk.devto.domain.usecases.SetFollowAsInSystemUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.SetUserAppThemeUseCase
 import com.github.kiolk.devto.domain.usecases.SetUserAppThemeUseCaseImpl
 import com.github.kiolk.devto.domain.usecases.SystemThemeChangedUseCase
@@ -36,4 +40,6 @@ val useCaseModule = module {
     factory<SystemThemeChangedUseCase> { SystemThemeChangedUseCaseImpl(get()) }
     factory<SetUserAppThemeUseCase> { SetUserAppThemeUseCaseImpl(get()) }
     factory<GetUserAppThemeUseCase> { GetUserAppThemeUseCaseImpl(get()) }
+    factory<SetFollowAsInSystemUseCase> { SetFollowAsInSystemUseCaseImpl(get()) }
+    factory<GetFollowAsInSystemUseCase> { GetFollowAsInSystemUseCaseImpl(get()) }
 }

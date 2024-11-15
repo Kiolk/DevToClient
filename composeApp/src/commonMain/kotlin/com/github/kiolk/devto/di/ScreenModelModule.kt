@@ -36,7 +36,7 @@ val screenModelModule = module {
         )
     }
     factory<SearchScreenModel> { SearchScreenModel(get(), get()) }
-    factory<ProfileScreenModel> { ProfileScreenModel(get(), get()) }
+    factory<ProfileScreenModel> { ProfileScreenModel(get(), get(), get(), get()) }
     factory<CommentsScreenModel> { (commentId: String) ->
         CommentsScreenModel(
             commentId,

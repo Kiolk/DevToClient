@@ -15,4 +15,8 @@ interface SettingsRepository {
     fun isUserAppThemeDark(): Flow<Boolean?>
 
     fun setUserAppThemeDark(isDarkTheme: Boolean)
+
+    fun setFollowAsInSystem(followAsInSystem: Boolean)
+
+    fun getFollowAsInSystem(): Flow<Boolean>
 }

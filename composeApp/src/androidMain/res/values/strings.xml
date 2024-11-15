@@ -40,4 +40,7 @@
     <string name="tags">Tags</string>
     <string name="search_comments">Comments</string>
     <string name="replies"> repliese</string>
+    <string name="settings">Settings: </string>
+    <string name="dark_theme">Dark theme: </string>
+    <string name="follow_as_in_system">Follow as in the system: </string>
 </resources>
