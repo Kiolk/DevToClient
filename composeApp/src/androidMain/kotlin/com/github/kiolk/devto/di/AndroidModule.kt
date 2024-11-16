@@ -3,7 +3,10 @@ package com.github.kiolk.devto.di
 import android.content.Context
 import com.github.kiolk.devto.utils.AndroidStringProvider
 import com.github.kiolk.devto.utils.localisation.StringProvider
-import com.russhwolf.settings.Settings
+import com.github.kiolk.devto.utils.theme.ThemeChangeReceiver
+import com.github.kiolk.devto.utils.theme.ThemeHelper
+import com.github.kiolk.devto.utils.theme.ThemeHelperAndroid
+import com.russhwolf.settings.ObservableSettings
 import com.russhwolf.settings.SharedPreferencesSettings
 import io.ktor.client.plugins.logging.ANDROID
 import io.ktor.client.plugins.logging.Logger
@@ -13,8 +16,15 @@ val androidModule = module {
     single<StringProvider> {
         AndroidStringProvider(get())
     }
-    single<Settings> {
-        SharedPreferencesSettings(get<Context>().getSharedPreferences("devto_settings", Context.MODE_PRIVATE))
+    single<ObservableSettings> {
+        SharedPreferencesSettings(
+            get<Context>().getSharedPreferences(
+                "devto_settings",
+                Context.MODE_PRIVATE
+            )
+        )
     }
+    single<ThemeHelper> { ThemeHelperAndroid(get()) }
     single<Logger> { Logger.ANDROID }
+    factory<ThemeChangeReceiver> { ThemeChangeReceiver(get()) }
 }

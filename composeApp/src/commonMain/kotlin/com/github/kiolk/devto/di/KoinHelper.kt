@@ -12,7 +12,7 @@ fun initKoin() {
             repositoryModule,
             useCaseModule,
             screenModelModule,
-            PlatformSpecificModule.getModule()
+            PlatformSpecificModule.getModule(),
         )
     }
 }

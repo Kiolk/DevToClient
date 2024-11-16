@@ -9,6 +9,7 @@ import com.github.kiolk.devto.presentation.screens.feed.view.FeedBodyScreenModel
 import com.github.kiolk.devto.presentation.screens.feed.view.FeedParameter
 import com.github.kiolk.devto.presentation.screens.feed.view.HeaderScreenModel
 import com.github.kiolk.devto.presentation.screens.home.HomeScreenModel
+import com.github.kiolk.devto.presentation.screens.profile.ProfileScreenModel
 import com.github.kiolk.devto.presentation.screens.search.SearchScreenModel
 import com.github.kiolk.devto.presentation.screens.user.UserScreenModel
 import org.koin.dsl.module
@@ -35,6 +36,7 @@ val screenModelModule = module {
         )
     }
     factory<SearchScreenModel> { SearchScreenModel(get(), get()) }
+    factory<ProfileScreenModel> { ProfileScreenModel(get(), get(), get(), get()) }
     factory<CommentsScreenModel> { (commentId: String) ->
         CommentsScreenModel(
             commentId,
