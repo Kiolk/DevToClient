@@ -143,7 +143,7 @@ android {
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-    jvmTarget = "11" // or "11" based on your project setup
+    jvmTarget = "11"
     classpath = files(
         // Include necessary dependencies here
         "$rootDir/shared/build/classes/kotlin/main",
