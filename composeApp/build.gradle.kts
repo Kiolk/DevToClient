@@ -96,6 +96,8 @@ kotlin {
 
             implementation(libs.multiplatform.settings)
             implementation(libs.multiplatform.settings.coroutines)
+
+            implementation ("com.github.Kiolk:ThemeSwitcher:develop-SNAPSHOT")
         }
 
         iosMain.dependencies {
